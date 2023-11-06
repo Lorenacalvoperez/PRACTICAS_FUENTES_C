@@ -2,7 +2,11 @@
 title: "Depresión y Jubilación"
 author: "Lorena Calvo Pérez, Julia Arellano Atienza, Mario Díaz Sutil"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+
 ---
 
 ```{r setup, include=FALSE}
