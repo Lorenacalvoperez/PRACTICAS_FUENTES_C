@@ -22,11 +22,13 @@ knitr::opts_chunk$set(echo = TRUE)
 library(climaemet)
 library(tibble)
 ```
-
-
 ### Carga de datos JSON
+```{r}
+psicologos_2021<- fromJSON(file = "INPUT/DATA/psicologos_CA_2021.json")
 
- 
+
+psicologos_2022<- fromJSON(file = "INPUT/DATA/psicologos_CA_2022.json")
+```
 ### Objetivos
 - __Cantidad de psicólogos por Comunidad Autónoma en función de su población__
 - __Asistencia en el área de salud mental segín sexo,edad y salario medio__
