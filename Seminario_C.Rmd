@@ -16,6 +16,17 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Introducción
  Se va a estudiar la relación que hay entre la asistencia al ámbito de salud mental con la economía de la población, en función de las comunidades.
  
+## Carga de datos
+### Carga de librerías
+```{r}
+library(climaemet)
+library(tibble)
+```
+
+
+### Carga de datos JSON
+
+ 
 ### Objetivos
 - __Cantidad de psicólogos por Comunidad Autónoma en función de su población__
 - __Asistencia en el área de salud mental segín sexo,edad y salario medio__
