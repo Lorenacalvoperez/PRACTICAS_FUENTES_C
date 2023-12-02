@@ -10,12 +10,26 @@ observaciones_22 <-aemet_daily_period_all(start = 2022, end = 2022)
 # Explicación Antonio: 
 observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
 # nos ha dicho q a partir d estos datos usemoss una de las funciones de la url para separar por años https://lubridate.tidyverse.org/reference/index.html 
+View(observaciones_diarias)
+
+temp_provincias <-  observaciones_diarias %>%
+  mutate(years=lubridate::year(fecha))%>%
+  group_by (years,provincia) %>%
+  summarise(
+    tmedia = mean(tmed, na.rm = TRUE)
+  )
+view(temp_provincias)
+  # select(nombre, tmed) %>%
+  #summarise(
+    #tmed22 = mean(tmed, na.rm = TRUE)
+  #)
 
 
 
 # Desde aquí ya tenemos nuestros datos de interés: tenemos q modificar en base a lo q ha dicho el profe
 
 # Temperatura 2021
+
 
 temp_2021 <-  observaciones_21 %>%
   group_by (provincia) %>%
