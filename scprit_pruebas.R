@@ -1,17 +1,14 @@
 library(climaemet)
 library(tibble)
 library(tidyverse)
-
+library(rjson)
+library(tidyjson)
 # Obtención de las Tª diaras por estaciones aemet (NO volver a ejecutar):
-observaciones_21 <-aemet_daily_period_all(start = 2021, end = 2021)
 
-observaciones_22 <-aemet_daily_period_all(start = 2022, end = 2022)
-
-# Explicación Antonio: 
 observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
 # nos ha dicho q a partir d estos datos usemoss una de las funciones de la url para separar por años https://lubridate.tidyverse.org/reference/index.html 
 View(observaciones_diarias)
-
+#temperatura de las provinias
 temp_provincias <-  observaciones_diarias %>%
   mutate(years=lubridate::year(fecha))%>%
   group_by (years,provincia) %>%
@@ -24,6 +21,7 @@ view(temp_provincias)
   #summarise(
     #tmed22 = mean(tmed, na.rm = TRUE)
   #)
+#creacion de una columna con las comunidades autonomas
   temp_con_CCAA <- temp_provincias %>%
   mutate(CCAA = case_when(
     provincia %in% c("BURGOS", "AVILA", "LEON", "SALAMANCA", "SEGOVIA", "SORIA", "VALLADOLID" ,"PALENCIA" ,"ZAMORA") ~ "CASTILLA Y LEON",
@@ -55,38 +53,52 @@ tmed_CCAA<- temp_con_CCAA %>%
   tmedia = mean(tmedia, na.rm = TRUE)
 )
   
-# Desde aquí ya tenemos nuestros datos de interés: tenemos q modificar en base a lo q ha dicho el profe
+#library(jsonlite)
+# Unión de las tablas de 
+psicologos_2021 <- fromJSON(file=DATA/psicologos_CA_2021.json)
+data.json <- data.frame(data.json,row.names = NULL)
+psicologos_2021 <- fromJSON(txt = readLines(file=DATA/psicologos_CA_2022.json, warn = FALSE))
 
-# Temperatura 2021
+columnas_deseadas <- psicologos_2021 %>%
+  select(Nombre, Data)
+View(psicologos_2021)
+View(columnas_deseadas)
+
+labels(factor(psicologos_2021$Nombre))
+
+head(psicologos_2021)
+
+psicologos_2021 %>% 
+  spread_all() %>% 
+  gather_object() %>% 
+  json_types() %>% 
+  count(name, type)
+
+psicologos_21<- psicologos_2021 %>% 
+  enter_object(Data) %>% 
+  gather_array() %>% 
+  spread_all() %>%
+  select(-document.id, - array.index)
+View(psicologos_21)
+
+psicologos_2022<- fromJSON(file = "DATA/psicologos_CA_2022.json")
 
 
-temp_2021 <-  observaciones_21 %>%
-  group_by (provincia) %>%
-  # select(nombre, tmed) %>%
-  summarise(
-    tmed21 = mean(tmed, na.rm = TRUE)
-  )
 
 
-# Temperatura 2022
 
-temp_2022 <-  observaciones_22 %>%
-  group_by (provincia) %>%
-  # select(nombre, tmed) %>%
-  summarise(
-    tmed22 = mean(tmed, na.rm = TRUE)
-  )
 
-# Unión de las tablas de temperatura: según lo del profe esto ya no haría falta
-temp_21_22 <- full_join(x = temp_2021, y = temp_2022)
 
-# Nuestra tabla de interés es:
-temp_21_22
 
-# Explicación del profe para obtener las provincias asociadas a las CCAA: usar cause when para juntar las provincias a las CCAA
 
 # Explicación para obtener las tablas de interés de forma correcta: 
 #library(DT)
 #datatable(iris) iris sería nuestro conjunto de datos de interés
 
+ruta_json <- "DATA/psicologos_CA_2021.json"
 
+# Cargar el contenido del JSON en un objeto de R
+psicologos_json <- fromJSON(txt = readLines(ruta_json, warn = FALSE))
+View(psicologos_json)
+# Visualizar la estructura de los datos
+str(psicologos_json)
