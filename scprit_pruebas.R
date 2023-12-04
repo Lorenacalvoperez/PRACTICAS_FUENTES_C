@@ -193,8 +193,6 @@ salarios_final <- salarios %>%
 
 View(salarios_final)
 
-
-
 #CARGA de datos psicologos.json 
 
 psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
