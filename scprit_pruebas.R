@@ -48,41 +48,91 @@ view(temp_provincias)
   view(temp_con_CCAA)
  #TABLA FINAL 
 tmed_CCAA<- temp_con_CCAA %>% 
-  group_by(CCAA) %>% 
+  group_by(CCAA,years) %>% 
   summarise(
   tmedia = mean(tmedia, na.rm = TRUE)
 )
   
-#library(jsonlite)
-# Unión de las tablas de 
-psicologos_2021 <- fromJSON("file=DATA/psicologos_CA_2021.json")
-data.json <- data.frame(data.json,row.names = NULL)
-psicologos_2021 <- fromJSON(txt = readLines(file=DATA/psicologos_CA_2022.json, warn = FALSE))
 
-columnas_deseadas <- psicologos_2021 %>%
-  select(Nombre, Data)
+
+#carga csv de psicologos
+
+library(readr)
+psicologos_2021 <- read_delim("DATA/psicologos_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+
+psicologos_2022 <- read_delim("DATA/psicologos_2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+#psicologos completos
+
+psicologos <- psicologos_2021%>%
+  mutate(years = 2021) %>% 
+  full_join(., 
+            psicologos_2022%>%
+              mutate(years = 2022) ) %>% 
+  drop_na() %>% 
+  filter(`Situación laboral`== "Colegiados no jubilados" & Sexo == "Total") %>% 
+  group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
+  select(`Comunidades y Ciudades Autónomas`,years,Total)
+  
+
+
+
+View(psicologos)
+View(psicologos_2022)
 View(psicologos_2021)
-View(columnas_deseadas)
 
-labels(factor(psicologos_2021$Nombre))
+#carga csv de psicologos
+library(readr)
+visitas_2021 <- read_delim("DATA/visitas_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-head(psicologos_2021)
+visitas_2022 <- read_delim("DATA/visitas_2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-psicologos_2021 %>% 
+#VISITAS COMPLETAS
+
+visitas<- visitas_2021%>%
+  mutate(years = 2021) %>% 
+  full_join(., 
+            visitas_2022%>%
+              mutate(years = 2022) ) %>% 
+  drop_na() %>% 
+  filter(`Tipo de profesional` == "Psicólogo, psicoterapeuta o psiquiatra" & 
+           `Sí o no` == "Sí") %>% 
+  group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
+  select(`Comunidades y Ciudades Autónomas`,years,Total)
+View(visitas)
+View(visitas_2022)
+View(visitas_2021)
+
+
+#CARGA de datos json 
+
+psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
+
+#Identificacion de arrays
+psicologos_json_2021 %>% 
   spread_all() %>% 
   gather_object() %>% 
   json_types() %>% 
   count(name, type)
-
-psicologos_21<- psicologos_2021 %>% 
+#obtenemos la columna data
+psicologos_json_2021_Data<- psicologos_json_2021 %>% 
   enter_object(Data) %>% 
   gather_array() %>% 
   spread_all() %>%
+  select(Valor)
+#obtenemos la columna metadata
+psicologos_json_2021_Metadata<- psicologos_json_2021 %>% 
+  enter_object(MetaData) %>% 
+  gather_array() %>% 
+  spread_all() %>%
   select(-document.id, - array.index)
-View(psicologos_21)
+View(visitas_Data)
+#union de columnas
+psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json_2021_Data)
+head(psicologos_json_2021_union)
+View(psicologos_json_2021_union)
 
-psicologos_2022<- fromJSON(file = "DATA/psicologos_CA_2022.json")
-psicologos_2021<- fromJSON(file = "DATA/psicologos_CA_2021.json")
 
 
 
@@ -95,10 +145,3 @@ psicologos_2021<- fromJSON(file = "DATA/psicologos_CA_2021.json")
 #library(DT)
 #datatable(iris) iris sería nuestro conjunto de datos de interés
 
-ruta_json <- "DATA/psicologos_CA_2021.json"
-
-# Cargar el contenido del JSON en un objeto de R
-psicologos_json <- fromJSON(txt = readLines(ruta_json, warn = FALSE))
-View(psicologos_json)
-# Visualizar la estructura de los datos
-str(psicologos_json)
