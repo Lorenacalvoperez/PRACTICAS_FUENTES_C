@@ -148,9 +148,30 @@ poblacion_MetaData<- poblacion %>%
 View(poblacion_MetaData)
 
 
+#Carga de datos de salarios
+
+salarios <- fromJSON(file ="DATA/salarios_CA.json")
+
+salarios %>% 
+  spread_all() %>% 
+  gather_object() %>% 
+  json_types() %>% 
+  count(name, type)
+
+salarios_Data<- salarios %>% 
+  enter_object(Data) %>% 
+  gather_array() %>% 
+  spread_all() 
 
 
+salarios_Metadata<- salarios %>% 
+  enter_object(MetaData) %>% 
+  gather_array() %>% 
+  spread_all() 
+  
 
+View(salarios_Metadata)
+View(salarios_Data)
 #CARGA de datos psicologos.json 
 
 psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
