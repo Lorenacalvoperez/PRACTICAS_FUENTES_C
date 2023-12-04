@@ -100,14 +100,42 @@ visitas<- visitas_2021%>%
            `Sí o no` == "Sí") %>% 
   group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
   select(`Comunidades y Ciudades Autónomas`,years,Total)
+
 View(visitas)
 View(visitas_2022)
 View(visitas_2021)
 
+#Carga de datos de la población json no coindiden los atributos po
 
+poblacion <- fromJSON(file ="DATA/poblacion_CA_por_años.json")
+
+poblacion %>% 
+  spread_all() %>% 
+  gather_object() %>% 
+  json_types() %>% 
+  count(name, type)
+
+poblacion_Data<- poblacion %>% 
+  enter_object(Data) %>% 
+  gather_array() %>% 
+  spread_all() 
+ 
+
+poblacion_MetaData<- poblacion %>% 
+  enter_object(MetaData) %>% 
+  gather_array() %>% 
+  spread_all()
+  
+
+View(poblacion_MetaData)
+
+View(poblacion_Data)
+poblacion<- poblacion %>% 
+  select(Nombre,T3_Escala,T3_Unidad)
 #CARGA de datos json 
 
 psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
+
 
 #Identificacion de arrays
 psicologos_json_2021 %>% 
