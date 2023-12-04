@@ -189,6 +189,8 @@ salarios_final <- salarios %>%
            `Comunidades y Ciudades Autonómas` != "Total Nacional" ) %>% 
   group_by(`Comunidades y Ciudades Autonómas`, years) %>% 
   select(Total) %>% 
+ # mutate(Total_num = as.double(Total)) %>% 
+ # summarise(Total = as.double(Total)*12) %>% 
   arrange(years)
 
 View(salarios_final)
