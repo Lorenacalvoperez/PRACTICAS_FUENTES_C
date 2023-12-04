@@ -82,7 +82,7 @@ View(psicologos)
 View(psicologos_2022)
 View(psicologos_2021)
 
-#carga csv de psicologos
+#carga csv de visitas
 library(readr)
 visitas_2021 <- read_delim("DATA/visitas_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
@@ -148,9 +148,10 @@ poblacion_MetaData<- poblacion %>%
 View(poblacion_MetaData)
 
 
-#Carga de datos de salarios
+# Carga de datos de salarios .json:
+# No coinciden los atributos para hacer la unión
 
-salarios <- fromJSON(file ="DATA/salarios_CA.json")
+salarios <- fromJSON(file ="DATA/salario_CCAA_años.json")
 
 salarios %>% 
   spread_all() %>% 
@@ -172,6 +173,28 @@ salarios_Metadata<- salarios %>%
 
 View(salarios_Metadata)
 View(salarios_Data)
+
+# Carga de datos de salarios .csv:
+library(readr)
+salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+View(salarios)
+
+salarios_final <- salarios %>%
+  drop_na() %>% 
+  rename(years = Periodo)%>% 
+  filter(`Tipo de jornada` == "Total" & 
+           Decil == "Total decil" &
+           years %in% c(2021,2022) &
+           `Comunidades y Ciudades Autonómas` != "Total Nacional" ) %>% 
+  group_by(`Comunidades y Ciudades Autonómas`, years) %>% 
+  select(Total) %>% 
+  arrange(years)
+
+View(salarios_final)
+
+
+
 #CARGA de datos psicologos.json 
 
 psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
