@@ -73,7 +73,7 @@ psicologos <- psicologos_2021%>%
   drop_na() %>% 
   filter(`Situación laboral`== "Colegiados no jubilados" & Sexo == "Total") %>% 
   group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
-  select(`Comunidades y Ciudades Autónomas`,years,Total)
+  select(Total)
   
 
 
@@ -99,15 +99,33 @@ visitas<- visitas_2021%>%
   filter(`Tipo de profesional` == "Psicólogo, psicoterapeuta o psiquiatra" & 
            `Sí o no` == "Sí") %>% 
   group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
-  select(`Comunidades y Ciudades Autónomas`,years,Total)
+  select(Total)
 
 View(visitas)
 View(visitas_2022)
 View(visitas_2021)
 
-#Carga de datos de la población json no coindiden los atributos po
+#carga de datos Población.csv
+library(readr)
+poblacion <- read_delim("DATA/poblacion_CA_años.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-poblacion <- fromJSON(file ="DATA/poblacion_CA_por_años.json")
+poblacion_final <- poblacion%>%
+  drop_na() %>% 
+  rename(years=Periodo)%>% 
+  filter(Sexo == "Ambos sexos" & 
+           Nacionalidad == "Española" &
+           years %in% c(2021,2022) &
+           `Comunidades y Ciudades Autónomas` != "Total Nacional" ) %>% 
+  group_by(`Comunidades y Ciudades Autónomas`,years) %>% 
+  select(Total)%>% 
+  arrange(years)
+
+View(poblacion_final)
+
+
+#Carga de datos de la población json no coindiden los atributos 
+
+poblacion <- fromJSON(file ="DATA/poblacion.json")
 
 poblacion %>% 
   spread_all() %>% 
@@ -129,10 +147,11 @@ poblacion_MetaData<- poblacion %>%
 
 View(poblacion_MetaData)
 
-View(poblacion_Data)
-poblacion<- poblacion %>% 
-  select(Nombre,T3_Escala,T3_Unidad)
-#CARGA de datos json 
+
+
+
+
+#CARGA de datos psicologos.json 
 
 psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
 
