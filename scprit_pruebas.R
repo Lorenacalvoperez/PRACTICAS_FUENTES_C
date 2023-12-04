@@ -55,7 +55,7 @@ tmed_CCAA<- temp_con_CCAA %>%
   
 #library(jsonlite)
 # Unión de las tablas de 
-psicologos_2021 <- fromJSON(file=DATA/psicologos_CA_2021.json)
+psicologos_2021 <- fromJSON("file=DATA/psicologos_CA_2021.json")
 data.json <- data.frame(data.json,row.names = NULL)
 psicologos_2021 <- fromJSON(txt = readLines(file=DATA/psicologos_CA_2022.json, warn = FALSE))
 
@@ -82,7 +82,7 @@ psicologos_21<- psicologos_2021 %>%
 View(psicologos_21)
 
 psicologos_2022<- fromJSON(file = "DATA/psicologos_CA_2022.json")
-
+psicologos_2021<- fromJSON(file = "DATA/psicologos_CA_2021.json")
 
 
 
