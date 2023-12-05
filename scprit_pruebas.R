@@ -421,6 +421,29 @@ tabla_final<- tmed_CCAA %>%
 
 View(tabla_final)
 
+# OBTENCIÓN DE GRÁFICOS:
+## GRÁFICO DE DISPERSIÓN:
+#NAT vs Temperatura media
+library(ggplot2)
+tabla_final %>%
+          #filter(.,NAT>0) %>% 
+          ggplot(.,mapping=aes(x=tmedia,y=NAT))+
+          geom_point(aes(colour=factor(years),shape=factor(years)))+ 
+          geom_smooth()+
+          labs(x="Temperatura Media(ºC)",y="Necesidad de Atención Psicológica",
+               subtitle = "Relación entre la Temperatura Media y la NAT")+
+          theme_bw()
+
+### WTF
+#NAT vs salario
+tabla_final %>% 
+  ggplot(.,mapping=aes(x=Total_num,y=NAT))+
+  geom_point(aes(colour=factor(years),shape=factor(years)))+ 
+  geom_smooth()+
+  labs(x="Salario",y="Necesidad de Atención Psicológica",
+       subtitle = "Relación entre el salario y la NAT")+
+  theme_bw()
+
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
 
 #CARGA de datos psicologos.json 
