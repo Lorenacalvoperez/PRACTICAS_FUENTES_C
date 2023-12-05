@@ -131,7 +131,11 @@ View(visitas_2021)
 library(readr)
 poblacion <- read_delim("DATA/poblacion_CA_años.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-poblacion_final <- poblacion%>%
+# Conversión de la columna Total a formato numérico: La llamaremos Total_pob
+poblacion <- poblacion %>% 
+  mutate(Total_pob = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
+
+poblacion_final <- poblacion %>%
   drop_na() %>% 
   rename(years=Periodo)%>% 
   filter(Sexo == "Ambos sexos" & 
@@ -139,9 +143,10 @@ poblacion_final <- poblacion%>%
            years %in% c(2021,2022) &
            `Comunidades y Ciudades Autónomas` != "Total Nacional" ) %>% 
   group_by(`Comunidades y Ciudades Autónomas`,years) %>% 
-  select(Total)%>% 
+  select(Total_pob) %>% 
   arrange(years)
 
+head(poblacion_final)
 View(poblacion_final)
 
 
