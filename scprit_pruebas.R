@@ -82,11 +82,12 @@ labels(factor(psicologos_2021$`Comunidades y Ciudades Autónomas`))
 
 # Es necesario aplicar un mutate sobre psicologos_2021 para que tenga los mismos levels que psicologos_2022!!!
 psicologos_2021 <- psicologos_2021 %>% 
-  mutate(`Comunidades y Ciudades Autónomas` = factor(`Comunidades y Ciudades Autónomas`, 
-                                                     levels = c("01 Andalucía", "02 Aragón", "03 Asturias, Principado
-                                                                de", "04 Balears, Illes", "05 Canarias", 
+  mutate(CCAA = factor(`Comunidades y Ciudades Autónomas`, 
+                                                     levels = c("01 Andalucía", "02 Aragón", 
+                                                                "03 Asturias, Principado de", "04 Balears, Illes", 
+                                                                "05 Canarias", 
                                                                 "06 Cantabria", 
-                                                                "07 Castilla y León", "08 Castilla-La Mancha",
+                                                                "07 Castilla y León", "08 Castilla - La Mancha",
                                                                 "09 Cataluña", "10 Comunitat Valenciana",
                                                                 "11 Extremadura", "12 Galicia", 
                                                                 "13 Madrid, Comunidad de", "14 Murcia, Región de", 
@@ -103,9 +104,10 @@ psicologos_2021 <- psicologos_2021 %>%
 levels(factor(psicologos_2021$`Comunidades y Ciudades Autónomas`))
 
 psicologos_2022 <- psicologos_2022 %>% 
-  mutate(`Comunidades y Ciudades Autónomas` = factor(`Comunidades y Ciudades Autónomas`, 
-                                                     levels = c("Andalucía", "Aragón", "Asturias, Principado
-                                                                de", "Balears, Illes", "Canarias", 
+  mutate(CCAA = factor(`Comunidades y Ciudades Autónomas`, 
+                                                     levels = c("Andalucía", "Aragón", 
+                                                                "Asturias, Principado de", "Balears, Illes", 
+                                                                "Canarias", 
                                                                 "Cantabria", 
                                                                 "Castilla-La Mancha", "Castilla y León",
                                                                 "Cataluña", "Ceuta", "Comunitat Valenciana",
@@ -121,6 +123,8 @@ psicologos_2022 <- psicologos_2022 %>%
                                                                 "GALICIA", "COMUNIDAD DE MADRID", "MELILLA", "MURCIA",
                                                                 "NAVARRA", "PAIS VASCO", "LA RIOJA")))
 
+levels(factor(psicologos_2022$`Comunidades y Ciudades Autónomas`))
+
 # Psicologos completos
 
 psicologos <- psicologos_2021 %>%
@@ -130,7 +134,7 @@ psicologos <- psicologos_2021 %>%
               mutate(years = 2022) ) %>% 
   drop_na() %>% 
   filter(`Situación laboral`== "Colegiados no jubilados" & Sexo == "Total") %>% 
-  group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
+  group_by(CCAA, years) %>% 
   select(Total_ps)
 # La columan de Total_ps está en formato numérico 
 
@@ -154,28 +158,59 @@ visitas_2021 <- visitas_2021 %>%
 visitas_2022 <- visitas_2022 %>% 
   mutate(Total_v = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
 
+
+levels(factor(visitas_2021$`Comunidades y Ciudades Autónomas`))
+levels(factor(visitas_2022$`Comunidades y Ciudades Autónomas`))
+
+visitas_2021 <- visitas_2021 %>% 
+  mutate(CCAA = factor(`Comunidades y Ciudades Autónomas`, 
+                                                     levels = c("Andalucía", "Aragón", 
+                                                                "Asturias (Principado de)", "Balears (Illes)", 
+                                                                "Canarias", 
+                                                                "Cantabria", 
+                                                                "Castilla-La Mancha", "Castilla y León",
+                                                                "Cataluña", "Ceuta (Ciudad Autónoma de)", 
+                                                                "Comunitat Valenciana",
+                                                                "Extremadura", "Galicia", 
+                                                                "Madrid (Comunidad de)", 
+                                                                "Melilla (Ciudad Autónoma de)", "Murcia (Región de)",
+                                                                "Navarra (Comunidad Foral de)",
+                                                                "País Vasco", "Rioja (La)" 
+                                                     ), 
+                                                     labels = c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                                                "BALEARES", "CANARIAS", "CANTABRIA", 
+                                                                "CASTILLA-LA MANCHA", "CASTILLA Y LEON", "CATALUÑA", 
+                                                                "CEUTA", "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                                                "GALICIA", "COMUNIDAD DE MADRID", "MELILLA", "MURCIA",
+                                                                "NAVARRA", "PAIS VASCO", "LA RIOJA")))
+
+levels(factor(visitas_2021$CCAA))
+
 levels(factor(visitas_2022$`Comunidades y Ciudades Autónomas`))
 
 # Es necesario aplicar un mutate sobre visitas_2022 para que tenga los mismos levels que visitas_2021!!!
 visitas_2022 <- visitas_2022 %>% 
-  mutate(`Comunidades y Ciudades Autónomas` = factor(`Comunidades y Ciudades Autónomas`, 
-                                                     levels = c("01 Andalucía", "02 Aragón", "03 Asturias, Principado
-                                                                de", "04 Balears, Illes", "05 Canarias", 
-                                                                "06 Cantabria", 
-                                                                "07 Castilla-La Mancha", "08 Castilla y León",
-                                                                "09 Cataluña", "18 Ceuta", "10 Comunitat Valenciana",
-                                                                "11 Extremadura",
-                                                                "12 Galicia", "13 Madrid, Comunidad de", "19 Melilla",
-                                                                "14 Murcia, Región de", 
-                                                                "15 Navarra, Comunidad Foral de",
-                                                                "16 País Vasco", "17 Rioja, La"), 
-                                                     labels = c("Andalucía", "Aragón", "Asturias, Principado de",
-                                                                "Balears, Illes", "Canarias", "Cantabria", 
-                                                                "Castilla-La Mancha", "Castilla y León", "Cataluña", 
-                                                                "Ceuta", "Comunitat Valenciana", "Extremadura",
-                                                                "Galicia", "Madrid, Comunidad de", "Melilla",
-                                                                "Murcia, Región de", "Navarra, Comunidad Foral de",
-                                                                "País Vasco", "Rioja, La")))
+  mutate(CCAA = factor(`Comunidades y Ciudades Autónomas`, 
+                             levels = c("01 Andalucía", "02 Aragón", 
+                                        "03 Asturias, Principado de", "04 Balears, Illes", 
+                                        "05 Canarias", 
+                                        "06 Cantabria", 
+                                        "07 Castilla y León", "08 Castilla - La Mancha",
+                                        "09 Cataluña", "10 Comunitat Valenciana",
+                                        "11 Extremadura", "12 Galicia", 
+                                        "13 Madrid, Comunidad de", "14 Murcia, Región de", 
+                                        "15 Navarra, Comunidad Foral de",
+                                        "16 País Vasco", "17 Rioja, La", "18 Ceuta", 
+                                        "19 Melilla"), 
+                             labels = c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                        "BALEARES", "CANARIAS", "CANTABRIA", 
+                                        "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                        "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                        "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                        "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA")))
+
+View(visitas_2022)
+levels(factor(visitas_2022$CCAA))
 
 #VISITAS COMPLETAS
 
@@ -186,8 +221,8 @@ visitas<- visitas_2021%>%
               mutate(years = 2022) ) %>% 
   drop_na() %>% 
   filter(`Tipo de profesional` == "Psicólogo, psicoterapeuta o psiquiatra" & 
-           `Sí o no` == "Sí") %>% 
-  group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
+           `Sí o no` == "Sí" & Sexo == "Ambos sexos") %>% 
+  group_by(CCAA, years) %>% 
   select(Total_v)
 
 
@@ -197,6 +232,7 @@ head(visitas)
 View(visitas)
 View(visitas_2022)
 View(visitas_2021)
+
 
 #carga de datos Población.csv
 library(readr)
@@ -210,25 +246,27 @@ levels(factor(poblacion$`Comunidades y Ciudades Autónomas`))
 
 # Es necesario aplicar un mutate sobre poblacion para que tenga los mismos levels que el resto de tablas: 
 poblacion <- poblacion %>% 
-  mutate(`Comunidades y Ciudades Autónomas` = factor(`Comunidades y Ciudades Autónomas`, 
-                                                     levels = c("01 Andalucía", "02 Aragón", "03 Asturias, Principado
-                                                                de", "04 Balears, Illes", "05 Canarias", 
-                                                                "06 Cantabria", 
-                                                                "07 Castilla-La Mancha", "08 Castilla y León",
-                                                                "09 Cataluña", "18 Ceuta", "10 Comunitat Valenciana",
-                                                                "11 Extremadura",
-                                                                "12 Galicia", "13 Madrid, Comunidad de", "19 Melilla",
-                                                                "14 Murcia, Región de", 
-                                                                "15 Navarra, Comunidad Foral de",
-                                                                "16 País Vasco", "17 Rioja, La"), 
-                                                     labels = c("Andalucía", "Aragón", "Asturias, Principado de",
-                                                                "Balears, Illes", "Canarias", "Cantabria", 
-                                                                "Castilla-La Mancha", "Castilla y León", "Cataluña", 
-                                                                "Ceuta", "Comunitat Valenciana", "Extremadura",
-                                                                "Galicia", "Madrid, Comunidad de", "Melilla",
-                                                                "Murcia, Región de", "Navarra, Comunidad Foral de",
-                                                                "País Vasco", "Rioja, La")))
+  mutate(CCAA = factor(`Comunidades y Ciudades Autónomas`, 
+                                               levels = c("01 Andalucía", "02 Aragón", 
+                                                          "03 Asturias, Principado de", "04 Balears, Illes", 
+                                                          "05 Canarias", 
+                                                          "06 Cantabria", 
+                                                          "07 Castilla y León", "08 Castilla - La Mancha",
+                                                          "09 Cataluña", "10 Comunitat Valenciana",
+                                                          "11 Extremadura", "12 Galicia", 
+                                                          "13 Madrid, Comunidad de", "14 Murcia, Región de", 
+                                                          "15 Navarra, Comunidad Foral de",
+                                                          "16 País Vasco", "17 Rioja, La", "18 Ceuta", 
+                                                          "19 Melilla", "Total Nacional"), 
+                                               labels = c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                                          "BALEARES", "CANARIAS", "CANTABRIA", 
+                                                          "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                                          "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                                          "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                                          "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA",
+                                                          "TOTAL NACIONAL")))
 
+levels(factor(poblacion$CCAA))
 
 poblacion_final <- poblacion %>%
   drop_na() %>% 
@@ -236,8 +274,8 @@ poblacion_final <- poblacion %>%
   filter(Sexo == "Ambos sexos" & 
            Nacionalidad == "Española" &
            years %in% c(2021,2022) &
-           `Comunidades y Ciudades Autónomas` != "Total Nacional" ) %>% 
-  group_by(`Comunidades y Ciudades Autónomas`,years) %>% 
+           CCAA != "TOTAL NACIONAL" ) %>% 
+  group_by(CCAA,years) %>% 
   select(Total_pob) %>% 
   arrange(years)
 
@@ -309,24 +347,27 @@ levels(factor(salarios$`Comunidades y Ciudades Autonómas`))
 
 # Es necesario aplicar un mutate sobre salarios para que tenga los mismos levels que el resto de tablas
 salarios <- salarios %>% 
-  mutate(`Comunidades y Ciudades Autónomas` = factor(`Comunidades y Ciudades Autonómas`, 
-                                                     levels = c("01 Andalucía", "02 Aragón", "03 Asturias, Principado
-                                                                de", "04 Balears, Illes", "05 Canarias", 
-                                                                "06 Cantabria", 
-                                                                "07 Castilla-La Mancha", "08 Castilla y León",
-                                                                "09 Cataluña", "18 Ceuta", "10 Comunitat Valenciana",
-                                                                "11 Extremadura",
-                                                                "12 Galicia", "13 Madrid, Comunidad de", "19 Melilla",
-                                                                "14 Murcia, Región de", 
-                                                                "15 Navarra, Comunidad Foral de",
-                                                                "16 País Vasco", "17 Rioja, La", "Total Nacional"), 
-                                                     labels = c("Andalucía", "Aragón", "Asturias, Principado de",
-                                                                "Balears, Illes", "Canarias", "Cantabria", 
-                                                                "Castilla-La Mancha", "Castilla y León", "Cataluña", 
-                                                                "Ceuta", "Comunitat Valenciana", "Extremadura",
-                                                                "Galicia", "Madrid, Comunidad de", "Melilla",
-                                                                "Murcia, Región de", "Navarra, Comunidad Foral de",
-                                                                "País Vasco", "Rioja, La", "Total Nacional")))
+  mutate(CCAA = factor(`Comunidades y Ciudades Autonómas`, 
+                                                 levels = c("01 Andalucía", "02 Aragón", 
+                                                            "03 Asturias, Principado de", "04 Balears, Illes", 
+                                                            "05 Canarias", 
+                                                            "06 Cantabria", 
+                                                            "07 Castilla y León", "08 Castilla - La Mancha",
+                                                            "09 Cataluña", "10 Comunitat Valenciana",
+                                                            "11 Extremadura", "12 Galicia", 
+                                                            "13 Madrid, Comunidad de", "14 Murcia, Región de", 
+                                                            "15 Navarra, Comunidad Foral de",
+                                                            "16 País Vasco", "17 Rioja, La", "18 Ceuta", 
+                                                            "19 Melilla", "Total Nacional"), 
+                                                 labels = c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                                            "BALEARES", "CANARIAS", "CANTABRIA", 
+                                                            "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                                            "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                                            "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                                            "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA",
+                                                            "TOTAL NACIONAL")))
+
+levels(factor(salarios$CCAA))
 
 # SALARIOS FINAL
 
@@ -336,14 +377,12 @@ salarios_final <- salarios %>%
   filter(`Tipo de jornada` == "Total" & 
            Decil == "Total decil" &
            years %in% c(2021,2022) &
-           `Comunidades y Ciudades Autónomas` != "Total Nacional" ) %>% 
-  group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
+           CCAA != "TOTAL NACIONAL" ) %>% 
+  group_by(CCAA, years) %>% 
   select(Total_num) %>% 
   arrange(years)
 
 View(salarios_final)
-
-# Modificamos los levels de tmed_CCAA para el atributo CCAA:
 
 
 
@@ -368,6 +407,8 @@ View(poblacion_final)
 # Salarios
 head(salarios_final)
 View(salarios_final)
+
+# OBTENCIÓN DE LA TABLA FINAL:
 
 
 
