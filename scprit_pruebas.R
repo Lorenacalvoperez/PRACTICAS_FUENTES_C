@@ -453,8 +453,12 @@ library(ggplot2)
 library(mapSpain)
 library(sf)
 
+CCAA_sf <- esp_get_ccaa()
+CCAA_sf <- merge(CCAA_sf, tabla_final)
+Can <- esp_get_can_box()
 
-ggplot(tabla_final) +
+
+ggplot(CCAA_sf) +
   geom_sf(aes(fill = NAT),
           color = "grey70",
           linewidth = .3
