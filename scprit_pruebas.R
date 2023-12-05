@@ -20,7 +20,8 @@ temp_provincias <-  observaciones_diarias %>%
 
 view(temp_provincias)
 
-  # select(nombre, tmed) %>%
+  
+# select(nombre, tmed) %>%
   #summarise(
     #tmed22 = mean(tmed, na.rm = TRUE)
   #)
@@ -49,7 +50,7 @@ view(temp_provincias)
     
   ))
   
-  view(temp_con_CCAA)
+view(temp_con_CCAA)
   
   
  #TABLA FINAL Tª
@@ -150,6 +151,7 @@ library(readr)
 visitas_2021 <- read_delim("DATA/visitas_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 visitas_2022 <- read_delim("DATA/visitas_2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
 
 # Conversión de la columna Total a formato numérico: La llamaremos Total_v
 visitas_2021 <- visitas_2021 %>% 
@@ -267,6 +269,7 @@ poblacion <- poblacion %>%
                                                           "TOTAL NACIONAL")))
 
 levels(factor(poblacion$CCAA))
+
 
 poblacion_final <- poblacion %>%
   drop_na() %>% 
@@ -409,8 +412,14 @@ head(salarios_final)
 View(salarios_final)
 
 # OBTENCIÓN DE LA TABLA FINAL:
+tabla_final<- tmed_CCAA %>% 
+              full_join(.,salarios_final) %>% 
+              full_join(.,psicologos) %>% 
+              full_join(.,visitas) %>% 
+              full_join(.,poblacion_final) %>% 
+          mutate(.,NAT=Total_v/(Total_ps/Total_pob))
 
-
+View(tabla_final)
 
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
 
