@@ -444,6 +444,39 @@ tabla_final %>%
        subtitle = "Relación entre el salario y la NAT")+
   theme_bw()
 
+
+
+#GRÁFICO MAPSPAIN()
+
+# Plot with ggplot
+library(ggplot2)
+library(mapSpain)
+library(sf)
+
+
+ggplot(tabla_final) +
+  geom_sf(aes(fill = NAT),
+          color = "grey70",
+          linewidth = .3
+  ) +
+  geom_sf(data = Can, color = "grey70") +
+  geom_sf_label(aes(label = NAT),
+                fill = "white", alpha = 0.5,
+                size = 3,
+                label.size = 0
+  ) +
+  scale_fill_gradientn(
+    colors = hcl.colors(10, "Blues", rev = TRUE),
+    n.breaks = 10,
+    labels = function(x) {
+      sprintf("%1.1f%%", 100 * x)
+    },
+    guide = guide_legend(title = "Necesidad de atención psicológica (NAT)")
+  ) +
+  theme_void() +
+  theme(legend.position = c(0.1, 0.6))
+
+
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
 
 #CARGA de datos psicologos.json 
