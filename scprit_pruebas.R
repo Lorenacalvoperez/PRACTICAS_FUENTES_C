@@ -3,6 +3,7 @@ library(tibble)
 library(tidyverse)
 library(rjson)
 library(tidyjson)
+library(readr)
 # Obtención de las Tª diaras por estaciones aemet (NO volver a ejecutar):
 
 observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
@@ -55,38 +56,55 @@ tmed_CCAA<- temp_con_CCAA %>%
   
 
 
-#carga csv de psicologos
+# Carga csv de psicologos
 
 library(readr)
 psicologos_2021 <- read_delim("DATA/psicologos_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
+levels(factor(psicologos_2021$`Comunidades y Ciudades Autónomas`))
+
+
 
 psicologos_2022 <- read_delim("DATA/psicologos_2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-#psicologos completos
+levels(factor(psicologos_2022$`Comunidades y Ciudades Autónomas`))
 
-psicologos <- psicologos_2021%>%
+# Psicologos completos
+
+psicologos <- psicologos_2021 %>%
   mutate(years = 2021) %>% 
   full_join(., 
-            psicologos_2022%>%
+            psicologos_2022 %>%
               mutate(years = 2022) ) %>% 
   drop_na() %>% 
   filter(`Situación laboral`== "Colegiados no jubilados" & Sexo == "Total") %>% 
   group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
-  select(Total)
-  
+  select(Total_ps)
+# La columan de Total_ps está en formato numérico  
+
+# Es necesario aplicar un mutate sobre psicologos_2021 para que tenga los mismos levels que psicologos 2022!!!
 
 
-
+head(psicologos)
 View(psicologos)
-View(psicologos_2022)
 View(psicologos_2021)
+View(psicologos_2022)
 
-#carga csv de visitas
+
+
+# Carga csv de visitas
 library(readr)
 visitas_2021 <- read_delim("DATA/visitas_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 visitas_2022 <- read_delim("DATA/visitas_2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+# Conversión de la columna Total a formato numérico: La llamaremos Total_v
+visitas_2021 <- visitas_2021 %>% 
+  mutate(Total_v = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
+
+visitas_2022 <- visitas_2022 %>% 
+  mutate(Total_v = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
+
 
 #VISITAS COMPLETAS
 
@@ -99,8 +117,12 @@ visitas<- visitas_2021%>%
   filter(`Tipo de profesional` == "Psicólogo, psicoterapeuta o psiquiatra" & 
            `Sí o no` == "Sí") %>% 
   group_by(`Comunidades y Ciudades Autónomas`, years) %>% 
-  select(Total)
+  select(Total_v)
 
+
+
+# ESTÁ CORRECTO
+head(visitas)
 View(visitas)
 View(visitas_2022)
 View(visitas_2021)
