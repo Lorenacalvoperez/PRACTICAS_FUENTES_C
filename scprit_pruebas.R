@@ -9,13 +9,15 @@ library(readr)
 observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
 # nos ha dicho q a partir d estos datos usemoss una de las funciones de la url para separar por años https://lubridate.tidyverse.org/reference/index.html 
 View(observaciones_diarias)
-#temperatura de las provinias
+
+#temperatura de las provincias
 temp_provincias <-  observaciones_diarias %>%
   mutate(years=lubridate::year(fecha))%>%
   group_by (years,provincia) %>%
   summarise(
     tmedia = mean(tmed, na.rm = TRUE)
   )
+
 view(temp_provincias)
 
   # select(nombre, tmed) %>%
@@ -46,8 +48,11 @@ view(temp_provincias)
     provincia == "MELILLA" ~ "MELILLA",
     
   ))
+  
   view(temp_con_CCAA)
- #TABLA FINAL 
+  
+  
+ #TABLA FINAL Tª
 tmed_CCAA<- temp_con_CCAA %>% 
   group_by(CCAA,years) %>% 
   summarise(
@@ -219,6 +224,34 @@ salarios_final <- salarios %>%
   arrange(years)
 
 View(salarios_final)
+
+
+
+# TABLAS DE INTERÉS: 
+
+# temp_con_CCAA
+head(tmed_CCAA)
+View(tmed_CCAA)
+
+# psicologos: NO ESTÁ BIEN DEL TODO!!! MODIFICAR PARA OBTENER MISMAS CCAA!!!
+head(psicologos)
+View(psicologos)
+
+# Visitas al psicologo:
+head(visitas)
+View(visitas)
+
+# Población
+head(poblacion_final)
+View(poblacion_final)
+
+# Salarios
+head(salarios_final)
+View(salarios_final)
+
+
+
+# JULIA AL FINAL QUE HACEMOS CON ESTO???
 
 #CARGA de datos psicologos.json 
 
