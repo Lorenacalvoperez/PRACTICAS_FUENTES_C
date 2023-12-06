@@ -275,7 +275,7 @@ poblacion_final <- poblacion %>%
   drop_na() %>% 
   rename(years=Periodo)%>% 
   filter(Sexo == "Ambos sexos" & 
-           Nacionalidad == "Española" &
+           Nacionalidad == "Total" &
            years %in% c(2021,2022) &
            CCAA != "TOTAL NACIONAL" ) %>% 
   group_by(CCAA,years) %>% 
