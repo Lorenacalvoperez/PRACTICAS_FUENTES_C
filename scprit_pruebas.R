@@ -417,9 +417,9 @@ tabla_final<- tmed_CCAA %>%
               full_join(.,salarios_final) %>% 
               full_join(.,psicologos) %>% 
               full_join(.,poblacion_final) %>% 
-          mutate(.,Total_ps=Total_ind_ps/(Total_pob*10^3)) %>%
+          mutate(.,Total_ps=Total_ind_ps*(Total_pob*10^3)) %>%
               full_join(.,visitas) %>% 
-          mutate(.,NAT=(Total_v/(Total_ps*(Total_pob*10^3))*10^5))
+          mutate(.,NAT=(Total_v*10^3/(Total_ps*(Total_pob*10^3))*10^5))
 
 View(tabla_final)
 
