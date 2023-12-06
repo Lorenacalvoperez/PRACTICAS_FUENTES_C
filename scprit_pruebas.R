@@ -136,8 +136,8 @@ psicologos <- psicologos_2021 %>%
   drop_na() %>% 
   filter(`Situación laboral`== "Colegiados no jubilados") %>% 
   group_by(CCAA, years) %>%
-  rename(Total_ps=Total) %>%
-  select(Total_ps)
+  mutate(Total_ind_ps=Total/10^5) %>%
+  select(Total_ind_ps)
 # La columan de Total_ps está en formato numérico 
 
 head(psicologos)
@@ -416,9 +416,10 @@ View(salarios_final)
 tabla_final<- tmed_CCAA %>% 
               full_join(.,salarios_final) %>% 
               full_join(.,psicologos) %>% 
-              full_join(.,visitas) %>% 
               full_join(.,poblacion_final) %>% 
-          mutate(.,NAT=Total_v/(Total_ps/Total_pob))
+          mutate(.,Total_ps=Total_ind_ps/(Total_pob*10^3)) %>%
+              full_join(.,visitas) %>% 
+          mutate(.,NAT=(Total_v/(Total_ps*(Total_pob*10^3))*10^5))
 
 View(tabla_final)
 
