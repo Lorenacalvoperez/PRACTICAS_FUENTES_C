@@ -1,0 +1,641 @@
+[{"Nombre":"TOTAL, Total", "MetaData":[{"Variable":{"Id":349, "Nombre":"Total Nacional", "Codigo":"NAC"}
+, "Nombre":"TOTAL", "Codigo":"00"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":80.36}
+]
+}
+,{"Nombre":"TOTAL, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":349, "Nombre":"Total Nacional", "Codigo":"NAC"}
+, "Nombre":"TOTAL", "Codigo":"00"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":79.64}
+]
+}
+,{"Nombre":"TOTAL, Colegiados jubilados", "MetaData":[{"Variable":{"Id":349, "Nombre":"Total Nacional", "Codigo":"NAC"}
+, "Nombre":"TOTAL", "Codigo":"00"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.72}
+]
+}
+,{"Nombre":"TOTAL, No consta", "MetaData":[{"Variable":{"Id":349, "Nombre":"Total Nacional", "Codigo":"NAC"}
+, "Nombre":"TOTAL", "Codigo":"00"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Andalucía, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Andalucía", "Codigo":"01"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":62.45}
+]
+}
+,{"Nombre":"Andalucía, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Andalucía", "Codigo":"01"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":62.26}
+]
+}
+,{"Nombre":"Andalucía, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Andalucía", "Codigo":"01"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.19}
+]
+}
+,{"Nombre":"Andalucía, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Andalucía", "Codigo":"01"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Aragón, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Aragón", "Codigo":"02"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":62.36}
+]
+}
+,{"Nombre":"Aragón, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Aragón", "Codigo":"02"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":60.99}
+]
+}
+,{"Nombre":"Aragón, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Aragón", "Codigo":"02"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":1.36}
+]
+}
+,{"Nombre":"Aragón, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Aragón", "Codigo":"02"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Asturias, Principado de, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Asturias, Principado de", "Codigo":"03"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":99.65}
+]
+}
+,{"Nombre":"Asturias, Principado de, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Asturias, Principado de", "Codigo":"03"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":97.66}
+]
+}
+,{"Nombre":"Asturias, Principado de, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Asturias, Principado de", "Codigo":"03"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":1.99}
+]
+}
+,{"Nombre":"Asturias, Principado de, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Asturias, Principado de", "Codigo":"03"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Balears, Illes, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Balears, Illes", "Codigo":"04"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":80.67}
+]
+}
+,{"Nombre":"Balears, Illes, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Balears, Illes", "Codigo":"04"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":79.7}
+]
+}
+,{"Nombre":"Balears, Illes, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Balears, Illes", "Codigo":"04"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.97}
+]
+}
+,{"Nombre":"Balears, Illes, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Balears, Illes", "Codigo":"04"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Canarias, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Canarias", "Codigo":"05"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":90.35}
+]
+}
+,{"Nombre":"Canarias, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Canarias", "Codigo":"05"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":88.77}
+]
+}
+,{"Nombre":"Canarias, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Canarias", "Codigo":"05"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":1.58}
+]
+}
+,{"Nombre":"Canarias, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Canarias", "Codigo":"05"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Cantabria, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cantabria", "Codigo":"06"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":66.34}
+]
+}
+,{"Nombre":"Cantabria, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cantabria", "Codigo":"06"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":65.83}
+]
+}
+,{"Nombre":"Cantabria, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cantabria", "Codigo":"06"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.51}
+]
+}
+,{"Nombre":"Cantabria, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cantabria", "Codigo":"06"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Castilla y León, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla y León", "Codigo":"07"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":45.98}
+]
+}
+,{"Nombre":"Castilla y León, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla y León", "Codigo":"07"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":45.43}
+]
+}
+,{"Nombre":"Castilla y León, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla y León", "Codigo":"07"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.55}
+]
+}
+,{"Nombre":"Castilla y León, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla y León", "Codigo":"07"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Castilla-La Mancha, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla-La Mancha", "Codigo":"08"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":26.29}
+]
+}
+,{"Nombre":"Castilla-La Mancha, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla-La Mancha", "Codigo":"08"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":26.24}
+]
+}
+,{"Nombre":"Castilla-La Mancha, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla-La Mancha", "Codigo":"08"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.05}
+]
+}
+,{"Nombre":"Castilla-La Mancha, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Castilla-La Mancha", "Codigo":"08"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Cataluña, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cataluña", "Codigo":"09"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":54.94}
+]
+}
+,{"Nombre":"Cataluña, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cataluña", "Codigo":"09"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":54.46}
+]
+}
+,{"Nombre":"Cataluña, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cataluña", "Codigo":"09"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.48}
+]
+}
+,{"Nombre":"Cataluña, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Cataluña", "Codigo":"09"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Comunidad Valenciana, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Comunidad Valenciana", "Codigo":"10"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":54.52}
+]
+}
+,{"Nombre":"Comunidad Valenciana, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Comunidad Valenciana", "Codigo":"10"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":54.2}
+]
+}
+,{"Nombre":"Comunidad Valenciana, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Comunidad Valenciana", "Codigo":"10"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.31}
+]
+}
+,{"Nombre":"Comunidad Valenciana, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Comunidad Valenciana", "Codigo":"10"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Extremadura, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Extremadura", "Codigo":"11"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":70.81}
+]
+}
+,{"Nombre":"Extremadura, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Extremadura", "Codigo":"11"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":70.62}
+]
+}
+,{"Nombre":"Extremadura, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Extremadura", "Codigo":"11"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.19}
+]
+}
+,{"Nombre":"Extremadura, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Extremadura", "Codigo":"11"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Galicia, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Galicia", "Codigo":"12"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":59.87}
+]
+}
+,{"Nombre":"Galicia, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Galicia", "Codigo":"12"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":59.31}
+]
+}
+,{"Nombre":"Galicia, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Galicia", "Codigo":"12"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.56}
+]
+}
+,{"Nombre":"Galicia, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Galicia", "Codigo":"12"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Madrid, Comunidad de, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Madrid, Comunidad de", "Codigo":"13"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":177.12}
+]
+}
+,{"Nombre":"Madrid, Comunidad de, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Madrid, Comunidad de", "Codigo":"13"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":175.95}
+]
+}
+,{"Nombre":"Madrid, Comunidad de, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Madrid, Comunidad de", "Codigo":"13"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":1.17}
+]
+}
+,{"Nombre":"Madrid, Comunidad de, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Madrid, Comunidad de", "Codigo":"13"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Murcia, Región de, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Murcia, Región de", "Codigo":"14"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":97.12}
+]
+}
+,{"Nombre":"Murcia, Región de, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Murcia, Región de", "Codigo":"14"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":95.63}
+]
+}
+,{"Nombre":"Murcia, Región de, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Murcia, Región de", "Codigo":"14"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":1.49}
+]
+}
+,{"Nombre":"Murcia, Región de, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Murcia, Región de", "Codigo":"14"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Navarra, Comunidad Foral de, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Navarra, Comunidad Foral de", "Codigo":"15"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":82.27}
+]
+}
+,{"Nombre":"Navarra, Comunidad Foral de, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Navarra, Comunidad Foral de", "Codigo":"15"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":78.66}
+]
+}
+,{"Nombre":"Navarra, Comunidad Foral de, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Navarra, Comunidad Foral de", "Codigo":"15"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":3.61}
+]
+}
+,{"Nombre":"Navarra, Comunidad Foral de, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Navarra, Comunidad Foral de", "Codigo":"15"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"País Vasco, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"País Vasco", "Codigo":"16"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":96.42}
+]
+}
+,{"Nombre":"País Vasco, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"País Vasco", "Codigo":"16"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":95.41}
+]
+}
+,{"Nombre":"País Vasco, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"País Vasco", "Codigo":"16"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":1.01}
+]
+}
+,{"Nombre":"País Vasco, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"País Vasco", "Codigo":"16"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Rioja, La, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Rioja, La", "Codigo":"17"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":98.19}
+]
+}
+,{"Nombre":"Rioja, La, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Rioja, La", "Codigo":"17"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":96.62}
+]
+}
+,{"Nombre":"Rioja, La, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Rioja, La", "Codigo":"17"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":1.57}
+]
+}
+,{"Nombre":"Rioja, La, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Rioja, La", "Codigo":"17"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Ceuta, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Ceuta", "Codigo":"18"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":45.95}
+]
+}
+,{"Nombre":"Ceuta, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Ceuta", "Codigo":"18"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":45.95}
+]
+}
+,{"Nombre":"Ceuta, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Ceuta", "Codigo":"18"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Ceuta, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Ceuta", "Codigo":"18"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Melilla, Total", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Melilla", "Codigo":"19"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Total", "Codigo":"total"}
+]
+, "Data":[{"Valor":125.83}
+]
+}
+,{"Nombre":"Melilla, Colegiados no jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Melilla", "Codigo":"19"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados no jubilados", "Codigo":"colegiadosnojubilados"}
+]
+, "Data":[{"Valor":125.83}
+]
+}
+,{"Nombre":"Melilla, Colegiados jubilados", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Melilla", "Codigo":"19"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"Colegiados jubilados", "Codigo":"colegiadosjubilados"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+,{"Nombre":"Melilla, No consta", "MetaData":[{"Variable":{"Id":70, "Nombre":"Comunidades y Ciudades Autónomas", "Codigo":"CCAA"}
+, "Nombre":"Melilla", "Codigo":"19"}
+,{"Variable":{"Nombre":"situación laboral", "Codigo":"situacionlaboral"}
+, "Nombre":"No consta", "Codigo":"noconsta"}
+]
+, "Data":[{"Valor":0.0}
+]
+}
+]
