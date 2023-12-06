@@ -68,14 +68,14 @@ labels(factor(tmed_CCAA$CCAA))
 # Carga csv de psicologos
 
 library(readr)
-psicologos_2021 <- read_delim("DATA/psicologos_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+psicologos_2021 <- read_delim("DATA/psicologos2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 levels(factor(psicologos_2021$`Comunidades y Ciudades Autónomas`))
 labels(factor(psicologos_2021$`Comunidades y Ciudades Autónomas`))
 
 
 
-psicologos_2022 <- read_delim("DATA/psicologos_2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+psicologos_2022 <- read_delim("DATA/psicologos2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 levels(factor(psicologos_2022$`Comunidades y Ciudades Autónomas`))
 labels(factor(psicologos_2021$`Comunidades y Ciudades Autónomas`))
@@ -102,7 +102,7 @@ psicologos_2021 <- psicologos_2021 %>%
                     "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
                     "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA")))
 
-levels(factor(psicologos_2021$`Comunidades y Ciudades Autónomas`))
+levels(factor(psicologos_2021$CCAA))
 
 psicologos_2022 <- psicologos_2022 %>% 
   mutate(CCAA = factor(`Comunidades y Ciudades Autónomas`, 
@@ -111,7 +111,7 @@ psicologos_2022 <- psicologos_2022 %>%
                                                                 "Canarias", 
                                                                 "Cantabria", 
                                                                 "Castilla-La Mancha", "Castilla y León",
-                                                                "Cataluña", "Ceuta", "Comunitat Valenciana",
+                                                                "Cataluña", "Ceuta", "Comunidad Valenciana",
                                                                 "Extremadura", "Galicia", 
                                                                 "Madrid, Comunidad de", "Melilla", "Murcia, Región de",
                                                                 "Navarra, Comunidad Foral de",
@@ -124,7 +124,7 @@ psicologos_2022 <- psicologos_2022 %>%
                                                                 "GALICIA", "COMUNIDAD DE MADRID", "MELILLA", "MURCIA",
                                                                 "NAVARRA", "PAIS VASCO", "LA RIOJA")))
 
-levels(factor(psicologos_2022$`Comunidades y Ciudades Autónomas`))
+levels(factor(psicologos_2022$CCAA))
 
 # Psicologos completos
 
@@ -134,8 +134,9 @@ psicologos <- psicologos_2021 %>%
             psicologos_2022 %>%
               mutate(years = 2022) ) %>% 
   drop_na() %>% 
-  filter(`Situación laboral`== "Colegiados no jubilados" & Sexo == "Total") %>% 
-  group_by(CCAA, years) %>% 
+  filter(`Situación laboral`== "Colegiados no jubilados") %>% 
+  group_by(CCAA, years) %>%
+  rename(Total_ps=Total) %>%
   select(Total_ps)
 # La columan de Total_ps está en formato numérico 
 
@@ -486,7 +487,7 @@ ggplot(CCAA_sf) +
 #CARGA de datos psicologos.json 
 
 psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
-
+psicologos_json_2021 <- fromJSON(file ="DATA/tasa_psicologos_2021.json")
 
 #Identificacion de arrays
 psicologos_json_2021 %>% 
