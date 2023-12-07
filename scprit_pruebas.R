@@ -453,12 +453,18 @@ tabla_final %>%
 #GRÁFICOS DE BARRAS
 ## NAT VS CCAA
 tabla_final %>% 
-  ggplot(.,mapping=aes(x=CCAA,y=NAT))+
-  geom_bar()+ 
-  #geom_smooth()+
-  labs(x="Comunidades y Ciudades Autónomas",y="Necesidad de Atención Psicológica",
-       subtitle = "Relación entre las CCAA y la NAT")+
-  theme_bw()+
+  ggplot(., aes(x = CCAA, y = NAT)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  labs(
+    title = "Necesidad de Atención Psicológica por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "Necesidad de Atención Psicológica"
+  ) +
+  #labs(x="Comunidades y Ciudades Autónomas",y="Necesidad de Atención Psicológica",
+       #subtitle = "Relación entre las CCAA y la NAT")+
+  theme_gray()+
+  #theme_bw()+
+  #coord_flip()+
   facet_wrap(facets = vars(years), nrow = 1)
 
 
