@@ -344,7 +344,8 @@ View(salarios_Data)
 # Carga de datos de salarios .csv:
 library(readr)
 salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
-
+salarios <- salarios %>% 
+  mutate(Total_s = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
 View(salarios)
 
 levels(factor(salarios$`Comunidades y Ciudades Autonómas`))
@@ -383,7 +384,7 @@ salarios_final <- salarios %>%
            years %in% c(2021,2022) &
            CCAA != "TOTAL NACIONAL" ) %>% 
   group_by(CCAA, years) %>% 
-  select(Total_num) %>% 
+  select(Total_s) %>% 
   arrange(years)
 
 View(salarios_final)
