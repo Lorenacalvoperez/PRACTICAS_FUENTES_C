@@ -422,7 +422,9 @@ tabla_final<- tmed_CCAA %>%
               full_join(.,visitas) %>% 
           mutate(.,NAT=as.integer(Total_v*10^6/(Total_ps*(Total_pob*10^3))*10^5))
 #se extrepresan los vslores en millones para que los indice salgan valores con mayor sentido.
+
 View(tabla_final)
+head(tabla_final)
 
 # OBTENCIÓN DE GRÁFICOS:
 ## GRÁFICO DE DISPERSIÓN:
@@ -440,12 +442,12 @@ tabla_final %>%
 ### WTF
 #NAT vs salario
 tabla_final %>% 
-  ggplot(.,mapping=aes(x=Total_num,y=NAT))+
+  filter(.,NAT<50000) %>% 
+  ggplot(.,mapping=aes(x=Total_s,y=NAT))+
   geom_point(aes(colour=factor(years),shape=factor(years)))+ 
   geom_smooth()+
   labs(x="Salario",y="Necesidad de Atención Psicológica",
        subtitle = "Relación entre el salario y la NAT")+
-  scale_x_continuous(limits = c(1700, 2600), breaks = seq(1700, 2600, by = 200)) +
   theme_bw()
 
 
