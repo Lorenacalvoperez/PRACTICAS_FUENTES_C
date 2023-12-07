@@ -428,7 +428,7 @@ View(tabla_final)
 #NAT vs Temperatura media
 library(ggplot2)
 tabla_final %>%
-          #filter(.,NAT>0) %>% 
+          filter(.,NAT<50000) %>% 
           ggplot(.,mapping=aes(x=tmedia,y=NAT))+
           geom_point(aes(colour=factor(years),shape=factor(years)))+ 
           geom_smooth()+
@@ -444,6 +444,7 @@ tabla_final %>%
   geom_smooth()+
   labs(x="Salario",y="Necesidad de Atención Psicológica",
        subtitle = "Relación entre el salario y la NAT")+
+  scale_x_continuous(limits = c(1700, 2600), breaks = seq(1700, 2600, by = 200)) +
   theme_bw()
 
 
