@@ -464,6 +464,30 @@ tabla_final %>%
   theme_bw()
 
 #GRÁFICOS DE BARRAS
+#introduccion
+# SALARIO VS CCAA
+tabla_final %>% 
+  ggplot(., aes(x = iniciales_CCAA, y = Total_s,fill= factor(years))) +
+  geom_bar(stat = "identity", color = "black") +
+  labs(
+    title = "NAT por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "Salario"
+  )+
+  theme_replace()+
+  facet_wrap(facets = vars(years), nrow = 1)
+  
+# TEMPERATURA MEDIA VS CCAA
+tabla_final %>% 
+  ggplot(., aes(x = iniciales_CCAA, y = Total_s,fill= factor(years))) +
+  geom_bar(stat = "identity", color = "black") +
+  labs(
+    title = "NAT por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "Temperatura Media"
+  )+
+  theme_replace()+
+  facet_wrap(facets = vars(years), nrow = 1)
 ## NAT VS CCAA
 tabla_final %>% 
   ggplot(., aes(x = iniciales_CCAA, y = NAT, fill= factor(years))) +
@@ -473,11 +497,7 @@ tabla_final %>%
     x = "Comunidad Autónoma",
     y = "Necesidad de Atención Psicológica"
   ) +
-  #labs(x="Comunidades y Ciudades Autónomas",y="Necesidad de Atención Psicológica",
-       #subtitle = "Relación entre las CCAA y la NAT")+
   theme_gray()+
-  #theme_bw()+
-  #coord_flip()+
   facet_wrap(facets = vars(years), nrow = 1)
 
 
