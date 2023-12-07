@@ -420,11 +420,24 @@ tabla_final<- tmed_CCAA %>%
               full_join(.,poblacion_final) %>% 
           mutate(.,Total_ps=Total_ind_ps*(Total_pob*10^3)) %>%
               full_join(.,visitas) %>% 
-          mutate(.,NAT=as.integer(Total_v*10^6/(Total_ps*(Total_pob*10^3))*10^5))
+          mutate(.,NAT=as.integer(Total_v*10^6/(Total_ps*(Total_pob*10^3))*10^5)) %>% 
+          mutate(.,iniciales_CCAA = factor(CCAA,
+                                   levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                            "BALEARES", "CANARIAS", "CANTABRIA", 
+                                            "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                            "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                            "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                            "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                   labels = c("An","Ar","As","Bl","Cs","Ca","CyL","Cm","Ct","Cv","Ex",
+                                              "Ga","M","Mu","Na","Pv","R","Ce","Ml" ))) %>% 
+          select(.,iniciales_CCAA,everything())
+          
 #se extrepresan los vslores en millones para que los indice salgan valores con mayor sentido.
 
 View(tabla_final)
 head(tabla_final)
+
+
 
 # OBTENCIÓN DE GRÁFICOS:
 ## GRÁFICO DE DISPERSIÓN:
@@ -453,10 +466,10 @@ tabla_final %>%
 #GRÁFICOS DE BARRAS
 ## NAT VS CCAA
 tabla_final %>% 
-  ggplot(., aes(x = CCAA, y = NAT)) +
-  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  ggplot(., aes(x = iniciales_CCAA, y = NAT, fill= factor(years))) +
+  geom_bar(stat = "identity", color = "black") +
   labs(
-    title = "Necesidad de Atención Psicológica por Comunidad Autónoma",
+    title = "NAT por Comunidad Autónoma",
     x = "Comunidad Autónoma",
     y = "Necesidad de Atención Psicológica"
   ) +
