@@ -419,8 +419,8 @@ tabla_final<- tmed_CCAA %>%
               full_join(.,poblacion_final) %>% 
           mutate(.,Total_ps=Total_ind_ps*(Total_pob*10^3)) %>%
               full_join(.,visitas) %>% 
-          mutate(.,NAT=(Total_v*10^3/(Total_ps*(Total_pob*10^3))*10^5))
-
+          mutate(.,NAT=as.integer(Total_v*10^6/(Total_ps*(Total_pob*10^3))*10^5))
+#se extrepresan los vslores en millones para que los indice salgan valores con mayor sentido.
 View(tabla_final)
 
 # OBTENCIÓN DE GRÁFICOS:
