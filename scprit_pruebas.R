@@ -450,6 +450,22 @@ tabla_final %>%
        subtitle = "Relación entre el salario y la NAT")+
   theme_bw()
 
+#GRÁFICOS DE BARRAS
+## NAT VS CCAA
+tabla_final %>% 
+  ggplot(.,mapping=aes(x=CCAA,y=NAT))+
+  geom_bar()+ 
+  #geom_smooth()+
+  labs(x="Comunidades y Ciudades Autónomas",y="Necesidad de Atención Psicológica",
+       subtitle = "Relación entre las CCAA y la NAT")+
+  theme_bw()+
+  facet_wrap(facets = vars(years), nrow = 1)
+
+
+
+
+
+
 
 
 #GRÁFICO MAPSPAIN()
