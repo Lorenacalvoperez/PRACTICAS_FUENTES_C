@@ -487,6 +487,45 @@ ggplot(CCAA_sf) +
   theme(legend.position = c(0.1, 0.6))
 
 
+
+
+# Para que aparezcan por separado: 
+library(ggplot2)
+library(mapSpain)
+library(sf)
+
+CCAA_sf <- esp_get_ccaa()
+CCAA_sf <- merge(CCAA_sf, tabla_final)
+Can <- esp_get_can_box()
+
+ggplot(CCAA_sf) +
+  geom_sf(aes(fill = NAT),
+          color = "grey70",
+          linewidth = .3
+  ) +
+  geom_sf(data = Can, color = "grey70") +
+  geom_sf_label(aes(label = NAT),
+                fill = "white", alpha = 0.5,
+                size = 3,
+                label.size = 0
+  ) +
+  scale_fill_gradientn(
+    colors = hcl.colors(10, "Blues", rev = TRUE),
+    n.breaks = 10,
+    labels = function(x) {
+      sprintf("%1.1f%%", 100 * x)
+    },
+    guide = guide_legend(title = "Necesidad de atención psicológica (NAT)")
+  ) +
+  theme_void() +
+  theme(legend.position = c(0.1, 0.6))+ 
+  facet_wrap(facets = vars(years), nrow = 1)
+
+
+
+
+
+
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
 
 #CARGA de datos psicologos.json 
