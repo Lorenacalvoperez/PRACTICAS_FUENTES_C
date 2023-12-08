@@ -465,7 +465,8 @@ tabla_final %>%
 
 #GRÁFICOS DE BARRAS
 #introduccion
-#SALARIO
+
+#SALARIO 2021
 # Plot with ggplot
 library(ggplot2)
 library(mapSpain)
@@ -499,12 +500,12 @@ Can <- esp_get_can_box()
 
 X11()
 Salario_21_graf <- ggplot(CCAA_sf) +
-  geom_sf(aes(fill = NAT),
+  geom_sf(aes(fill = Total_s),
           color = "black",
           linewidth = .3
   ) +
   geom_sf(data = Can, color = "black") +
-  geom_sf_label(aes(label = NAT),
+  geom_sf_label(aes(label = Total_s),
                 fill = "white", alpha = 0.5,
                 size = 3,
                 label.size = 0
@@ -513,13 +514,13 @@ Salario_21_graf <- ggplot(CCAA_sf) +
     colors = hcl.colors(7, "Greens", rev = TRUE),
     n.breaks = 7,
     labels = function(x) sprintf("%1.0f", x),
-    limits = c(min(CCAA_sf$NAT), 13000),
+    limits = c(min(CCAA_sf$Total_s), 3000),
     guide = guide_legend(title = "Salario 2021")
   ) +
   theme_void() +
   theme(legend.position = c(0.1, 0.6))
 
-#NAT 2022
+#Salario 2022
 library(ggplot2)
 library(mapSpain)
 library(sf)
@@ -548,12 +549,12 @@ CCAA_sf <- merge(CCAA_sf, Salario_2022, by = "ccaa.shortname.es")
 Can <- esp_get_can_box()
 X11()
 Salario_22_graf <- ggplot(CCAA_sf) +
-  geom_sf(aes(fill = NAT),
+  geom_sf(aes(fill = Total_s),
           color = "black",
           linewidth = .3
   ) +
   geom_sf(data = Can, color = "black") +
-  geom_sf_label(aes(label = NAT),
+  geom_sf_label(aes(label = Total_s),
                 fill = "white", alpha = 0.5,
                 size = 3,
                 label.size = 0
@@ -562,7 +563,7 @@ Salario_22_graf <- ggplot(CCAA_sf) +
     colors = hcl.colors(7, "Purples", rev = TRUE),
     n.breaks = 7,
     labels = function(x) sprintf("%1.0f", x),
-    limits = c(min(CCAA_sf$NAT), 5000),
+    limits = c(min(CCAA_sf$Total_s), 3000),
     guide = guide_legend(title = "Salario 2022")
   ) +
   theme_void() +
@@ -573,6 +574,125 @@ Salario_22_graf <- ggplot(CCAA_sf) +
 library(cowplot)
 X11()
 plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
+
+
+# Temperatura 
+#Temperatura 2021
+# Plot with ggplot
+library(ggplot2)
+library(mapSpain)
+library(sf)
+
+Temperatura_2021 <- tabla_final %>% 
+  filter(years == 2021) %>% 
+  mutate(.,ccaa.shortname.es = factor(CCAA,
+                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                               "BALEARES", "CANARIAS", "CANTABRIA", 
+                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                      labels = c("Andalucía", "Aragón", 
+                                                 "Asturias", "Baleares ", 
+                                                 "Canarias", 
+                                                 "Cantabria", 
+                                                 "Castilla y León","Castilla-La Mancha",
+                                                 "Cataluña", "Comunidad Valenciana",
+                                                 "Extremadura", "Galicia", 
+                                                 "Madrid", "Murcia",
+                                                 "Navarra",
+                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
+                                      ))) %>% 
+  mutate(., tmedia = round(tmedia, 3))
+
+
+CCAA_sf <- esp_get_ccaa()
+CCAA_sf <- merge(CCAA_sf, Temperatura_2021, by = "ccaa.shortname.es")
+Can <- esp_get_can_box()
+
+X11()
+Temperatura_21_graf <- ggplot(CCAA_sf) +
+  geom_sf(aes(fill = tmedia),
+          color = "black",
+          linewidth = .3
+  ) +
+  geom_sf(data = Can, color = "black") +
+  geom_sf_label(aes(label = tmedia),
+                fill = "white", alpha = 0.5,
+                size = 3,
+                label.size = 0
+  ) +
+  scale_fill_gradientn(
+    colors = hcl.colors(7, "Oranges", rev = TRUE),
+    n.breaks = 7,
+    labels = function(x) sprintf("%1.0f", x),
+    limits = c(min(CCAA_sf$tmedia), 20),
+    guide = guide_legend(title = "Temperatura 2021")
+  ) +
+  theme_void() +
+  theme(legend.position = c(0.1, 0.6))
+
+#Temperatura 2022
+library(ggplot2)
+library(mapSpain)
+library(sf)
+
+Temperatura_2022 <- tabla_final %>% 
+  filter(years == 2022) %>% 
+  mutate(.,ccaa.shortname.es = factor(CCAA,
+                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                               "BALEARES", "CANARIAS", "CANTABRIA", 
+                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                      labels = c("Andalucía", "Aragón", 
+                                                 "Asturias", "Baleares ", 
+                                                 "Canarias", 
+                                                 "Cantabria", 
+                                                 "Castilla y León","Castilla-La Mancha",
+                                                 "Cataluña", "Comunidad Valenciana",
+                                                 "Extremadura", "Galicia", 
+                                                 "Madrid", "Murcia",
+                                                 "Navarra",
+                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
+                                      ))) %>% 
+  mutate(., tmedia = round(tmedia, 3))
+
+CCAA_sf <- esp_get_ccaa()
+CCAA_sf <- merge(CCAA_sf, Temperatura_2022, by = "ccaa.shortname.es")
+Can <- esp_get_can_box()
+X11()
+Temperatura_22_graf <- ggplot(CCAA_sf) +
+  geom_sf(aes(fill = tmedia),
+          color = "black",
+          linewidth = .3
+  ) +
+  geom_sf(data = Can, color = "black") +
+  geom_sf_label(aes(label = tmedia),
+                fill = "white", alpha = 0.5,
+                size = 3,
+                label.size = 0
+  ) +
+  scale_fill_gradientn(
+    colors = hcl.colors(7, "Reds", rev = TRUE),
+    n.breaks = 7,
+    labels = function(x) sprintf("%1.0f", x),
+    limits = c(min(CCAA_sf$tmedia), 20),
+    guide = guide_legend(title = "Temperatura 2022")
+  ) +
+  theme_void() +
+  theme(legend.position = c(0.1, 0.6))
+
+
+# GRaficos combinados:
+library(cowplot)
+X11()
+plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncols = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
+
+
+
+
 # SALARIO VS CCAA
 tabla_final %>% 
   ggplot(., aes(x = iniciales_CCAA, y = Total_s,fill= factor(years))) +
@@ -672,7 +792,7 @@ NAT_21_graf <- ggplot(CCAA_sf) +
     n.breaks = 7,
     labels = function(x) sprintf("%1.0f", x),
     limits = c(min(CCAA_sf$NAT), 13000),
-    guide = guide_legend(title = "Necesidad de atención psicológica (NAT)")
+    guide = guide_legend(title = "NAT 2021")
   ) +
   theme_void() +
   theme(legend.position = c(0.1, 0.6))
@@ -721,7 +841,7 @@ NAT_22_graf <- ggplot(CCAA_sf) +
     n.breaks = 7,
     labels = function(x) sprintf("%1.0f", x),
     limits = c(min(CCAA_sf$NAT), 5000),
-    guide = guide_legend(title = "Necesidad de atención psicológica  (NAT)")
+    guide = guide_legend(title = "NAT 2022")
   ) +
   theme_void() +
   theme(legend.position = c(0.1, 0.6))
