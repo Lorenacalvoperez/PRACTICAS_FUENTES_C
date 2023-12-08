@@ -520,9 +520,10 @@ visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 library(ggplot2)
 library(mapSpain)
 library(sf)
+rangos<-c(400,2000,4000,6000,10000,15000,1000100)
 NAT_2021 <- tabla_final %>% 
   filter(years == 2021) %>% 
-  mutate(.,comunidades = factor(CCAA,
+  mutate(.,ccaa.shortname.es = factor(CCAA,
                                  levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
                                           "BALEARES", "CANARIAS", "CANTABRIA", 
                                           "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
@@ -533,18 +534,22 @@ NAT_2021 <- tabla_final %>%
                                             "Asturias", "Baleares ", 
                                             "Canarias", 
                                             "Cantabria", 
-                                            "Castilla-La Mancha", "Castilla y León",
-                                            "Cataluña", "Ceuta", "Comunidad Valenciana",
+                                            "Castilla y León","Castilla-La Mancha",
+                                            "Cataluña", "Comunidad Valenciana",
                                             "Extremadura", "Galicia", 
-                                            "Madrid", "Melilla", "Murcia",
+                                            "Madrid", "Murcia",
                                             "Navarra",
-                                            "País Vasco", " La Rioja" 
+                                            "País Vasco", "La Rioja" ,"Ceuta","Melilla"
                                 )))
 
-CCAA_sf <- merge(CCAA_sf, tabla_final)
-Can <- esp_get_can_box()
+NAT_2021$rangos<-paste0(round(10^-3*NAT_2021$NAT, 2), "miles")
 CCAA_sf <- esp_get_ccaa()
+View(CCAA_sf)
+CCAA_sf <- merge(CCAA_sf, NAT_2021, by = "ccaa.shortname.es")
+Can <- esp_get_can_box()
+View(CCAA_sf)
 
+X11()
 ggplot(CCAA_sf) +
   geom_sf(aes(fill = NAT),
           color = "grey70",
@@ -557,11 +562,10 @@ ggplot(CCAA_sf) +
                 label.size = 0
   ) +
   scale_fill_gradientn(
-    colors = hcl.colors(10, "Blues", rev = TRUE),
-    n.breaks = 10,
-    labels = function(x) {
-      sprintf("%1.1f%%", 100 * x)
-    },
+    colors = hcl.colors(7, "Blues", rev = TRUE),
+    n.breaks = 7,
+    labels = function(x) sprintf("%1.0f", x),
+    limits = c(min(CCAA_sf$NAT), 13000),
     guide = guide_legend(title = "Necesidad de atención psicológica (NAT)")
   ) +
   theme_void() +
