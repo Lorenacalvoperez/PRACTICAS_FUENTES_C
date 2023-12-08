@@ -488,16 +488,17 @@ tabla_final %>%
   )+
   theme_replace()+
   facet_wrap(facets = vars(years), nrow = 1)
+
 ## NAT VS CCAA
 tabla_final %>% 
-  ggplot(., aes(x = iniciales_CCAA, y = NAT, fill= factor(years))) +
+  ggplot(., aes(x = reorder(iniciales_CCAA, desc(NAT)), y = NAT, fill = factor(years))) +
   geom_bar(stat = "identity", color = "black") +
   labs(
     title = "NAT por Comunidad Autónoma",
     x = "Comunidad Autónoma",
     y = "Necesidad de Atención Psicológica"
   ) +
-  theme_gray()+
+  theme_gray() +
   facet_wrap(facets = vars(years), nrow = 1)
 
 
