@@ -502,7 +502,13 @@ tabla_final %>%
   facet_wrap(facets = vars(years), nrow = 1)
 
 
+# Análisis de regresión final:
+library(visreg)
+Modelo <- lm(NAT ~ tmedia*Total_s, data = tabla_final)
+summary(Modelo)
 
+# Visualización 3D para ver la relación entre Tª media y el total de salario:
+visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 
 
 
