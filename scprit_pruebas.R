@@ -520,11 +520,30 @@ visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 library(ggplot2)
 library(mapSpain)
 library(sf)
+NAT_2021 <- tabla_final %>% 
+  filter(years == 2021) %>% 
+  mutate(.,comunidades = factor(CCAA,
+                                 levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                          "BALEARES", "CANARIAS", "CANTABRIA", 
+                                          "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                          "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                          "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                          "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                 labels = c("Andalucía", "Aragón", 
+                                            "Asturias", "Baleares ", 
+                                            "Canarias", 
+                                            "Cantabria", 
+                                            "Castilla-La Mancha", "Castilla y León",
+                                            "Cataluña", "Ceuta", "Comunidad Valenciana",
+                                            "Extremadura", "Galicia", 
+                                            "Madrid", "Melilla", "Murcia",
+                                            "Navarra",
+                                            "País Vasco", " La Rioja" 
+                                )))
 
-CCAA_sf <- esp_get_ccaa()
 CCAA_sf <- merge(CCAA_sf, tabla_final)
 Can <- esp_get_can_box()
-
+CCAA_sf <- esp_get_ccaa()
 
 ggplot(CCAA_sf) +
   geom_sf(aes(fill = NAT),
