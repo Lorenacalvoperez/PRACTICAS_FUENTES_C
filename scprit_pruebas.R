@@ -520,7 +520,7 @@ visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 library(ggplot2)
 library(mapSpain)
 library(sf)
-rangos<-c(400,2000,4000,6000,10000,15000,1000100)
+
 NAT_2021 <- tabla_final %>% 
   filter(years == 2021) %>% 
   mutate(.,ccaa.shortname.es = factor(CCAA,
@@ -542,7 +542,7 @@ NAT_2021 <- tabla_final %>%
                                             "País Vasco", "La Rioja" ,"Ceuta","Melilla"
                                 )))
 
-NAT_2021$rangos<-paste0(round(10^-3*NAT_2021$NAT, 2), "miles")
+
 CCAA_sf <- esp_get_ccaa()
 View(CCAA_sf)
 CCAA_sf <- merge(CCAA_sf, NAT_2021, by = "ccaa.shortname.es")
@@ -571,16 +571,32 @@ ggplot(CCAA_sf) +
   theme_void() +
   theme(legend.position = c(0.1, 0.6))
 
-
-
-
-# Para que aparezcan por separado: 
+#NAT 2022
 library(ggplot2)
 library(mapSpain)
 library(sf)
-
+NAT_2022 <- tabla_final %>% 
+  filter(years == 2022) %>% 
+  mutate(.,ccaa.shortname.es = factor(CCAA,
+                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                               "BALEARES", "CANARIAS", "CANTABRIA", 
+                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                      labels = c("Andalucía", "Aragón", 
+                                                 "Asturias", "Baleares ", 
+                                                 "Canarias", 
+                                                 "Cantabria", 
+                                                 "Castilla y León","Castilla-La Mancha",
+                                                 "Cataluña", "Comunidad Valenciana",
+                                                 "Extremadura", "Galicia", 
+                                                 "Madrid", "Murcia",
+                                                 "Navarra",
+                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
+                                      )))
 CCAA_sf <- esp_get_ccaa()
-CCAA_sf <- merge(CCAA_sf, tabla_final)
+CCAA_sf <- merge(CCAA_sf, NAT_2022, by = "ccaa.shortname.es")
 Can <- esp_get_can_box()
 
 ggplot(CCAA_sf) +
@@ -595,18 +611,16 @@ ggplot(CCAA_sf) +
                 label.size = 0
   ) +
   scale_fill_gradientn(
-    colors = hcl.colors(10, "Blues", rev = TRUE),
-    n.breaks = 10,
-    labels = function(x) {
-      sprintf("%1.1f%%", 100 * x)
-    },
-    guide = guide_legend(title = "Necesidad de atención psicológica (NAT)")
+    colors = hcl.colors(7, "Reds", rev = TRUE),
+    n.breaks = 7,
+    labels = function(x) sprintf("%1.0f", x),
+    limits = c(min(CCAA_sf$NAT), 13000),
+    guide = guide_legend(title = "Necesidad de atención psicológica  (NAT)")
   ) +
   theme_void() +
-  theme(legend.position = c(0.1, 0.6))+ 
-  facet_wrap(facets = vars(years), nrow = 1)
+  theme(legend.position = c(0.1, 0.6))
 
-
+# Para que aparezcan por separado:
 
 
 
