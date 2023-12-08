@@ -465,12 +465,120 @@ tabla_final %>%
 
 #GRÁFICOS DE BARRAS
 #introduccion
+#SALARIO
+# Plot with ggplot
+library(ggplot2)
+library(mapSpain)
+library(sf)
+
+Salario_2021 <- tabla_final %>% 
+  filter(years == 2021) %>% 
+  mutate(.,ccaa.shortname.es = factor(CCAA,
+                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                               "BALEARES", "CANARIAS", "CANTABRIA", 
+                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                      labels = c("Andalucía", "Aragón", 
+                                                 "Asturias", "Baleares ", 
+                                                 "Canarias", 
+                                                 "Cantabria", 
+                                                 "Castilla y León","Castilla-La Mancha",
+                                                 "Cataluña", "Comunidad Valenciana",
+                                                 "Extremadura", "Galicia", 
+                                                 "Madrid", "Murcia",
+                                                 "Navarra",
+                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
+                                      )))
+
+
+CCAA_sf <- esp_get_ccaa()
+CCAA_sf <- merge(CCAA_sf, Salario_2021, by = "ccaa.shortname.es")
+Can <- esp_get_can_box()
+
+X11()
+Salario_21_graf <- ggplot(CCAA_sf) +
+  geom_sf(aes(fill = NAT),
+          color = "black",
+          linewidth = .3
+  ) +
+  geom_sf(data = Can, color = "black") +
+  geom_sf_label(aes(label = NAT),
+                fill = "white", alpha = 0.5,
+                size = 3,
+                label.size = 0
+  ) +
+  scale_fill_gradientn(
+    colors = hcl.colors(7, "Greens", rev = TRUE),
+    n.breaks = 7,
+    labels = function(x) sprintf("%1.0f", x),
+    limits = c(min(CCAA_sf$NAT), 13000),
+    guide = guide_legend(title = "Salario 2021")
+  ) +
+  theme_void() +
+  theme(legend.position = c(0.1, 0.6))
+
+#NAT 2022
+library(ggplot2)
+library(mapSpain)
+library(sf)
+Salario_2022 <- tabla_final %>% 
+  filter(years == 2022) %>% 
+  mutate(.,ccaa.shortname.es = factor(CCAA,
+                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                               "BALEARES", "CANARIAS", "CANTABRIA", 
+                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                      labels = c("Andalucía", "Aragón", 
+                                                 "Asturias", "Baleares ", 
+                                                 "Canarias", 
+                                                 "Cantabria", 
+                                                 "Castilla y León","Castilla-La Mancha",
+                                                 "Cataluña", "Comunidad Valenciana",
+                                                 "Extremadura", "Galicia", 
+                                                 "Madrid", "Murcia",
+                                                 "Navarra",
+                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
+                                      )))
+CCAA_sf <- esp_get_ccaa()
+CCAA_sf <- merge(CCAA_sf, Salario_2022, by = "ccaa.shortname.es")
+Can <- esp_get_can_box()
+X11()
+Salario_22_graf <- ggplot(CCAA_sf) +
+  geom_sf(aes(fill = NAT),
+          color = "black",
+          linewidth = .3
+  ) +
+  geom_sf(data = Can, color = "black") +
+  geom_sf_label(aes(label = NAT),
+                fill = "white", alpha = 0.5,
+                size = 3,
+                label.size = 0
+  ) +
+  scale_fill_gradientn(
+    colors = hcl.colors(7, "Purples", rev = TRUE),
+    n.breaks = 7,
+    labels = function(x) sprintf("%1.0f", x),
+    limits = c(min(CCAA_sf$NAT), 5000),
+    guide = guide_legend(title = "Salario 2022")
+  ) +
+  theme_void() +
+  theme(legend.position = c(0.1, 0.6))
+
+
+# GRaficos combinados:
+library(cowplot)
+X11()
+plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
 # SALARIO VS CCAA
 tabla_final %>% 
   ggplot(., aes(x = iniciales_CCAA, y = Total_s,fill= factor(years))) +
   geom_bar(stat = "identity", color = "black") +
   labs(
-    title = "NAT por Comunidad Autónoma",
+    title = "Salario por Comunidad Autónoma",
     x = "Comunidad Autónoma",
     y = "Salario"
   )+
