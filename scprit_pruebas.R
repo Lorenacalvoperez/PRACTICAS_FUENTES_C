@@ -544,18 +544,16 @@ NAT_2021 <- tabla_final %>%
 
 
 CCAA_sf <- esp_get_ccaa()
-View(CCAA_sf)
 CCAA_sf <- merge(CCAA_sf, NAT_2021, by = "ccaa.shortname.es")
 Can <- esp_get_can_box()
-View(CCAA_sf)
 
 X11()
-ggplot(CCAA_sf) +
+NAT_21_graf <- ggplot(CCAA_sf) +
   geom_sf(aes(fill = NAT),
-          color = "grey70",
+          color = "black",
           linewidth = .3
   ) +
-  geom_sf(data = Can, color = "grey70") +
+  geom_sf(data = Can, color = "black") +
   geom_sf_label(aes(label = NAT),
                 fill = "white", alpha = 0.5,
                 size = 3,
@@ -598,13 +596,13 @@ NAT_2022 <- tabla_final %>%
 CCAA_sf <- esp_get_ccaa()
 CCAA_sf <- merge(CCAA_sf, NAT_2022, by = "ccaa.shortname.es")
 Can <- esp_get_can_box()
-
-ggplot(CCAA_sf) +
+X11()
+NAT_22_graf <- ggplot(CCAA_sf) +
   geom_sf(aes(fill = NAT),
-          color = "grey70",
+          color = "black",
           linewidth = .3
   ) +
-  geom_sf(data = Can, color = "grey70") +
+  geom_sf(data = Can, color = "black") +
   geom_sf_label(aes(label = NAT),
                 fill = "white", alpha = 0.5,
                 size = 3,
@@ -614,12 +612,17 @@ ggplot(CCAA_sf) +
     colors = hcl.colors(7, "Reds", rev = TRUE),
     n.breaks = 7,
     labels = function(x) sprintf("%1.0f", x),
-    limits = c(min(CCAA_sf$NAT), 13000),
+    limits = c(min(CCAA_sf$NAT), 5000),
     guide = guide_legend(title = "Necesidad de atención psicológica  (NAT)")
   ) +
   theme_void() +
   theme(legend.position = c(0.1, 0.6))
 
+
+# GRaficos combinados:
+library(cowplot)
+X11()
+plot_grid(NAT_21_graf, NAT_22_graf, ncols = 2, labels = c("NAT 2021", "NAT 2022") )
 # Para que aparezcan por separado:
 
 
