@@ -112,8 +112,12 @@ psicologos_json_2021_Metadata<- psicologos_json_2021 %>%
 
 psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json_2021_Data)
 
-
 ```
+![Tabla_psicologos.json](IMAGES/tabla_psicologos.jpg)
+![Tabla_psicologos.csv](IMAGES/tabla_psicologos_json.jpg)
+Como se visualiza en las tablas, al intentar cargas los datos json nos encontrabamos 2 objetos de tipo arrays (Data y Metadata). En el objeto Data se localizaban los valores , miestras que en el objeto Metadata se localizaban las varibles.Hay combinar todo vemos que los final combinadas no son las correctas en consecuencia, que las variables no coinciden con sus valores.
+
+En conclusión, utilizamos csv para cargar nuestros datos de forma correcta.
 
 ### Carga de datos csv
 ```{r}
