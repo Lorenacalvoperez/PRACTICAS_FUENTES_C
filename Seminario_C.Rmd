@@ -19,8 +19,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Objetivos
  Inicialmente, se han planteado una serie de objetivos, de los cuales que tras el análisis de los datos obtendremos respuestas:
  
-  - Estudiar como afecta la temperatura sobre la NAT 
-  - Estudiar como afecta  el salario sobre la NAT 
+  - Visualizar la necesidad de atención psicológica por Comunidades Autónomas
+  - Estudiar como afecta la temperatura sobre la necesidad de atención psicológica 
+  - Estudiar como afecta  el salario sobre la necesidad de atención psicológica 
   
 ## Información sobre el tema
 
@@ -330,7 +331,12 @@ visitas<- visitas_2021%>%
   group_by(CCAA, years) %>% 
   select(Total_v)
 
+datatable(visitas)
+
 ```
+*Nota:* Nº de visitas por Comunidades Autónomas
+
+
 
 ### Obtención del salario
 ```{r}
@@ -374,8 +380,10 @@ salarios_final <- salarios %>%
   group_by(CCAA, years) %>% 
   select(Total_s) %>% 
   arrange(years)
-```
 
+datatable(salarios_final)
+```
+*Nota:* Salarios mensuales por Comunidades Autónomas
 
 ### Obtención de la población
 ```{r}
@@ -420,7 +428,16 @@ poblacion_final <- poblacion %>%
   select(Total_pob) %>% 
   arrange(years)
 
+datatable(poblacion_final)
 ```
+*Nota:* Población por Comunidades Autónomas
+
+
+## Obtención de la tabla final
+
+#Análisis de nuestros datos
+
+
 ### Objetivos
 
 - __Cantidad de psicólogos por Comunidad Autónoma en función de su población__
