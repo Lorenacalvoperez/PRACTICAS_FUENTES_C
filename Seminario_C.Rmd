@@ -757,7 +757,27 @@ Podemos determinar que para el mismo rango de salarios, la NAT es superior en 20
 Por otro lado, conforme aumenta el salario ,hasta 2200€, aumenta el valor de la NAT paulatinamente.
 De forma muy clara, se observa que ante salarios más elevados (a partir de 2200€) la NAT disminuye, llegando incluso a ser nula.
 
+## Gráfico de barras
+### NAT VS CCAA
+En este gráfico de dispersión vamos a visulizar como afecta el salario medio de cada una de las CCAA en la necesidad de atención psicológica.
+```{r}
+NAT_vs_CCAA <- tabla_final %>% 
+  ggplot(., aes(x = reorder(iniciales_CCAA, desc(NAT)), y = NAT, fill = factor(years))) +
+  geom_bar(stat = "identity", color = "black") +
+  labs(
+    title = "NAT por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "Necesidad de Atención Psicológica"
+  ) +
+  theme_gray() +
+  facet_wrap(facets = vars(years), nrow = 1)
 
+NAT_vs_CCAA
+
+```
+Podemos aprecir que los valores de NAT han sido más elevados generalemnte en 2021 que en 2022.
+Al igual que la CCAA con más NAT ha sido tanto en 2021 como en 2022 Ceuta y detrás de esta Melilla.
+La CCAA siguen la misma tendencia de NAT en ambos años, pero con valores generalemnte inferiores 
 
 ## Comportamiento de los factores que analizaremos
 
