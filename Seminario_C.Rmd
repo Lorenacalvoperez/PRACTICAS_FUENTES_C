@@ -148,7 +148,11 @@ salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FA
 ## Trabajando con los datos
 
 ### Obtención de la Temperatura Media
+*Nota:* Temperatura media por Comunidades Autónomas
 
+
+Para la obtención de la *temperatura media*, se han creado una columna de años y y otra columna de comunidades.Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades.
+Tras ello, hemos calculado la temperatura media por comunidad.
 ```{r}
 
 # Temperatura de las provincias
@@ -194,16 +198,15 @@ tmed_CCAA<- temp_con_CCAA %>%
 datatable(tmed_CCAA)
   
 ```
-*Nota:* Temperatura media por Comunidades Autónomas
-
-
-Para la obtención de la *temperatura media*, se han crearon una columna de años y y otra columna de comunidades.Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades.
-Tras ello, hemos calculado la temperatura media por comunidad. 
+ 
 
 
 
 ### Obtención de los psicólogos
+*Nota:* Nº de psicólogos por Comunidades Autónomas
 
+Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
+Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 ```{r}
 
 psicologos_2021 <- psicologos_2021 %>% 
@@ -266,12 +269,13 @@ psicologos <- psicologos_2021 %>%
 datatable(psicologos)
 
 ```
-*Nota:* Nº de psicólogos por Comunidades Autónomas
 
-Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
-Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ### Obtención de las visitas
+*Nota:* Nº de visitas por Comunidades Autónomas
+
+Los datos de *visitas* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
+Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 ```{r}
 visitas_2021 <- visitas_2021 %>% 
   mutate(Total_v = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
@@ -341,12 +345,13 @@ visitas<- visitas_2021%>%
 datatable(visitas)
 
 ```
-*Nota:* Nº de visitas por Comunidades Autónomas
 
-Los datos de *visitas* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
-Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ### Obtención del salario
+*Nota:* Salarios mensuales por Comunidades Autónomas
+
+Para la obtención de los datos de *salario* utilizados.Se crean una columna para transformar los salarios de tipo __character__ a tipo __númerico__.
+Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 ```{r}
 salarios <- salarios %>% 
   mutate(Total_s = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
@@ -391,12 +396,13 @@ salarios_final <- salarios %>%
 
 datatable(salarios_final)
 ```
-*Nota:* Salarios mensuales por Comunidades Autónomas
 
-Para la obtención de los datos de *salario* utilizados.Se crean una columna para transformar los salarios de tipo __character__ a tipo __númerico__.
-Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ### Obtención de la población
+*Nota:* Población por Comunidades Autónomas
+
+Para la obtención de los datos de *población * utilizados.Se crean una columna para transformar la población de tipo __character__ a tipo __númerico__.
+Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 ```{r}
 poblacion <- poblacion %>% 
   mutate(Total_pob = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
@@ -441,12 +447,36 @@ poblacion_final <- poblacion %>%
 
 datatable(poblacion_final)
 ```
-*Nota:* Población por Comunidades Autónomas
 
-Para la obtención de los datos de *población * utilizados.Se crean una columna para transformar la población de tipo __character__ a tipo __númerico__.
-Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ## Obtención de la tabla final
+A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_final,poblacion_final y psicologos) mediante los atributos comunes, el 'CCAA' y 'years' , construimos la tabla final con los datos de interés.
+Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:
+    - *iniciales_CCAA* : contiene las abreviaturas para identificar a las CCAA.
+    - *Total_ps* : contiene la cantidad de psicologos por cada CCAA.
+    - *NAT* : contiene los valores de la necesidad de atención psicológica por cada comunidad.
+```{r}
+
+# OBTENCIÓN DE LA TABLA FINAL:
+tabla_final<- tmed_CCAA %>% 
+              full_join(.,salarios_final) %>% 
+              full_join(.,psicologos) %>% 
+              full_join(.,poblacion_final) %>% 
+          mutate(.,Total_ps=Total_ind_ps*(Total_pob*10^3)) %>%
+              full_join(.,visitas) %>% 
+          mutate(.,NAT=as.integer(Total_v*10^6/(Total_ps*(Total_pob*10^3))*10^5)) %>% 
+          mutate(.,iniciales_CCAA = factor(CCAA,
+                                   levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
+                                            "BALEARES", "CANARIAS", "CANTABRIA", 
+                                            "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
+                                            "COMUNIDAD VALENCIANA", "EXTREMADURA",
+                                            "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
+                                            "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
+                                   labels = c("An","Ar","As","Bl","Cs","Ca","CyL","Cm","Ct","Cv","Ex",
+                                              "Ga","M","Mu","Na","Pv","R","Ce","Ml" ))) %>% 
+          select(.,iniciales_CCAA,everything())
+```
+
 
 #Análisis de nuestros datos
 
