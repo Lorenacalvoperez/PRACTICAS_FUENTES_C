@@ -1,7 +1,7 @@
 ---
 title: "Necesidad de Atención Psicológica en España"
 subtitle: "Fuentes de datos Biomédicas y Web semántica, Grado de Ingeniería de la Salud"
-author: "Lorena Calvo Pérez, Julia Arellano Atienza, Mario Díaz Sutil"
+author: "**Lorena Calvo Pérez, Julia Arellano Atienza, Mario Díaz Sutil**"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -57,7 +57,7 @@ URLs de los distintos datos usados:
 
 - [Salarios](https://datos.gob.es/es/catalogo/ea0010587-salarios-medios-por-tipo-de-jornada-comunidad-autonoma-y-decil-epa-identificador-api-13930)
  
-## Carga de librerías
+## **Carga de librerías**
 ```{r}
 library(climaemet)
 library(tibble)
@@ -73,7 +73,7 @@ library(visreg)
 library(DT)
 ```
 
-## Acceso a climaemet
+## **Acceso a climaemet**
 
 API necesaria para poder acceder a los datos de climaemet.
 
@@ -82,7 +82,7 @@ library(climaemet)
 aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = FALSE)
 ```
 
-Podemos ver las estaciones meteorológicas de las que dipsone climaemet de datos y las provincias a las que pertenecen dichas estaciones. Además, observamos el nº de estaciones por provincia. 
+Podemos ver las estaciones meteorológicas de las que dispone climaemet de datos y las provincias a las que pertenecen dichas estaciones. Además, observamos el nº de estaciones por provincia. 
 
 ```{r}
 library(tibble)
@@ -93,16 +93,16 @@ stations
 table(stations$provincia)
 ```
 
-## Carga de datos
+## **Carga de datos**
 
-### Carga de datos de climaemet
+### **Carga de datos de climaemet**
 ```{r}
 # Obtención de las Tª diaras por estaciones aemet:
 
 observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
 ```
 
-### Carga de datos JSON
+### **Carga de datos JSON**
 ```{r eval=FALSE}
 
 #Carga de datos de la población json no coindiden los atributos 
@@ -162,15 +162,20 @@ psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json
 
 ```
 
-![Tabla_psicologos.json](IMAGES/tabla_psicologos.jpg)
 
-![Tabla_psicologos.csv](IMAGES/tabla_psicologos_json.jpg)
+![**Tabla_psicologos.json**]
+
+(IMAGES/tabla_psicologos.jpg)
+
+![**Tabla_psicologos.csv**]
+
+(IMAGES/tabla_psicologos_json.jpg)
 
 Como se visualiza en las tablas, al intentar cargas los datos json nos encontrabamos 2 objetos de tipo arrays (Data y Metadata). En el objeto Data se localizaban los valores , miestras que en el objeto Metadata se localizaban las varibles.Hay combinar todo vemos que los final combinadas no son las correctas en consecuencia, que las variables no coinciden con sus valores.
 
 En conclusión, utilizamos csv para cargar nuestros datos de forma correcta.
 
-### Carga de datos csv
+### **Carga de datos csv**
 
 ```{r}
 # Carga csv de psicologos
@@ -197,9 +202,9 @@ salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FA
 
 ```
 
-## Trabajando con los datos
+## **Trabajando con los datos**
 
-### Obtención de la Temperatura Media
+### **Obtención de la Temperatura Media**
 
 *Nota:* Temperatura media por Comunidades Autónomas
 
@@ -252,7 +257,7 @@ datatable(tmed_CCAA)
   
 ```
  
-### Obtención de los psicólogos
+### **Obtención de los psicólogos**
 
 *Nota:* Nº de psicólogos por Comunidades Autónomas
 
@@ -321,13 +326,13 @@ psicologos <- psicologos_2021 %>%
 datatable(psicologos)
 
 ```
-
-### Obtención de las visitas
+*
+### *Obtención de las visitas**
 
 *Nota:* Nº de visitas por Comunidades Autónomas
 
 Los datos de **visitas** utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
-Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+Tras ello, se combinaron los conjuntos y se seleccionaron aquellos útiles para el estudio.
 
 ```{r}
 visitas_2021 <- visitas_2021 %>% 
@@ -400,7 +405,7 @@ datatable(visitas)
 ```
 
 
-### Obtención del salario
+### **Obtención del salario**
 
 *Nota:* Salarios mensuales por Comunidades Autónomas
 
@@ -453,7 +458,7 @@ datatable(salarios_final)
 ```
 
 
-### Obtención de la población
+### **Obtención de la población**
 
 *Nota:* Población por Comunidades Autónomas
 
@@ -506,12 +511,15 @@ datatable(poblacion_final)
 ```
 
 
-## Obtención de la tabla final
+## **Obtención de la tabla final**
 
 A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_final,poblacion_final y psicologos) mediante los atributos comunes, el 'CCAA' y 'years' , construimos la tabla final con los datos de interés.
-Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:
-    - **iniciales_CCAA** : contiene las abreviaturas para identificar a las CCAA.
-    - **Total_ps** : contiene la cantidad de psicologos por cada CCAA.
+Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:  
+
+    - **iniciales_CCAA** : contiene las abreviaturas para identificar a las CCAA.  
+    
+    - **Total_ps** : contiene la cantidad de psicologos por cada CCAA.  
+    
     - **NAT** : contiene los valores de la necesidad de atención psicológica por cada         comunidad.
     
 ```{r}
@@ -538,9 +546,9 @@ tabla_final<- tmed_CCAA %>%
 datatable(tabla_final)
 ```
 
-# Análisis de nuestros datos
+# *Análisis de nuestros datos**
 
-## Gráficos
+## *Gráficos**
 
 ### **Visualización del salario medio en España por CCAA**
 
@@ -653,7 +661,7 @@ Salario_21_22
 
 ```
 
-### Conclusiones
+### **Conclusiones**
 
 Se puede apreciar una notable diferencia de los salarios entre un año y otro, siendo superiores los salarios de 2022.Por otro lado se observa un patrón de salarios en el cual  Madrid, EL País Vasco, Navarra y Cataluña contienen en ambos años salafrios superiores al resto de España.
 
@@ -775,7 +783,7 @@ Temperatura_21_22
 
 ```
 
-### Conclusiones
+### **Conclusiones**
 
 Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte.
 Por otro lado la difernecia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
@@ -801,7 +809,7 @@ NAT_vs_tmedia
 
 ```
 
-### Conclusiones
+### **Conclusiones**
 
 De forma general se aprecia que a partir de una temperatura media superior a 18ºC, comienza a crecer de forma exponencial la necesidad de atención psicológica.
 Análogamente, podemos ver que ante valores de temperatura inferiores a 15ºC también se observa un ligero aumento de la NAT, pero mucho más suavizada.
@@ -830,7 +838,7 @@ NAT_vs_salario
 
 ```
 
-### Conclusiones
+### **Conclusiones**
 
 Ante valores bajos de salario, la NAT no es muy elevada, probablemente debido a que dicho salario no es destinado para esa necesidad .
 Podemos determinar que para el mismo rango de salarios, la NAT es superior en 2021 que en 2022.
@@ -839,9 +847,9 @@ Por otro lado, conforme aumenta el salario ,hasta 2200€, aumenta el valor de l
 
 De forma muy clara, se observa que ante salarios más elevados (a partir de 2200€) la NAT disminuye, llegando incluso a ser nula.
 
-## Gráfico de barras
+## **Gráfico de barras**
 
-### NAT VS CCAA
+### **NAT VS CCAA**
 
 En este gráfico de dispersión vamos a visulizar como afecta el salario medio de cada una de las CCAA en la necesidad de atención psicológica.
 
@@ -861,7 +869,7 @@ NAT_vs_CCAA
 
 ```
 
-### Conclusiones 
+### **Conclusiones**
 
 Podemos aprecir que los valores de NAT han sido más elevados generalemnte en 2021 que en 2022.
 Al igual que la CCAA con más NAT ha sido tanto en 2021 como en 2022 Ceuta y detrás de esta Melilla.
@@ -979,7 +987,7 @@ NAT_21_22
 
 ```
 
-### Conclusiones
+### **Conclusiones**
 
 En 2021, podemos apreciar que en las zonas del norte y centro peninsular, así como Ceuta y Melilla, la NAT es más elevada que en el resto de las CCAA.
 En 2022, generalmente los valores de NAT son más bajo, exluyendo algunas CCAA como La Rioja, Cantabria, Navarra, Ceuta y Melilla.
