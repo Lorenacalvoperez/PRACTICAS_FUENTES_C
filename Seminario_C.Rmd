@@ -16,27 +16,119 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Introducción
  Se va a estudiar la relación que hay entre la asistencia al ámbito de salud mental con la economía de la población, en función de las comunidades.
  
-## Carga de datos
+## Materiales y Métodos
+ 
 ### Carga de librerías
 ```{r}
 library(climaemet)
 library(tibble)
+library(tidyverse)
+library(rjson)
+library(tidyjson)
+library(readr)
+library(ggplot2)
+library(mapSpain)
+library(sf)
+library(cowplot)
+library(visreg)
+library(DT)
 ```
-### Carga de datos JSON
+### Carga de datos
+#### Carga de datos de climaemet
 ```{r}
-psicologos_2021<- fromJSON(file = "INPUT/DATA/psicologos_CA_2021.json")
+# Obtención de las Tª diaras por estaciones aemet:
 
-
-psicologos_2022<- fromJSON(file = "INPUT/DATA/psicologos_CA_2022.json")
+observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
 ```
 
+#### Carga de datos JSON
+```{r eval=FALSE}
+
+#Carga de datos de la población json no coindiden los atributos 
+
+poblacion_json <- fromJSON(file ="DATA/poblacion.json")
+
+poblacion_json %>% 
+  spread_all() %>% 
+  gather_object() %>% 
+  json_types() %>% 
+  count(name, type)
+
+poblacion_Data<- poblacion_json %>% 
+  enter_object(Data) %>% 
+  gather_array() %>% 
+  spread_all() 
+ 
+
+poblacion_MetaData<- poblacion_json %>% 
+  enter_object(MetaData) %>% 
+  gather_array() %>% 
+  spread_all()
+
+poblacion_json_union<- cbind(poblacion_Metadata,poblacion_Data)
+
+#CARGA de datos psicologos.json 
+
+psicologos_json_2021 <- fromJSON(file ="DATA/tasa_psicologos_2021.json")
+
+#Identificacion de arrays
+
+psicologos_json_2021 %>% 
+  spread_all() %>% 
+  gather_object() %>% 
+  json_types() %>% 
+  count(name, type)
+
+#obtenemos la columna data
+
+psicologos_json_2021_Data<- psicologos_json_2021 %>% 
+  enter_object(Data) %>% 
+  gather_array() %>% 
+  spread_all() %>%
+  select(Valor)
+
+#obtenemos la columna metadata
+
+psicologos_json_2021_Metadata<- psicologos_json_2021 %>% 
+  enter_object(MetaData) %>% 
+  gather_array() %>% 
+  spread_all() %>%
+  select(-document.id, - array.index)
+
+#union de columnas
+
+psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json_2021_Data)
+
+
+```
+
+#### Carga de datos csv
 ```{r}
-poblacion_años<- formJSON(file="INPUT/DATA/poblacion_Ca_por_años.json")
+# Carga csv de psicologos
+
+psicologos_2021 <- read_delim("DATA/psicologos2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+
+psicologos_2022 <- read_delim("DATA/psicologos2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+# Carga csv de visitas
+
+visitas_2021 <- read_delim("DATA/visitas_2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+visitas_2022 <- read_delim("DATA/visitas_2022.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+# Carga de datos Población.csv
+
+poblacion <- read_delim("DATA/poblacion_CA_años.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+
+# Carga de datos de salarios .csv:
+
+salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
 ```
 
-```{r}
-salarios_CA<- formJSON(file="INPUT/DATA/salarios_CA.json")
-```
+
 
 ### Objetivos
 - __Cantidad de psicólogos por Comunidad Autónoma en función de su población__
