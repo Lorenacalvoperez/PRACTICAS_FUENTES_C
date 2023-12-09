@@ -483,7 +483,7 @@ datatable(tabla_final)
 # Análisis de nuestros datos
 ## Gráficos
 ## Introducción
-*Visualización del salario medio en España por CCAA*
+### *Visualización del salario medio en España por CCAA*
 A continuación se pueden observar los salarios medios entre las diferentes CCAA, tanto en 2021 como 2022.
 ```{r}
 #SALARIO 2021
@@ -594,7 +594,7 @@ Salario_21_22
 Se puede apreciar una notable diferencia de los salarios entre un año y otro, siendo superiores los salarios de 2022.Por otro lado se observa un patrón de salarios en el cual  Madrid, EL País Vasco, Navarra y Cataluña contienen en ambos años salafrios superiores al resto de España.
 
 
-*Visualización de la temperatura media en España por CCAA*
+### *Visualización de la temperatura media en España por CCAA*
 A continuación se puede observar la temperatura media entre las diferentes CCAA, tanto en 2021 como 2022.
 ```{r}
 # Temperatura 
@@ -711,7 +711,29 @@ Temperatura_21_22
 Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte.
 Por otro lado la difernecia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
 
+## *Gráficos de dispersión*
+### *NAT vs Temperatura media*
+En este gráfico de dispersión vamos a visulizar como afecta la temperatura media de cada una de las CCAA en la necesidad de atención psicológica.
+```{r}
 
+NAT_vs_tmedia <- tabla_final %>%
+          filter(.,NAT<50000) %>% 
+          ggplot(.,mapping=aes(x=tmedia,y=NAT))+
+          geom_point(aes(colour=factor(years),shape=factor(years)))+ 
+          geom_smooth()+
+          labs(x="Temperatura Media(ºC)",y="Necesidad de Atención Psicológica",
+               subtitle = "Relación entre la Temperatura Media y la NAT")+
+          theme_bw()
+
+NAT_vs_tmedia
+
+```
+De forma general se aprecia que a partir de una temperatura media superior a 18ºC, comienza a crecer de forma exponencial la necesidad de atención psicológica.
+Análogamente, podemos ver que ante valores de temperatura inferiores a 15ºC también se observa un ligero aumento de la NAT, pero mucho más suavizada.
+Por otro lado, ante unos valores de temperatura intermedios (menos extremos) la NAT disminuye, manteniéndose aproxiamdamente en un valor constante.
+
+En general, en el 2021 hubo una mayor necesidad de atención psicológica que en 2022 y esto pudo deberse a la post-pandemia.
+Podemos llegar a la conclusion de que mayores temperaturas pueden ocasionar mayor cantidad de estrés y con ello mayor NAT.
 
 
 
