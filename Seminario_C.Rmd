@@ -14,7 +14,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introducción
- Se va a estudiar la relación que hay entre la asistencia al ámbito de salud mental con la economía de la población, en función de las comunidades.
+ En este seminario ,se va a estudiar la relación que hay entre la necesidad de atención psicológica que proximamente definiremos , la temperatura y salario.
+
+## Objetivos
+ Inicialmente, se han planteado una serie de objetivos, de los cuales que tras el análisis de los datos obtendremos respuestas:
+ 
+  - Estudiar como afecta la temperatura sobre la NAT 
+  - Estudiar como afecta  el salario sobre la NAT 
+  
+## Información sobre el tema
+
  
 # Materiales y Métodos
  
@@ -177,6 +186,13 @@ tmed_CCAA<- temp_con_CCAA %>%
 datatable(tmed_CCAA)
   
 ```
+*Nota:* Temperatura media por Comunidades Autónomas
+
+
+Para la obtención de la temperatura media, se han crearon una columna de años y y otra columna de comunidades.Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades.
+Tras ello, hemos calculado la temperatura media por comunidad. 
+
+
 
 ### Obtención de los psicólogos
 
@@ -242,6 +258,10 @@ psicologos <- psicologos_2021 %>%
 datatable(psicologos)
 
 ```
+*Nota:* Nº de psicólogos por Comunidades Autónomas
+
+Los datos de psicólogos utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
+Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ### Obtención de las visitas
 
