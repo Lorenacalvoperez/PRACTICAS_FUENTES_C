@@ -45,16 +45,15 @@ Los objetivos planteados para desarrollar el seminario son los siguientes:
 ## Materiales
 URLs de los distintos datos usados:
 
--[Psicologos_2021](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2021_8678-l0-s05005-px1)
+- [Psicologos_2021](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2021_8678-l0-s05005-px1)
 
-[psicologos_2022](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2022_9766-l0-s05005-px)
+- [Psicologos_2022](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2022_9766-l0-s05005-px)
 
+- [Población](https://datos.gob.es/es/catalogo/ea0010587-poblacion-por-nacionalidad-sexo-y-comunidad-autonoma-epa-identificador-api-4927)
 
--[Población](https://datos.gob.es/es/catalogo/ea0010587-poblacion-por-nacionalidad-sexo-y-comunidad-autonoma-epa-identificador-api-4927)
+- [Visitas_2021](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p02-l0-01050-px1)
 
--[Visitas_2021](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p02-l0-01050-px1)
-
--[Visitas_2022](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p05-l0-01038-px1)
+- [Visitas_2022](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p05-l0-01038-px1)
 
 - [Salarios](https://datos.gob.es/es/catalogo/ea0010587-salarios-medios-por-tipo-de-jornada-comunidad-autonoma-y-decil-epa-identificador-api-13930)
  
@@ -80,10 +79,10 @@ API necesaria para poder acceder a los datos de climaemet.
 
 ```{r}
 library(climaemet)
-aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = TRUE)
+aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = FALSE)
 ```
 
-Podemos ver las estaciones meteorológicas de las que dipsone climaemet de datos y las localizaciones de dichas estaciones en las provinvias.
+Podemos ver las estaciones meteorológicas de las que dipsone climaemet de datos y las provincias a las que pertenecen dichas estaciones. Además, observamos el nº de estaciones por provincia. 
 
 ```{r}
 library(tibble)
