@@ -292,21 +292,21 @@ View(poblacion_final)
 
 #Carga de datos de la población json no coindiden los atributos 
 
-poblacion <- fromJSON(file ="DATA/poblacion.json")
+poblacion_json <- fromJSON(file ="DATA/poblacion.json")
 
-poblacion %>% 
+poblacion_json %>% 
   spread_all() %>% 
   gather_object() %>% 
   json_types() %>% 
   count(name, type)
 
-poblacion_Data<- poblacion %>% 
+poblacion_Data<- poblacion_json %>% 
   enter_object(Data) %>% 
   gather_array() %>% 
   spread_all() 
  
 
-poblacion_MetaData<- poblacion %>% 
+poblacion_MetaData<- poblacion_json %>% 
   enter_object(MetaData) %>% 
   gather_array() %>% 
   spread_all()
@@ -318,21 +318,21 @@ View(poblacion_MetaData)
 # Carga de datos de salarios .json:
 # No coinciden los atributos para hacer la unión
 
-salarios <- fromJSON(file ="DATA/salario_CCAA_años.json")
+salarios_json <- fromJSON(file ="DATA/salario_CCAA_años.json")
 
-salarios %>% 
+salarios_json %>% 
   spread_all() %>% 
   gather_object() %>% 
   json_types() %>% 
   count(name, type)
 
-salarios_Data<- salarios %>% 
+salarios_Data<- salarios_json %>% 
   enter_object(Data) %>% 
   gather_array() %>% 
   spread_all() 
 
 
-salarios_Metadata<- salarios %>% 
+salarios_Metadata<- salarios_json %>% 
   enter_object(MetaData) %>% 
   gather_array() %>% 
   spread_all() 
@@ -443,7 +443,8 @@ head(tabla_final)
 ## GRÁFICO DE DISPERSIÓN:
 #NAT vs Temperatura media
 library(ggplot2)
-tabla_final %>%
+
+NAT_vs_tmedia <- tabla_final %>%
           filter(.,NAT<50000) %>% 
           ggplot(.,mapping=aes(x=tmedia,y=NAT))+
           geom_point(aes(colour=factor(years),shape=factor(years)))+ 
@@ -452,9 +453,9 @@ tabla_final %>%
                subtitle = "Relación entre la Temperatura Media y la NAT")+
           theme_bw()
 
-### WTF
+
 #NAT vs salario
-tabla_final %>% 
+NAT_vs_salario <- tabla_final %>% 
   filter(.,NAT<50000) %>% 
   ggplot(.,mapping=aes(x=Total_s,y=NAT))+
   geom_point(aes(colour=factor(years),shape=factor(years)))+ 
@@ -573,7 +574,7 @@ Salario_22_graf <- ggplot(CCAA_sf) +
 # GRaficos combinados:
 library(cowplot)
 X11()
-plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
+Salario_21_22 <- plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
 
 
 # Temperatura 
@@ -688,13 +689,13 @@ Temperatura_22_graf <- ggplot(CCAA_sf) +
 # GRaficos combinados:
 library(cowplot)
 X11()
-plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncols = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
+Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncols = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
 
 
 
 
 # SALARIO VS CCAA
-tabla_final %>% 
+Salario_vs_CCAA <- tabla_final %>% 
   ggplot(., aes(x = iniciales_CCAA, y = Total_s,fill= factor(years))) +
   geom_bar(stat = "identity", color = "black") +
   labs(
@@ -706,7 +707,7 @@ tabla_final %>%
   facet_wrap(facets = vars(years), nrow = 1)
   
 # TEMPERATURA MEDIA VS CCAA
-tabla_final %>% 
+tmedia_vs_CCAA <- tabla_final %>% 
   ggplot(., aes(x = iniciales_CCAA, y = Total_s,fill= factor(years))) +
   geom_bar(stat = "identity", color = "black") +
   labs(
@@ -718,7 +719,7 @@ tabla_final %>%
   facet_wrap(facets = vars(years), nrow = 1)
 
 ## NAT VS CCAA
-tabla_final %>% 
+NAT_vs_CCAA <- tabla_final %>% 
   ggplot(., aes(x = reorder(iniciales_CCAA, desc(NAT)), y = NAT, fill = factor(years))) +
   geom_bar(stat = "identity", color = "black") +
   labs(
@@ -736,7 +737,7 @@ Modelo <- lm(NAT ~ tmedia*Total_s, data = tabla_final)
 summary(Modelo)
 
 # Visualización 3D para ver la relación entre Tª media y el total de salario:
-visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
+visor_3d <- visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 
 
 
@@ -850,7 +851,7 @@ NAT_22_graf <- ggplot(CCAA_sf) +
 # GRaficos combinados:
 library(cowplot)
 X11()
-plot_grid(NAT_21_graf, NAT_22_graf, ncols = 2, labels = c("NAT 2021", "NAT 2022") )
+NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncols = 2, labels = c("NAT 2021", "NAT 2022") )
 # Para que aparezcan por separado:
 
 
@@ -860,7 +861,6 @@ plot_grid(NAT_21_graf, NAT_22_graf, ncols = 2, labels = c("NAT 2021", "NAT 2022"
 
 #CARGA de datos psicologos.json 
 
-psicologos_json_2021 <- fromJSON(file ="DATA/psicologos_2021.json")
 psicologos_json_2021 <- fromJSON(file ="DATA/tasa_psicologos_2021.json")
 
 #Identificacion de arrays
