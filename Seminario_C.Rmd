@@ -735,6 +735,28 @@ Por otro lado, ante unos valores de temperatura intermedios (menos extremos) la 
 En general, en el 2021 hubo una mayor necesidad de atención psicológica que en 2022 y esto pudo deberse a la post-pandemia.
 Podemos llegar a la conclusion de que mayores temperaturas pueden ocasionar mayor cantidad de estrés y con ello mayor NAT.
 
+### *NAT vs salario*
+En este gráfico de dispersión vamos a visulizar como afecta el salario medio de cada una de las CCAA en la necesidad de atención psicológica.
+```{r}
+
+NAT_vs_salario <- tabla_final %>% 
+  filter(.,NAT<50000) %>% 
+  ggplot(.,mapping=aes(x=Total_s,y=NAT))+
+  geom_point(aes(colour=factor(years),shape=factor(years)))+ 
+  geom_smooth()+
+  labs(x="Salario",y="Necesidad de Atención Psicológica",
+       subtitle = "Relación entre el salario y la NAT")+
+  theme_bw()
+
+NAT_vs_salario
+
+```
+Ante valores bajos de salario, la NAT no es muy elevada, probablemente debido a que dicho salario no es destinado para esa necesidad .
+Podemos determinar que para el mismo rango de salarios, la NAT es superior en 2021 que en 2022.
+
+Por otro lado, conforme aumenta el salario ,hasta 2200€, aumenta el valor de la NAT paulatinamente.
+De forma muy clara, se observa que ante salarios más elevados (a partir de 2200€) la NAT disminuye, llegando incluso a ser nula.
+
 
 
 ## Comportamiento de los factores que analizaremos
