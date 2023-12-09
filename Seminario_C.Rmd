@@ -15,6 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introducción
  En este seminario ,se va a estudiar la relación que hay entre la necesidad de atención psicológica que proximamente definiremos , la temperatura y salario.
+ 
+ La Necesidad de atención psicológica se calcula con la siguiente fórmula:
+ \text{NAT} = \frac{\text{Visitas}}{\text{Psicólogos} \times \text{Población}} \times 100,000
 
 ## Objetivos
  Inicialmente, se han planteado una serie de objetivos, de los cuales que tras el análisis de los datos obtendremos respuestas:
