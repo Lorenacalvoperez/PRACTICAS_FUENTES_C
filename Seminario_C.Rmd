@@ -14,22 +14,47 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introducción
- En este seminario ,se va a estudiar la relación que hay entre la necesidad de atención psicológica que proximamente definiremos , la temperatura y salario.
+La necesidada de atención psicológica es definida como la demanda de servicios o intervenciones psicológicas que una persona puede tener debido a problemas emocionales, mentales o de comportamiento.
+
+Esta necesidad puede surgir a partir de una variedad de situaciones y condiciones, y la atención psicológica puede ser buscada para abordar problemas como el estrés, la ansiedad, la depresión, los trastornos del estado de ánimo, las dificultades en las relaciones, traumas, entre otros.
+
+En este caso nos centraremos en estudiar como diferentes factores como el salario o la temperatura media afecta a la NAT.
+
+Para medir la necesidad de atención psiscológica utilizamos el numero de visitas al psicólogo, la disponibillidad de psicólogos y la población.
+ 
  
  La Necesidad de atención psicológica se calcula con la siguiente fórmula:
  \text{NAT} = \frac{\text{Visitas}}{\text{Psicólogos} \times \text{Población}} \times 100,000
 
+
 ## Objetivos
- Inicialmente, se han planteado una serie de objetivos, de los cuales que tras el análisis de los datos obtendremos respuestas:
+
+Los objetivos planteados para desarrollar el seminario son los siguientes:
  
-  - Visualizar la necesidad de atención psicológica por Comunidades Autónomas
-  - Estudiar como afecta la temperatura sobre la necesidad de atención psicológica 
-  - Estudiar como afecta  el salario sobre la necesidad de atención psicológica 
+  1. Visualizar la necesidad de atención psicológica por Comunidades Autónomas
+  2. Estudiar como afecta la temperatura sobre la necesidad de atención psicológica 
+  3. Estudiar como afecta  el salario sobre la necesidad de atención psicológica 
   
 ## Información sobre el tema
 
  
 # Materiales y Métodos
+
+## Materiales
+URLs de los distintos datos usados:
+
+-[Psicologos_2021](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2021_8678-l0-s05005-px1)
+
+[psicologos_2022](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2022_9766-l0-s05005-px)
+
+
+-[Población](https://datos.gob.es/es/catalogo/ea0010587-poblacion-por-nacionalidad-sexo-y-comunidad-autonoma-epa-identificador-api-4927)
+
+-[Visitas_2021](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p02-l0-01050-px1)
+
+-[Visitas_2022](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p05-l0-01038-px1)
+
+- [Salarios](https://datos.gob.es/es/catalogo/ea0010587-salarios-medios-por-tipo-de-jornada-comunidad-autonoma-y-decil-epa-identificador-api-13930)
  
 ## Carga de librerías
 ```{r}
@@ -46,7 +71,29 @@ library(cowplot)
 library(visreg)
 library(DT)
 ```
+
+## Acceso a climaemet
+
+API necesaria para poder acceder a los datos de climaemet.
+
+```{r}
+library(climaemet)
+aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = TRUE)
+```
+
+Podemos ver las estaciones meteorológicas de las que dipsone climaemet de datos y las localizaciones de dichas estaciones en las provinvias.
+
+```{r}
+library(tibble)
+stations <- aemet_stations()
+stations
+```
+```{r}
+table(stations$provincia)
+```
+
 ## Carga de datos
+
 ### Carga de datos de climaemet
 ```{r}
 # Obtención de las Tª diaras por estaciones aemet:
@@ -113,13 +160,17 @@ psicologos_json_2021_Metadata<- psicologos_json_2021 %>%
 psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json_2021_Data)
 
 ```
+
 ![Tabla_psicologos.json](IMAGES/tabla_psicologos.jpg)
+
 ![Tabla_psicologos.csv](IMAGES/tabla_psicologos_json.jpg)
+
 Como se visualiza en las tablas, al intentar cargas los datos json nos encontrabamos 2 objetos de tipo arrays (Data y Metadata). En el objeto Data se localizaban los valores , miestras que en el objeto Metadata se localizaban las varibles.Hay combinar todo vemos que los final combinadas no son las correctas en consecuencia, que las variables no coinciden con sus valores.
 
 En conclusión, utilizamos csv para cargar nuestros datos de forma correcta.
 
 ### Carga de datos csv
+
 ```{r}
 # Carga csv de psicologos
 
@@ -148,6 +199,7 @@ salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FA
 ## Trabajando con los datos
 
 ### Obtención de la Temperatura Media
+
 *Nota:* Temperatura media por Comunidades Autónomas
 
 
@@ -199,14 +251,13 @@ datatable(tmed_CCAA)
   
 ```
  
-
-
-
 ### Obtención de los psicólogos
+
 *Nota:* Nº de psicólogos por Comunidades Autónomas
 
 Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
 Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+
 ```{r}
 
 psicologos_2021 <- psicologos_2021 %>% 
@@ -270,12 +321,13 @@ datatable(psicologos)
 
 ```
 
-
 ### Obtención de las visitas
+
 *Nota:* Nº de visitas por Comunidades Autónomas
 
-Los datos de *visitas* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
+Los datos de **visitas** utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
 Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+
 ```{r}
 visitas_2021 <- visitas_2021 %>% 
   mutate(Total_v = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
@@ -348,10 +400,12 @@ datatable(visitas)
 
 
 ### Obtención del salario
+
 *Nota:* Salarios mensuales por Comunidades Autónomas
 
 Para la obtención de los datos de *salario* utilizados.Se crean una columna para transformar los salarios de tipo __character__ a tipo __númerico__.
 Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+
 ```{r}
 salarios <- salarios %>% 
   mutate(Total_s = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
@@ -399,10 +453,12 @@ datatable(salarios_final)
 
 
 ### Obtención de la población
+
 *Nota:* Población por Comunidades Autónomas
 
 Para la obtención de los datos de *población * utilizados.Se crean una columna para transformar la población de tipo __character__ a tipo __númerico__.
 Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+
 ```{r}
 poblacion <- poblacion %>% 
   mutate(Total_pob = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
@@ -450,11 +506,13 @@ datatable(poblacion_final)
 
 
 ## Obtención de la tabla final
+
 A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_final,poblacion_final y psicologos) mediante los atributos comunes, el 'CCAA' y 'years' , construimos la tabla final con los datos de interés.
 Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:
-    - *iniciales_CCAA* : contiene las abreviaturas para identificar a las CCAA.
-    - *Total_ps* : contiene la cantidad de psicologos por cada CCAA.
-    - *NAT* : contiene los valores de la necesidad de atención psicológica por cada comunidad.
+    - **iniciales_CCAA** : contiene las abreviaturas para identificar a las CCAA.
+    - **Total_ps** : contiene la cantidad de psicologos por cada CCAA.
+    - **NAT** : contiene los valores de la necesidad de atención psicológica por cada         comunidad.
+    
 ```{r}
 
 # OBTENCIÓN DE LA TABLA FINAL:
@@ -479,12 +537,14 @@ tabla_final<- tmed_CCAA %>%
 datatable(tabla_final)
 ```
 
-
 # Análisis de nuestros datos
+
 ## Gráficos
-## Introducción
-### *Visualización del salario medio en España por CCAA*
+
+### **Visualización del salario medio en España por CCAA**
+
 A continuación se pueden observar los salarios medios entre las diferentes CCAA, tanto en 2021 como 2022.
+
 ```{r}
 #SALARIO 2021
 
@@ -591,11 +651,16 @@ Salario_21_22 <- plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels =
 Salario_21_22
 
 ```
+
+### Conclusiones
+
 Se puede apreciar una notable diferencia de los salarios entre un año y otro, siendo superiores los salarios de 2022.Por otro lado se observa un patrón de salarios en el cual  Madrid, EL País Vasco, Navarra y Cataluña contienen en ambos años salafrios superiores al resto de España.
 
 
-### *Visualización de la temperatura media en España por CCAA*
+### **Visualización de la temperatura media en España por CCAA**
+
 A continuación se puede observar la temperatura media entre las diferentes CCAA, tanto en 2021 como 2022.
+
 ```{r}
 # Temperatura 
 
@@ -708,12 +773,18 @@ Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncols =
 Temperatura_21_22
 
 ```
+
+### Conclusiones
+
 Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte.
 Por otro lado la difernecia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
 
-## *Gráficos de dispersión*
-### *NAT vs Temperatura media*
+## **Gráficos de dispersión**
+
+### **NAT vs Temperatura media**
+
 En este gráfico de dispersión vamos a visulizar como afecta la temperatura media de cada una de las CCAA en la necesidad de atención psicológica.
+
 ```{r}
 
 NAT_vs_tmedia <- tabla_final %>%
@@ -728,15 +799,21 @@ NAT_vs_tmedia <- tabla_final %>%
 NAT_vs_tmedia
 
 ```
+
+### Conclusiones
+
 De forma general se aprecia que a partir de una temperatura media superior a 18ºC, comienza a crecer de forma exponencial la necesidad de atención psicológica.
 Análogamente, podemos ver que ante valores de temperatura inferiores a 15ºC también se observa un ligero aumento de la NAT, pero mucho más suavizada.
+
 Por otro lado, ante unos valores de temperatura intermedios (menos extremos) la NAT disminuye, manteniéndose aproxiamdamente en un valor constante.
 
 En general, en el 2021 hubo una mayor necesidad de atención psicológica que en 2022 y esto pudo deberse a la post-pandemia.
 Podemos llegar a la conclusion de que mayores temperaturas pueden ocasionar mayor cantidad de estrés y con ello mayor NAT.
 
-### *NAT vs salario*
+### **NAT vs salario**
+
 En este gráfico de dispersión vamos a visulizar como afecta el salario medio de cada una de las CCAA en la necesidad de atención psicológica.
+
 ```{r}
 
 NAT_vs_salario <- tabla_final %>% 
@@ -751,15 +828,22 @@ NAT_vs_salario <- tabla_final %>%
 NAT_vs_salario
 
 ```
+
+### Conclusiones
+
 Ante valores bajos de salario, la NAT no es muy elevada, probablemente debido a que dicho salario no es destinado para esa necesidad .
 Podemos determinar que para el mismo rango de salarios, la NAT es superior en 2021 que en 2022.
 
 Por otro lado, conforme aumenta el salario ,hasta 2200€, aumenta el valor de la NAT paulatinamente.
+
 De forma muy clara, se observa que ante salarios más elevados (a partir de 2200€) la NAT disminuye, llegando incluso a ser nula.
 
 ## Gráfico de barras
+
 ### NAT VS CCAA
+
 En este gráfico de dispersión vamos a visulizar como afecta el salario medio de cada una de las CCAA en la necesidad de atención psicológica.
+
 ```{r}
 NAT_vs_CCAA <- tabla_final %>% 
   ggplot(., aes(x = reorder(iniciales_CCAA, desc(NAT)), y = NAT, fill = factor(years))) +
@@ -775,6 +859,9 @@ NAT_vs_CCAA <- tabla_final %>%
 NAT_vs_CCAA
 
 ```
+
+### Conclusiones 
+
 Podemos aprecir que los valores de NAT han sido más elevados generalemnte en 2021 que en 2022.
 Al igual que la CCAA con más NAT ha sido tanto en 2021 como en 2022 Ceuta y detrás de esta Melilla.
 La CCAA siguen la misma tendencia de NAT en ambos años, pero con valores generalemnte inferiores 
@@ -890,6 +977,9 @@ NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncols = 2, labels = c("NAT 2021
 NAT_21_22
 
 ```
+
+### Conclusiones
+
 En 2021, podemos apreciar que en las zonas del norte y centro peninsular, así como Ceuta y Melilla, la NAT es más elevada que en el resto de las CCAA.
 En 2022, generalmente los valores de NAT son más bajo, exluyendo algunas CCAA como La Rioja, Cantabria, Navarra, Ceuta y Melilla.
 
@@ -897,9 +987,11 @@ En conclusión, podemos determiar que en el 2021 hay mucha más NAT que en el 20
 
 
 ## **Análisis de la regresión lineal**
+
 Procedemos a crear un modelo lineal donde la variable de respuesta es **'NAT'** (necesidad de atención psicológica) y las variables predictoras son **'tmedia'** (temperatura media) y **'Total_s'** (salario medio). También, analizaremos la interacción entre **'tmedia'** y **'Total_s'**
 
 Este modelo (**'Modelo'**) es ajustado utilizando la tabla final (**'tabla_final'**).
+
 ```{r}
 Modelo <- lm(NAT ~ tmedia*Total_s, data = tabla_final)
 summary(Modelo)
@@ -951,271 +1043,3 @@ visor_3d <- visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 
 visor_3d
 ```
-
-
-## Comportamiento de los factores que analizaremos
-
-### Temperatura por comunidades autónomas
-
-```{r}
-
-Temperatura_2021 <- tabla_final %>% 
-  filter(years == 2021) %>% 
-  mutate(.,ccaa.shortname.es = factor(CCAA,
-                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
-                                               "BALEARES", "CANARIAS", "CANTABRIA", 
-                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
-                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
-                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
-                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
-                                      labels = c("Andalucía", "Aragón", 
-                                                 "Asturias", "Baleares ", 
-                                                 "Canarias", 
-                                                 "Cantabria", 
-                                                 "Castilla y León","Castilla-La Mancha",
-                                                 "Cataluña", "Comunidad Valenciana",
-                                                 "Extremadura", "Galicia", 
-                                                 "Madrid", "Murcia",
-                                                 "Navarra",
-                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
-                                      ))) %>% 
-  mutate(., tmedia = round(tmedia, 3))
-
-
-CCAA_sf <- esp_get_ccaa()
-CCAA_sf <- merge(CCAA_sf, Temperatura_2021, by = "ccaa.shortname.es")
-Can <- esp_get_can_box()
-
-X11()
-Temperatura_21_graf <- ggplot(CCAA_sf) +
-  geom_sf(aes(fill = tmedia),
-          color = "black",
-          linewidth = .3
-  ) +
-  geom_sf(data = Can, color = "black") +
-  geom_sf_label(aes(label = tmedia),
-                fill = "white", alpha = 0.5,
-                size = 3,
-                label.size = 0
-  ) +
-  scale_fill_gradientn(
-    colors = hcl.colors(7, "Oranges", rev = TRUE),
-    n.breaks = 7,
-    labels = function(x) sprintf("%1.0f", x),
-    limits = c(min(CCAA_sf$tmedia), 20),
-    guide = guide_legend(title = "Temperatura 2021")
-  ) +
-  theme_void() +
-  theme(legend.position = c(0.1, 0.6))
-
-#Temperatura 2022
-
-
-Temperatura_2022 <- tabla_final %>% 
-  filter(years == 2022) %>% 
-  mutate(.,ccaa.shortname.es = factor(CCAA,
-                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
-                                               "BALEARES", "CANARIAS", "CANTABRIA", 
-                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
-                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
-                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
-                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
-                                      labels = c("Andalucía", "Aragón", 
-                                                 "Asturias", "Baleares ", 
-                                                 "Canarias", 
-                                                 "Cantabria", 
-                                                 "Castilla y León","Castilla-La Mancha",
-                                                 "Cataluña", "Comunidad Valenciana",
-                                                 "Extremadura", "Galicia", 
-                                                 "Madrid", "Murcia",
-                                                 "Navarra",
-                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
-                                      ))) %>% 
-  mutate(., tmedia = round(tmedia, 3))
-
-CCAA_sf <- esp_get_ccaa()
-CCAA_sf <- merge(CCAA_sf, Temperatura_2022, by = "ccaa.shortname.es")
-Can <- esp_get_can_box()
-X11()
-Temperatura_22_graf <- ggplot(CCAA_sf) +
-  geom_sf(aes(fill = tmedia),
-          color = "black",
-          linewidth = .3
-  ) +
-  geom_sf(data = Can, color = "black") +
-  geom_sf_label(aes(label = tmedia),
-                fill = "white", alpha = 0.5,
-                size = 3,
-                label.size = 0
-  ) +
-  scale_fill_gradientn(
-    colors = hcl.colors(7, "Reds", rev = TRUE),
-    n.breaks = 7,
-    labels = function(x) sprintf("%1.0f", x),
-    limits = c(min(CCAA_sf$tmedia), 20),
-    guide = guide_legend(title = "Temperatura 2022")
-  ) +
-  theme_void() +
-  theme(legend.position = c(0.1, 0.6))
-
-
-# Combinación de gráficos:
-
-Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncols = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
-```
-
-### Salario por comunidades autónomas
-```{r}
-Salario_2021 <- tabla_final %>% 
-  filter(years == 2021) %>% 
-  mutate(.,ccaa.shortname.es = factor(CCAA,
-                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
-                                               "BALEARES", "CANARIAS", "CANTABRIA", 
-                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
-                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
-                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
-                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
-                                      labels = c("Andalucía", "Aragón", 
-                                                 "Asturias", "Baleares ", 
-                                                 "Canarias", 
-                                                 "Cantabria", 
-                                                 "Castilla y León","Castilla-La Mancha",
-                                                 "Cataluña", "Comunidad Valenciana",
-                                                 "Extremadura", "Galicia", 
-                                                 "Madrid", "Murcia",
-                                                 "Navarra",
-                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
-                                      )))
-
-
-CCAA_sf <- esp_get_ccaa()
-CCAA_sf <- merge(CCAA_sf, Salario_2021, by = "ccaa.shortname.es")
-Can <- esp_get_can_box()
-
-X11()
-Salario_21_graf <- ggplot(CCAA_sf) +
-  geom_sf(aes(fill = Total_s),
-          color = "black",
-          linewidth = .3
-  ) +
-  geom_sf(data = Can, color = "black") +
-  geom_sf_label(aes(label = Total_s),
-                fill = "white", alpha = 0.5,
-                size = 3,
-                label.size = 0
-  ) +
-  scale_fill_gradientn(
-    colors = hcl.colors(7, "Greens", rev = TRUE),
-    n.breaks = 7,
-    labels = function(x) sprintf("%1.0f", x),
-    limits = c(min(CCAA_sf$Total_s), 3000),
-    guide = guide_legend(title = "Salario 2021")
-  ) +
-  theme_void() +
-  theme(legend.position = c(0.1, 0.6))
-
-#Salario 2022
-library(ggplot2)
-library(mapSpain)
-library(sf)
-Salario_2022 <- tabla_final %>% 
-  filter(years == 2022) %>% 
-  mutate(.,ccaa.shortname.es = factor(CCAA,
-                                      levels=c("ANDALUCIA", "ARAGON", "ASTURIAS",
-                                               "BALEARES", "CANARIAS", "CANTABRIA", 
-                                               "CASTILLA Y LEON", "CASTILLA-LA MANCHA", "CATALUÑA", 
-                                               "COMUNIDAD VALENCIANA", "EXTREMADURA",
-                                               "GALICIA", "COMUNIDAD DE MADRID", "MURCIA",
-                                               "NAVARRA", "PAIS VASCO", "LA RIOJA", "CEUTA", "MELILLA"), 
-                                      labels = c("Andalucía", "Aragón", 
-                                                 "Asturias", "Baleares ", 
-                                                 "Canarias", 
-                                                 "Cantabria", 
-                                                 "Castilla y León","Castilla-La Mancha",
-                                                 "Cataluña", "Comunidad Valenciana",
-                                                 "Extremadura", "Galicia", 
-                                                 "Madrid", "Murcia",
-                                                 "Navarra",
-                                                 "País Vasco", "La Rioja" ,"Ceuta","Melilla"
-                                      )))
-CCAA_sf <- esp_get_ccaa()
-CCAA_sf <- merge(CCAA_sf, Salario_2022, by = "ccaa.shortname.es")
-Can <- esp_get_can_box()
-
-
-Salario_22_graf <- ggplot(CCAA_sf) +
-  geom_sf(aes(fill = Total_s),
-          color = "black",
-          linewidth = .3
-  ) +
-  geom_sf(data = Can, color = "black") +
-  geom_sf_label(aes(label = Total_s),
-                fill = "white", alpha = 0.5,
-                size = 3,
-                label.size = 0
-  ) +
-  scale_fill_gradientn(
-    colors = hcl.colors(7, "Purples", rev = TRUE),
-    n.breaks = 7,
-    labels = function(x) sprintf("%1.0f", x),
-    limits = c(min(CCAA_sf$Total_s), 3000),
-    guide = guide_legend(title = "Salario 2022")
-  ) +
-  theme_void() +
-  theme(legend.position = c(0.1, 0.6))
-
-
-# Combianción de gráficos:
-
-library(cowplot)
-
-Salario_21_22 <- plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
-
-```
-
-### Objetivos
-
-- __Cantidad de psicólogos por Comunidad Autónoma en función de su población__
-- __Asistencia en el área de salud mental segín sexo,edad y salario medio__
-
-## Materiales
-URLs de los distintos datos usados:
-
--[números de psicólogos](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2022_9766-l0-s05005-px)
-
--[Ganancia anual sexo y edad](https://datos.gob.es/es/catalogo/ea0010587-sexo-y-edad-anual-nacional-encuesta-anual-de-estructura-salarial-identificador-api-281891)
-
--[Asistencia a profesionales del área mental](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p02-l0-01050-px1)
-
--[Variación anual de la población](https://datos.gob.es/es/catalogo/ea0010587-variacion-anual-en-la-poblacion-por-comunidades-y-ciudades-autonomas-dpop-identificador-api-2920)
-
-
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r}
-library(climaemet)
-aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = TRUE)
-```
-
-```{r}
-library(tibble)
-stations <- aemet_stations()
-stations
-```
-```{r}
-table(stations$provincia)
-```
-
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
