@@ -1,5 +1,6 @@
 ---
-title: "Depresión y Jubilación"
+title: "Necesidad de Atención Psicológica en España"
+subtitle: "Fuentes de datos Biomédicas y Web semántica, Grado de Ingeniería de la Salud"
 author: "Lorena Calvo Pérez, Julia Arellano Atienza, Mario Díaz Sutil"
 date: "`r Sys.Date()`"
 output: 
@@ -14,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introducción
+
 La necesidada de atención psicológica es definida como la demanda de servicios o intervenciones psicológicas que una persona puede tener debido a problemas emocionales, mentales o de comportamiento.
 
 Esta necesidad puede surgir a partir de una variedad de situaciones y condiciones, y la atención psicológica puede ser buscada para abordar problemas como el estrés, la ansiedad, la depresión, los trastornos del estado de ánimo, las dificultades en las relaciones, traumas, entre otros.
