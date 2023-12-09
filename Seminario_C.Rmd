@@ -781,7 +781,7 @@ La CCAA siguen la misma tendencia de NAT en ambos años, pero con valores genera
 
 
 
-## *Visualización de la NAT en cada CCAA de España*
+## **Visualización de la NAT en cada CCAA de España**
 
 A continuación se puede observar la necesidad de atención psicológica entre las diferentes CCAA, tanto en 2021 como 2022.
 ```{r}
@@ -896,8 +896,61 @@ En 2022, generalmente los valores de NAT son más bajo, exluyendo algunas CCAA c
 En conclusión, podemos determiar que en el 2021 hay mucha más NAT que en el 2022, esto puede ser debido a la post-pandemia, salarios inferiores, temperaturas mas bajas.
 
 
-## Análisis de la regresión lineal
+## **Análisis de la regresión lineal**
+Procedemos a crear un modelo lineal donde la variable de respuesta es **'NAT'** (necesidad de atención psicológica) y las variables predictoras son **'tmedia'** (temperatura media) y **'Total_s'** (salario medio). También, analizaremos la interacción entre **'tmedia'** y **'Total_s'**
 
+Este modelo (**'Modelo'**) es ajustado utilizando la tabla final (**'tabla_final'**).
+```{r}
+Modelo <- lm(NAT ~ tmedia*Total_s, data = tabla_final)
+summary(Modelo)
+```
+
+- **COEFICIENTES**:
+
+  - **Intercept**: Es 774516.902. Valor estimado de la variable de respuesta (NAT) cuando todas las variables predictoras son cero.
+
+  - **tmedia**: Por cada unidad de **aumento** en **tmedia**, se espera que la NAT disminuya en promedio en -51551.784 unidades.
+            Sin embargo, en gráficas anteriores hemos visto como ante un mayor valor de temperatura la NAT aumentaba exponencialmente (la conclusión del análisis no se corresponde con el comportamiento del modelo).
+
+  - **Total_s**: Por cada unidad de **aumento** en **Total_s**, se espera que NAT disminuya en promedio en -397.301 unidades. Se corresponde con el comportamiento observado del modelo. 
+
+  - **Interacción entre tmedia y Total_s**: Es positiva (26.668). Esto indica que el efecto de tmedia en NAT depende del valor de Total_s, y viceversa.
+  
+- **SIGNIFICACIÓN ESTADÍSTICA**:
+
+Los **asteriscos** en la *columna "Pr(>|t|)"* indican la **significancia estadística** de cada coeficiente. 
+Podemos observar como el intercept, tmedia, Total_s y su interacción son **estadísticamente significativas**, dado que presentan unos valores p < 0.05.
+
+
+- **BONDAD DE AJUSTE**:
+  - **Residual standard error**: La desviación estándar de los residuos (errores) es 20450. Esto indica la variabilidad no explicada por el modelo.
+
+  - **R cuadrado y R cuadrado ajustado**: El *R cuadrado* es 0.3869, lo que significa que el modelo explica el 38.69% de la variabilidad en NAT. El *R cuadrado ajustado* tiene en cuenta el número de predictores en el modelo, y es 0.3328.
+
+
+- **ESTADÍSITCO F**:
+
+El valor F-statistic (7.151) y el p-value asociado (0.000754) indican si al menos una de las variables predictoras es significativa en la explicación de la variabilidad en la variable de respuesta. 
+En este caso, el p-value es bajo, lo que sugiere que al menos una de las variables predictoras (tmedia y Total_s) es significativa en el modelo.
+
+Como hemos observado en las diversas gráficas, ambas variables tienen un efecto sobre la NAT. 
+
+
+En resumen, el modelo proporciona evidencia de que las variables **tmedia**, **Total_s** y su **interacción** tienen un **impacto significativo** en la variable de **respuesta NAT**. 
+Sin embargo, el modelo solo explica alrededor del 38.69% de la variabilidad en NAT, lo que sugiere que hay otras variables que podrían estar influyendo en la respuesta.
+
+
+### **Visualización 3D para ver la relación entre Tª media y el total de salario**
+
+A continuación, podremos observar la relación conjunta entre **tmedia** y **Total_s** sobre la NAT de nuestro modelo lineal. 
+Podemos ver cómo cambia la **NAT** ante las variables predictoras **tmedia** y **Total_s**.
+
+```{r}
+
+visor_3d <- visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
+
+visor_3d
+```
 
 
 ## Comportamiento de los factores que analizaremos
