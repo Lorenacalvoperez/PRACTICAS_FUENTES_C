@@ -24,7 +24,7 @@ En este caso nos centraremos en estudiar como diferentes factores como el salari
 Para medir la necesidad de atención psiscológica utilizamos el número de visitas al psicólogo, la disponibillidad de psicólogos y la población.
 
 La Necesidad de atención psicológica se calcula con la siguiente fórmula:\
-$$\text{NAT} = \frac{\text{Nº Visitas}}{\text{NºPsicólogos} \times \text{Población}} \times 100,000$$
+$$\text{NAT} = \frac{\text{Nº Visitas}}{\text{NºPsicólogos} \times \text{Población}} \times 100.000$$
 
 ## Objetivos
 
@@ -783,7 +783,7 @@ Temperatura_21_22
 
 **Conclusiones**
 
-Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte. Por otro lado la difernecia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
+Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte. Por otro lado la diferencia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
 
 ## **Gráficos de dispersión**
 
