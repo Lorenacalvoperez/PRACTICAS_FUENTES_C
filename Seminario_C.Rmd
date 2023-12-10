@@ -21,25 +21,32 @@ Esta necesidad puede surgir a partir de una variedad de situaciones y condicione
 
 En este caso nos centraremos en estudiar como diferentes factores como el salario o la temperatura media afecta a la NAT.
 
-Para medir la necesidad de atención psiscológica utilizamos el numero de visitas al psicólogo, la disponibillidad de psicólogos y la población.
+Para medir la necesidad de atención psiscológica utilizamos el número de visitas al psicólogo, la disponibillidad de psicólogos y la población.
 
 La Necesidad de atención psicológica se calcula con la siguiente fórmula:\
 $$\text{NAT} = \frac{\text{Nº Visitas}}{\text{NºPsicólogos} \times \text{Población}} \times 100,000$$
 
 ## Objetivos
 
-Los objetivos planteados para desarrollar el seminario son los siguientes:
+Los objetivos planteados para desarrollar en el estudio son los siguientes:
 
 1.  Visualizar la necesidad de atención psicológica por Comunidades Autónomas
 2.  Estudiar como afecta la temperatura sobre la necesidad de atención psicológica
 3.  Estudiar como afecta el salario sobre la necesidad de atención psicológica
 
 ## Información sobre el tema
+
 El cambio climático es un problema que puede causar múltiples efectos. En nuestro estudio queremos ver si realmente el aumento de la temperatura media global puede poner en riesgo la salud mental de la población.
 
-Como se puede ver existen númerosos estudios que muetrán uan relación entre los efectos mentales y la temperatura [](https://www.pnas.org/doi/full/10.1073/pnas.1801528115)
+Como se puede ver existen númerosos estudios que muestran una relación entre los efectos mentales y la temperatura.
 
-El aumento en las temperaturas globales incide en los problemas de salud mental \| CNN
+En el siguiente [estudio](https://www.pnas.org/doi/full/10.1073/pnas.1801528115), los resultados obtenidos son:
+
+![Resultados del estudio](IMAGES/Temperatura%20.png)
+
+Además, también hemos visto un [estudio](https://www.somospacientes.com/noticias/sanidad/estudio-sobre-las-necesidades-de-atencion-psicologica-en-la-sanidad-publica/) relacionado con la necesidad de atención psicologica del SNS.En el que se muestra que en España se necesitan más *psicologos*.
+
+Unicamente, el médico de atención primaria envia a el paciente a psicología cuando su cuadro clinico se agrava.
 
 # Materiales y Métodos
 
@@ -168,9 +175,9 @@ psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json
 
 ```
 
-[**Tabla_psicologos.json**](IMAGES/tabla_psicologos.jpg)
+![**Tabla_psicologos.json**](IMAGES/tabla_psicologos.jpg)
 
-[**Tabla_psicologos.csv**](IMAGES/tabla_psicologos_json.jpg)
+![**Tabla_psicologos.csv**](IMAGES/tabla_psicologos_json.jpg)
 
 Como se visualiza en las tablas, al intentar cargar los datos json, nos encontramos 2 objetos de tipo arrays (Data y Metadata). En el objeto Data se localizan los valores , mientras que en el objeto Metadata se localizan las varibles.Al combinar todo vemos que los filas combinadas no son las correctas en consecuencia, que las variables no coinciden con sus valores.
 
@@ -207,7 +214,7 @@ salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FA
 
 ### **Obtención de la Temperatura Media**
 
-Para la obtención de la *temperatura media*, se han creado una columna de años y y otra columna de comunidades.Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades. Tras ello, hemos calculado la temperatura media por comunidad.
+Para la obtención de la *temperatura media*, se han creado una columna de años y y otra columna de comunidades. Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades. Tras ello, hemos calculado la temperatura media por comunidad.
 
 ```{r}
 
@@ -252,14 +259,13 @@ tmed_CCAA<- temp_con_CCAA %>%
   arrange(years)
 
 datatable(tmed_CCAA)
-  
 ```
 
-*Nota:* Temperatura media por Comunidades Autónomas
+**Nota:** Temperatura media por Comunidades Autónomas
 
 ### **Obtención de los psicólogos**
 
-Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas. Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos. Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas. Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ```{r}
 
@@ -324,9 +330,9 @@ datatable(psicologos)
 
 ```
 
-*Nota:* Nº de psicólogos por Comunidades Autónomas - \### \*\*Obtención de las visitas\*\*
+**Nota:** Nº de psicólogos por Comunidades Autónomas
 
-*Nota:* Nº de visitas por Comunidades Autónomas
+### **Obtención de las visitas**
 
 Los datos de **visitas** utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas. Tras ello, se combinaron los conjuntos y se seleccionaron aquellos útiles para el estudio.
 
@@ -397,14 +403,13 @@ visitas<- visitas_2021%>%
   select(Total_v)
 
 datatable(visitas)
-
 ```
+
+**Nota:** Nº de visitas por Comunidades Autónomas
 
 ### **Obtención del salario**
 
-*Nota:* Salarios mensuales por Comunidades Autónomas
-
-Para la obtención de los datos de *salario* utilizados.Se crean una columna para transformar los salarios de tipo **character** a tipo **númerico**. Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+Para la obtención de los datos de *salario* utilizados. Se crea una columna para transformar los salarios de tipo **character** a tipo **númerico**. Tras ello, se creo otra columna CCAA para estandarizar los nombres de las comunidades autónomas. Después , se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ```{r}
 salarios <- salarios %>% 
@@ -451,9 +456,9 @@ salarios_final <- salarios %>%
 datatable(salarios_final)
 ```
 
-### **Obtención de la población**
+**Nota:** Salarios mensuales por Comunidades Autónomas
 
-*Nota:* Población por Comunidades Autónomas
+### **Obtención de la población**
 
 Para la obtención de los datos de *población* utilizados.Se crean una columna para transformar la población de tipo **character** a tipo **númerico**. Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
@@ -501,6 +506,8 @@ poblacion_final <- poblacion %>%
 
 datatable(poblacion_final)
 ```
+
+**Nota:** Población por Comunidades Autónomas
 
 ## **Obtención de la tabla final**
 
@@ -653,7 +660,7 @@ Salario_21_22
 
 ```
 
-### **Conclusiones**
+**Conclusiones**
 
 Se puede apreciar una notable diferencia de los salarios entre un año y otro, siendo superiores los salarios de 2022.Por otro lado se observa un patrón de salarios en el cual Madrid, EL País Vasco, Navarra y Cataluña contienen en ambos años salafrios superiores al resto de España.
 
@@ -774,7 +781,7 @@ Temperatura_21_22
 
 ```
 
-### **Conclusiones**
+**Conclusiones**
 
 Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte. Por otro lado la difernecia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
 
@@ -799,7 +806,7 @@ NAT_vs_tmedia
 
 ```
 
-#### **Conclusiones**
+**Conclusiones**
 
 De forma general se aprecia que a partir de una temperatura media superior a 18ºC, comienza a crecer de forma exponencial la necesidad de atención psicológica. Análogamente, podemos ver que ante valores de temperatura inferiores a 15ºC también se observa un ligero aumento de la NAT, pero mucho más suavizada.
 
@@ -856,7 +863,7 @@ NAT_vs_CCAA
 
 ```
 
-### **Conclusiones**
+**Conclusiones**
 
 Podemos aprecir que los valores de NAT han sido más elevados generalemnte en 2021 que en 2022. Al igual que la CCAA con más NAT ha sido tanto en 2021 como en 2022 Ceuta y detrás de esta Melilla. La CCAA siguen la misma tendencia de NAT en ambos años, pero con valores generalemnte inferiores
 
@@ -971,7 +978,7 @@ NAT_21_22
 
 ```
 
-### **Conclusiones**
+**Conclusiones**
 
 En 2021, podemos apreciar que en las zonas del norte y centro peninsular, así como Ceuta y Melilla, la NAT es más elevada que en el resto de las CCAA. En 2022, generalmente los valores de NAT son más bajo, exluyendo algunas CCAA como La Rioja, Cantabria, Navarra, Ceuta y Melilla.
 
