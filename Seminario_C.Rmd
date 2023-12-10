@@ -46,7 +46,7 @@ En el siguiente [estudio](https://www.pnas.org/doi/full/10.1073/pnas.1801528115)
 
 Además, también hemos visto un [estudio](https://www.somospacientes.com/noticias/sanidad/estudio-sobre-las-necesidades-de-atencion-psicologica-en-la-sanidad-publica/) relacionado con la necesidad de atención psicologica del SNS.En el que se muestra que en España se necesitan más *psicologos*.
 
-Unicamente, el médico de atención primaria envia a el paciente a psicología cuando su cuadro clinico se agrava.
+Unicamente, el médico de atención primaria envia al paciente a psicología cuando su cuadro clinico se agrava.
 
 # Materiales y Métodos
 
@@ -88,14 +88,12 @@ library(DT)
 API necesaria para poder acceder a los datos de climaemet.
 
 ```{r}
-library(climaemet)
 aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = FALSE)
 ```
 
 Podemos ver las estaciones meteorológicas de las que dispone climaemet de datos y las provincias a las que pertenecen dichas estaciones. Además, observamos el nº de estaciones por provincia.
 
 ```{r}
-library(tibble)
 stations <- aemet_stations()
 stations
 ```
@@ -511,15 +509,15 @@ datatable(poblacion_final)
 
 ## **Obtención de la tabla final**
 
-A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_final,poblacion_final y psicologos) mediante los atributos comunes, el 'CCAA' y 'years' , construimos la tabla final con los datos de interés. Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:
+A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_final,poblacion_final y psicologos) mediante los atributos comunes, el 'CCAA' y 'years' , construimos la tabla final con los datos de interés. Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:  
 
-```         
+
 - **iniciales_CCAA** : contiene las abreviaturas para identificar a las CCAA.  
 
 - **Total_ps** : contiene la cantidad de psicologos por cada CCAA.  
 
-- **NAT** : contiene los valores de la necesidad de atención psicológica por cada         comunidad.
-```
+- **NAT** : contiene los valores de la necesidad de atención psicológica por cada comunidad.
+
 
 ```{r}
 
@@ -545,9 +543,9 @@ tabla_final<- tmed_CCAA %>%
 datatable(tabla_final)
 ```
 
-# *Análisis de nuestros datos*
+# **Análisis de nuestros datos**
 
-## *Gráficos*
+## **Gráficos**
 
 ### **Visualización del salario medio en España por CCAA**
 
@@ -654,9 +652,9 @@ Salario_22_graf <- ggplot(CCAA_sf) +
 
 # Gráficos combinados:
 
-Salario_21_22 <- plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
+plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
 
-Salario_21_22
+
 
 ```
 
@@ -833,7 +831,7 @@ NAT_vs_salario
 
 ```
 
-### **Conclusiones**
+**Conclusiones**
 
 Ante valores bajos de salario, la NAT no es muy elevada, probablemente debido a que dicho salario no es destinado para esa necesidad . Podemos determinar que para el mismo rango de salarios, la NAT es superior en 2021 que en 2022.
 
@@ -856,7 +854,7 @@ NAT_vs_CCAA <- tabla_final %>%
     x = "Comunidad Autónoma",
     y = "Necesidad de Atención Psicológica"
   ) +
-  theme_gray() +
+  theme_gray(axis.text.x = element_text(angle = 45, hjust = 1)) +
   facet_wrap(facets = vars(years), nrow = 1)
 
 NAT_vs_CCAA
@@ -1021,13 +1019,20 @@ Como hemos observado en las diversas gráficas, ambas variables tienen un efecto
 
 En resumen, el modelo proporciona evidencia de que las variables **tmedia**, **Total_s** y su **interacción** tienen un **impacto significativo** en la variable de **respuesta NAT**. Sin embargo, el modelo solo explica alrededor del 38.69% de la variabilidad en NAT, lo que sugiere que hay otras variables que podrían estar influyendo en la respuesta.
 
+
+### **Visualización 2D para ver la relación entre Tª media y el total de salario**
+
+```{r}
+visreg2d(Modelo, "tmedia", "Total_s")
+```
+
+
 ### **Visualización 3D para ver la relación entre Tª media y el total de salario**
 
 A continuación, podremos observar la relación conjunta entre **tmedia** y **Total_s** sobre la NAT de nuestro modelo lineal. Podemos ver cómo cambia la **NAT** ante las variables predictoras **tmedia** y **Total_s**.
 
 ```{r}
 
-visor_3d <- visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
+visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 
-visor_3d
 ```
