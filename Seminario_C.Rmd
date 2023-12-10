@@ -68,7 +68,7 @@ URLs de los distintos datos usados:
 
 ## **Carga de librerías**
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(climaemet)
 library(tibble)
 library(tidyverse)
@@ -87,18 +87,18 @@ library(DT)
 
 API necesaria para poder acceder a los datos de climaemet.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = FALSE)
 ```
 
 Podemos ver las estaciones meteorológicas de las que dispone climaemet de datos y las provincias a las que pertenecen dichas estaciones. Además, observamos el nº de estaciones por provincia.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 stations <- aemet_stations()
 stations
 ```
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 table(stations$provincia)
 ```
 
@@ -106,7 +106,7 @@ table(stations$provincia)
 
 ### **Carga de datos de climaemet**
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Obtención de las Tª diaras por estaciones aemet:
 
 observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
@@ -183,7 +183,7 @@ En conclusión, utilizamos csv para cargar nuestros datos de forma correcta.
 
 ### **Carga de datos csv**
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Carga csv de psicologos
 
 psicologos_2021 <- read_delim("DATA/psicologos2021.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
@@ -214,7 +214,7 @@ salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FA
 
 Para la obtención de la *temperatura media*, se han creado una columna de años y y otra columna de comunidades. Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades. Tras ello, hemos calculado la temperatura media por comunidad.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 # Temperatura de las provincias
 temp_provincias <-  observaciones_diarias %>%
@@ -265,7 +265,7 @@ datatable(tmed_CCAA)
 
 Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos. Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas. Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 psicologos_2021 <- psicologos_2021 %>% 
   mutate(CCAA = factor(`Comunidades y Ciudades Autónomas`, 
@@ -334,7 +334,7 @@ datatable(psicologos)
 
 Los datos de **visitas** utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas. Tras ello, se combinaron los conjuntos y se seleccionaron aquellos útiles para el estudio.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 visitas_2021 <- visitas_2021 %>% 
   mutate(Total_v = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
 
@@ -409,7 +409,7 @@ datatable(visitas)
 
 Para la obtención de los datos de *salario* utilizados. Se crea una columna para transformar los salarios de tipo **character** a tipo **númerico**. Tras ello, se creo otra columna CCAA para estandarizar los nombres de las comunidades autónomas. Después , se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 salarios <- salarios %>% 
   mutate(Total_s = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
 
@@ -460,7 +460,7 @@ datatable(salarios_final)
 
 Para la obtención de los datos de *población* utilizados.Se crean una columna para transformar la población de tipo **character** a tipo **númerico**. Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 poblacion <- poblacion %>% 
   mutate(Total_pob = as.numeric(gsub(',', '.', gsub('\\.', '', .$Total))))
 
@@ -519,7 +519,7 @@ A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_fi
 - **NAT** : contiene los valores de la necesidad de atención psicológica por cada comunidad.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 # OBTENCIÓN DE LA TABLA FINAL:
 tabla_final<- tmed_CCAA %>% 
@@ -551,7 +551,7 @@ datatable(tabla_final)
 
 A continuación se pueden observar los salarios medios entre las diferentes CCAA, tanto en 2021 como 2022.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 #SALARIO 2021
 
 Salario_2021 <- tabla_final %>% 
@@ -652,7 +652,7 @@ Salario_22_graf <- ggplot(CCAA_sf) +
 
 # Gráficos combinados:
 
-plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
+plot_grid(Salario_21_graf, Salario_22_graf, ncol = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
 
 
 
@@ -666,7 +666,7 @@ Se puede apreciar una notable diferencia de los salarios entre un año y otro, s
 
 A continuación se puede observar la temperatura media entre las diferentes CCAA, tanto en 2021 como 2022.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Temperatura 
 
 #Temperatura 2021
@@ -773,7 +773,7 @@ Temperatura_22_graf <- ggplot(CCAA_sf) +
 
 # Gráficos combinados:
 
-Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncols = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
+Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncol = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
 
 Temperatura_21_22
 
@@ -789,7 +789,7 @@ Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterr
 
 En este gráfico de dispersión vamos a visulizar como afecta la temperatura media de cada una de las CCAA en la necesidad de atención psicológica.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 NAT_vs_tmedia <- tabla_final %>%
           filter(.,NAT<50000) %>% 
@@ -816,7 +816,7 @@ En general, en el 2021 hubo una mayor necesidad de atención psicológica que en
 
 En este gráfico de dispersión vamos a visulizar como afecta el salario medio de cada una de las CCAA en la necesidad de atención psicológica.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 NAT_vs_salario <- tabla_final %>% 
   filter(.,NAT<50000) %>% 
@@ -845,7 +845,7 @@ De forma muy clara, se observa que ante salarios más elevados (a partir de 2200
 
 En este gráfico de dispersión vamos a visulizar como afecta el salario medio de cada una de las CCAA en la necesidad de atención psicológica.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 NAT_vs_CCAA <- tabla_final %>% 
   ggplot(., aes(x = reorder(iniciales_CCAA, desc(NAT)), y = NAT, fill = factor(years))) +
   geom_bar(stat = "identity", color = "black") +
@@ -854,7 +854,7 @@ NAT_vs_CCAA <- tabla_final %>%
     x = "Comunidad Autónoma",
     y = "Necesidad de Atención Psicológica"
   ) +
-  theme_gray(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   facet_wrap(facets = vars(years), nrow = 1)
 
 NAT_vs_CCAA
@@ -869,7 +869,7 @@ Podemos aprecir que los valores de NAT han sido más elevados generalemnte en 20
 
 A continuación se puede observar la necesidad de atención psicológica entre las diferentes CCAA, tanto en 2021 como 2022.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 # NAT 2021
 NAT_2021 <- tabla_final %>% 
@@ -970,9 +970,11 @@ NAT_22_graf <- ggplot(CCAA_sf) +
 # Gráficos combinados:
 library(cowplot)
 X11()
-NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncols = 2, labels = c("NAT 2021", "NAT 2022") )
+NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, labels = c("NAT 2021", "NAT 2022") )
 
 NAT_21_22
+
+
 
 ```
 
@@ -988,7 +990,7 @@ Procedemos a crear un modelo lineal donde la variable de respuesta es **'NAT'** 
 
 Este modelo (**'Modelo'**) es ajustado utilizando la tabla final (**'tabla_final'**).
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 Modelo <- lm(NAT ~ tmedia*Total_s, data = tabla_final)
 summary(Modelo)
 ```
@@ -1022,7 +1024,7 @@ En resumen, el modelo proporciona evidencia de que las variables **tmedia**, **T
 
 ### **Visualización 2D para ver la relación entre Tª media y el total de salario**
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 visreg2d(Modelo, "tmedia", "Total_s")
 ```
 
@@ -1031,7 +1033,7 @@ visreg2d(Modelo, "tmedia", "Total_s")
 
 A continuación, podremos observar la relación conjunta entre **tmedia** y **Total_s** sobre la NAT de nuestro modelo lineal. Podemos ver cómo cambia la **NAT** ante las variables predictoras **tmedia** y **Total_s**.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 
