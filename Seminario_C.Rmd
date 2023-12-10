@@ -13,7 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introducción
+# **Introducción**
 
 La necesidad de atención psicológica es definida como la demanda de servicios o intervenciones psicológicas que una persona puede tener debido a problemas emocionales, mentales o de comportamiento.
 
@@ -26,7 +26,7 @@ Para medir la necesidad de atención psiscológica utilizamos el número de visi
 La Necesidad de atención psicológica se calcula con la siguiente fórmula:\
 $$\text{NAT} = \frac{\text{Nº Visitas}}{\text{NºPsicólogos} \times \text{Población}} \times 100.000$$
 
-## Objetivos
+## **Objetivos**
 
 Los objetivos planteados para desarrollar en el estudio son los siguientes:
 
@@ -34,7 +34,7 @@ Los objetivos planteados para desarrollar en el estudio son los siguientes:
 2.  Estudiar como afecta la temperatura sobre la necesidad de atención psicológica
 3.  Estudiar como afecta el salario sobre la necesidad de atención psicológica
 
-## Información sobre el tema
+## **Información sobre el tema**
 
 El cambio climático es un problema que puede causar múltiples efectos. En nuestro estudio queremos ver si realmente el aumento de la temperatura media global puede poner en riesgo la salud mental de la población.
 
@@ -49,9 +49,9 @@ Además, también hemos visto un [estudio](https://www.somospacientes.com/notici
 
 Unicamente, el médico de atención primaria envia al paciente a psicología cuando su cuadro clinico se agrava.
 
-# Materiales y Métodos
+# **Materiales y Métodos**
 
-## Materiales
+## **Materiales**
 
 URLs de los distintos datos usados:
 
