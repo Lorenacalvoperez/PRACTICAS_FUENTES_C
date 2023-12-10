@@ -574,7 +574,7 @@ Salario_22_graf <- ggplot(CCAA_sf) +
 # GRaficos combinados:
 library(cowplot)
 X11()
-Salario_21_22 <- plot_grid(Salario_21_graf, Salario_22_graf, ncols = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
+Salario_21_22 <- plot_grid(Salario_21_graf, Salario_22_graf, ncol = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
 
 
 # Temperatura 
@@ -689,7 +689,7 @@ Temperatura_22_graf <- ggplot(CCAA_sf) +
 # GRaficos combinados:
 library(cowplot)
 X11()
-Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncols = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
+Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncol = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
 
 
 
@@ -727,7 +727,7 @@ NAT_vs_CCAA <- tabla_final %>%
     x = "Comunidad Autónoma",
     y = "Necesidad de Atención Psicológica"
   ) +
-  theme_gray() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   facet_wrap(facets = vars(years), nrow = 1)
 
 
@@ -738,7 +738,7 @@ summary(Modelo)
 
 # Visualización 3D para ver la relación entre Tª media y el total de salario:
 visor_3d <- visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
-
+visreg2d(Modelo, "tmedia", "Total_s", plot.type = "persp")
 
 
 
@@ -851,10 +851,11 @@ NAT_22_graf <- ggplot(CCAA_sf) +
 # GRaficos combinados:
 library(cowplot)
 X11()
-NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncols = 2, labels = c("NAT 2021", "NAT 2022") )
-# Para que aparezcan por separado:
+NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, labels = c("NAT 2021", "NAT 2022") )
 
+# Prueba para que aparezcan mejor:
 
+plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, align = 'v', axis = 'tb', labels = c("NAT 2021", "NAT 2022"))
 
 
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
