@@ -7,7 +7,6 @@ output:
   html_document:
     toc: true
     toc_float: true
-
 ---
 
 ```{r setup, include=FALSE}
@@ -16,48 +15,52 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introducción
 
-La necesidada de atención psicológica es definida como la demanda de servicios o intervenciones psicológicas que una persona puede tener debido a problemas emocionales, mentales o de comportamiento.
+La necesidad de atención psicológica es definida como la demanda de servicios o intervenciones psicológicas que una persona puede tener debido a problemas emocionales, mentales o de comportamiento.
 
 Esta necesidad puede surgir a partir de una variedad de situaciones y condiciones, y la atención psicológica puede ser buscada para abordar problemas como el estrés, la ansiedad, la depresión, los trastornos del estado de ánimo, las dificultades en las relaciones, traumas, entre otros.
 
 En este caso nos centraremos en estudiar como diferentes factores como el salario o la temperatura media afecta a la NAT.
 
 Para medir la necesidad de atención psiscológica utilizamos el numero de visitas al psicólogo, la disponibillidad de psicólogos y la población.
- 
- 
- La Necesidad de atención psicológica se calcula con la siguiente fórmula:
- \text{NAT} = \frac{\text{Visitas}}{\text{Psicólogos} \times \text{Población}} \times 100,000
 
+La Necesidad de atención psicológica se calcula con la siguiente fórmula:\
+$$\text{NAT} = \frac{\text{Nº Visitas}}{\text{NºPsicólogos} \times \text{Población}} \times 100,000$$
 
 ## Objetivos
 
 Los objetivos planteados para desarrollar el seminario son los siguientes:
- 
-  1. Visualizar la necesidad de atención psicológica por Comunidades Autónomas
-  2. Estudiar como afecta la temperatura sobre la necesidad de atención psicológica 
-  3. Estudiar como afecta  el salario sobre la necesidad de atención psicológica 
-  
-## Información sobre el tema
 
- 
+1.  Visualizar la necesidad de atención psicológica por Comunidades Autónomas
+2.  Estudiar como afecta la temperatura sobre la necesidad de atención psicológica
+3.  Estudiar como afecta el salario sobre la necesidad de atención psicológica
+
+## Información sobre el tema
+El cambio climático es un problema que puede causar múltiples efectos. En nuestro estudio queremos ver si realmente el aumento de la temperatura media global puede poner en riesgo la salud mental de la población.
+
+Como se puede ver existen númerosos estudios que muetrán uan relación entre los efectos mentales y la temperatura [](https://www.pnas.org/doi/full/10.1073/pnas.1801528115)
+
+El aumento en las temperaturas globales incide en los problemas de salud mental \| CNN
+
 # Materiales y Métodos
 
 ## Materiales
+
 URLs de los distintos datos usados:
 
-- [Psicologos_2021](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2021_8678-l0-s05005-px1)
+-   [Psicólogos_2021](https://datos.gob.es/es/catalogo/ea0010587-tasa-de-psicologos-por-100-000-habitantes-por-comunidades-y-ciudades-autonomas-de-colegiacion-y-situacion-laboral-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2021_8678-l0-s05006-px1)
 
-- [Psicologos_2022](https://datos.gob.es/es/catalogo/ea0010587-distribucion-del-n-de-psicologos-por-comunidades-y-ciudades-autonomas-de-colegiacion-situacion-laboral-y-sexo-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2022_9766-l0-s05005-px)
+-   [Psicólogos_2022](https://datos.gob.es/es/catalogo/ea0010587-tasa-de-psicologos-por-100-000-habitantes-por-comunidades-y-ciudades-autonomas-de-colegiacion-y-situacion-laboral-identificador-api-tpx-sociedad_2589-salud_2590-epsc_5623-a2022_9766-l0-s05006-px)
 
-- [Población](https://datos.gob.es/es/catalogo/ea0010587-poblacion-por-nacionalidad-sexo-y-comunidad-autonoma-epa-identificador-api-4927)
+-   [Población](https://datos.gob.es/es/catalogo/ea0010587-poblacion-por-nacionalidad-sexo-y-comunidad-autonoma-epa-identificador-api-4927)
 
-- [Visitas_2021](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p02-l0-01050-px1)
+-   [Visitas_2021](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p02-l0-01050-px1)
 
-- [Visitas_2022](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p05-l0-01038-px1)
+-   [Visitas_2022](https://datos.gob.es/es/catalogo/ea0010587-visitas-a-otros-profesionales-sanitarios-en-los-ultimos-12-meses-segun-tipo-de-profesional-sanitario-por-sexo-y-comunidad-autonoma-poblacion-de-15-y-mas-anos-identificador-api-t15-p420-a2019-p05-l0-01038-px1)
 
-- [Salarios](https://datos.gob.es/es/catalogo/ea0010587-salarios-medios-por-tipo-de-jornada-comunidad-autonoma-y-decil-epa-identificador-api-13930)
- 
+-   [Salarios](https://datos.gob.es/es/catalogo/ea0010587-salarios-medios-por-tipo-de-jornada-comunidad-autonoma-y-decil-epa-identificador-api-13930)
+
 ## **Carga de librerías**
+
 ```{r}
 library(climaemet)
 library(tibble)
@@ -82,13 +85,14 @@ library(climaemet)
 aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWExMDE4QGFsdS51YnUuZXMiLCJqdGkiOiJkZTE4NmIwZC02ZTc1LTRmYmYtOGE4ZS1kYThiNzhkYjM5NWYiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY5OTI2NzY1NywidXNlcklkIjoiZGUxODZiMGQtNmU3NS00ZmJmLThhOGUtZGE4Yjc4ZGIzOTVmIiwicm9sZSI6IiJ9.Im8N73nz9TkoDv1I7_fmIf7FSgfyQGsTrwuYGrl3k9g", install = FALSE)
 ```
 
-Podemos ver las estaciones meteorológicas de las que dispone climaemet de datos y las provincias a las que pertenecen dichas estaciones. Además, observamos el nº de estaciones por provincia. 
+Podemos ver las estaciones meteorológicas de las que dispone climaemet de datos y las provincias a las que pertenecen dichas estaciones. Además, observamos el nº de estaciones por provincia.
 
 ```{r}
 library(tibble)
 stations <- aemet_stations()
 stations
 ```
+
 ```{r}
 table(stations$provincia)
 ```
@@ -96,6 +100,7 @@ table(stations$provincia)
 ## **Carga de datos**
 
 ### **Carga de datos de climaemet**
+
 ```{r}
 # Obtención de las Tª diaras por estaciones aemet:
 
@@ -103,6 +108,7 @@ observaciones_diarias <-aemet_daily_period_all(start = 2021, end = 2022)
 ```
 
 ### **Carga de datos JSON**
+
 ```{r eval=FALSE}
 
 #Carga de datos de la población json no coindiden los atributos 
@@ -162,16 +168,11 @@ psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json
 
 ```
 
+[**Tabla_psicologos.json**](IMAGES/tabla_psicologos.jpg)
 
-![**Tabla_psicologos.json**]
+[**Tabla_psicologos.csv**](IMAGES/tabla_psicologos_json.jpg)
 
-(IMAGES/tabla_psicologos.jpg)
-
-![**Tabla_psicologos.csv**]
-
-(IMAGES/tabla_psicologos_json.jpg)
-
-Como se visualiza en las tablas, al intentar cargas los datos json nos encontrabamos 2 objetos de tipo arrays (Data y Metadata). En el objeto Data se localizaban los valores , miestras que en el objeto Metadata se localizaban las varibles.Hay combinar todo vemos que los final combinadas no son las correctas en consecuencia, que las variables no coinciden con sus valores.
+Como se visualiza en las tablas, al intentar cargar los datos json, nos encontramos 2 objetos de tipo arrays (Data y Metadata). En el objeto Data se localizan los valores , mientras que en el objeto Metadata se localizan las varibles.Al combinar todo vemos que los filas combinadas no son las correctas en consecuencia, que las variables no coinciden con sus valores.
 
 En conclusión, utilizamos csv para cargar nuestros datos de forma correcta.
 
@@ -206,11 +207,8 @@ salarios <- read_delim("DATA/salarios_CCAA.csv", delim = ";", escape_double = FA
 
 ### **Obtención de la Temperatura Media**
 
-*Nota:* Temperatura media por Comunidades Autónomas
+Para la obtención de la *temperatura media*, se han creado una columna de años y y otra columna de comunidades.Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades. Tras ello, hemos calculado la temperatura media por comunidad.
 
-
-Para la obtención de la *temperatura media*, se han creado una columna de años y y otra columna de comunidades.Esta última se utilizó para agrupar los datos mostrados en provincias en comunidades.
-Tras ello, hemos calculado la temperatura media por comunidad.
 ```{r}
 
 # Temperatura de las provincias
@@ -256,13 +254,12 @@ tmed_CCAA<- temp_con_CCAA %>%
 datatable(tmed_CCAA)
   
 ```
- 
+
+*Nota:* Temperatura media por Comunidades Autónomas
+
 ### **Obtención de los psicólogos**
 
-*Nota:* Nº de psicólogos por Comunidades Autónomas
-
-Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
-Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+Los datos de *psicólogos* utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas. Tras ello, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ```{r}
 
@@ -326,13 +323,12 @@ psicologos <- psicologos_2021 %>%
 datatable(psicologos)
 
 ```
-*
-### *Obtención de las visitas**
+
+*Nota:* Nº de psicólogos por Comunidades Autónomas - \### \*\*Obtención de las visitas\*\*
 
 *Nota:* Nº de visitas por Comunidades Autónomas
 
-Los datos de **visitas** utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas.
-Tras ello, se combinaron los conjuntos y se seleccionaron aquellos útiles para el estudio.
+Los datos de **visitas** utilizados se encontraban en distintos conjuntos de datos.Inicialmente, se creo una columna CCAA en cada uno de los conjuntos para estandarizar los nombres de las comunidades autónomas. Tras ello, se combinaron los conjuntos y se seleccionaron aquellos útiles para el estudio.
 
 ```{r}
 visitas_2021 <- visitas_2021 %>% 
@@ -404,13 +400,11 @@ datatable(visitas)
 
 ```
 
-
 ### **Obtención del salario**
 
 *Nota:* Salarios mensuales por Comunidades Autónomas
 
-Para la obtención de los datos de *salario* utilizados.Se crean una columna para transformar los salarios de tipo __character__ a tipo __númerico__.
-Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+Para la obtención de los datos de *salario* utilizados.Se crean una columna para transformar los salarios de tipo **character** a tipo **númerico**. Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ```{r}
 salarios <- salarios %>% 
@@ -457,13 +451,11 @@ salarios_final <- salarios %>%
 datatable(salarios_final)
 ```
 
-
 ### **Obtención de la población**
 
 *Nota:* Población por Comunidades Autónomas
 
-Para la obtención de los datos de *población * utilizados.Se crean una columna para transformar la población de tipo __character__ a tipo __númerico__.
-Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
+Para la obtención de los datos de *población* utilizados.Se crean una columna para transformar la población de tipo **character** a tipo **númerico**. Tras ello, se creo una columna CCAA para estandarizar los nombres de las comunidades autónomas.Además, se combinaron los conjutos y se seleccionaron aquellos útiles para el estudio.
 
 ```{r}
 poblacion <- poblacion %>% 
@@ -510,18 +502,18 @@ poblacion_final <- poblacion %>%
 datatable(poblacion_final)
 ```
 
-
 ## **Obtención de la tabla final**
 
-A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_final,poblacion_final y psicologos) mediante los atributos comunes, el 'CCAA' y 'years' , construimos la tabla final con los datos de interés.
-Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:  
+A través de la unión de las diferentes tablas obtenidas (tmed_CCAA,salarios_final,poblacion_final y psicologos) mediante los atributos comunes, el 'CCAA' y 'years' , construimos la tabla final con los datos de interés. Por otro lado, hemos creado un total de 3 columnas nuevas,las cuales son:
 
-    - **iniciales_CCAA** : contiene las abreviaturas para identificar a las CCAA.  
-    
-    - **Total_ps** : contiene la cantidad de psicologos por cada CCAA.  
-    
-    - **NAT** : contiene los valores de la necesidad de atención psicológica por cada         comunidad.
-    
+```         
+- **iniciales_CCAA** : contiene las abreviaturas para identificar a las CCAA.  
+
+- **Total_ps** : contiene la cantidad de psicologos por cada CCAA.  
+
+- **NAT** : contiene los valores de la necesidad de atención psicológica por cada         comunidad.
+```
+
 ```{r}
 
 # OBTENCIÓN DE LA TABLA FINAL:
@@ -546,9 +538,9 @@ tabla_final<- tmed_CCAA %>%
 datatable(tabla_final)
 ```
 
-# *Análisis de nuestros datos**
+# *Análisis de nuestros datos*
 
-## *Gráficos**
+## *Gráficos*
 
 ### **Visualización del salario medio en España por CCAA**
 
@@ -663,8 +655,7 @@ Salario_21_22
 
 ### **Conclusiones**
 
-Se puede apreciar una notable diferencia de los salarios entre un año y otro, siendo superiores los salarios de 2022.Por otro lado se observa un patrón de salarios en el cual  Madrid, EL País Vasco, Navarra y Cataluña contienen en ambos años salafrios superiores al resto de España.
-
+Se puede apreciar una notable diferencia de los salarios entre un año y otro, siendo superiores los salarios de 2022.Por otro lado se observa un patrón de salarios en el cual Madrid, EL País Vasco, Navarra y Cataluña contienen en ambos años salafrios superiores al resto de España.
 
 ### **Visualización de la temperatura media en España por CCAA**
 
@@ -785,8 +776,7 @@ Temperatura_21_22
 
 ### **Conclusiones**
 
-Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte.
-Por otro lado la difernecia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
+Se puede apreciar en zonas como el sur peninsular y las CCAA de la zona mediterránea presentan una mayor temperatura media que las zonas del Norte. Por otro lado la difernecia observada entre 2021 y 2022, es que se ha producido una subida de temperatura de 1 grado en toda España.
 
 ## **Gráficos de dispersión**
 
@@ -809,15 +799,13 @@ NAT_vs_tmedia
 
 ```
 
-### **Conclusiones**
+#### **Conclusiones**
 
-De forma general se aprecia que a partir de una temperatura media superior a 18ºC, comienza a crecer de forma exponencial la necesidad de atención psicológica.
-Análogamente, podemos ver que ante valores de temperatura inferiores a 15ºC también se observa un ligero aumento de la NAT, pero mucho más suavizada.
+De forma general se aprecia que a partir de una temperatura media superior a 18ºC, comienza a crecer de forma exponencial la necesidad de atención psicológica. Análogamente, podemos ver que ante valores de temperatura inferiores a 15ºC también se observa un ligero aumento de la NAT, pero mucho más suavizada.
 
 Por otro lado, ante unos valores de temperatura intermedios (menos extremos) la NAT disminuye, manteniéndose aproxiamdamente en un valor constante.
 
-En general, en el 2021 hubo una mayor necesidad de atención psicológica que en 2022 y esto pudo deberse a la post-pandemia.
-Podemos llegar a la conclusion de que mayores temperaturas pueden ocasionar mayor cantidad de estrés y con ello mayor NAT.
+En general, en el 2021 hubo una mayor necesidad de atención psicológica que en 2022 y esto pudo deberse a la post-pandemia. Podemos llegar a la conclusion de que mayores temperaturas pueden ocasionar mayor cantidad de estrés y con ello mayor NAT.
 
 ### **NAT vs salario**
 
@@ -840,8 +828,7 @@ NAT_vs_salario
 
 ### **Conclusiones**
 
-Ante valores bajos de salario, la NAT no es muy elevada, probablemente debido a que dicho salario no es destinado para esa necesidad .
-Podemos determinar que para el mismo rango de salarios, la NAT es superior en 2021 que en 2022.
+Ante valores bajos de salario, la NAT no es muy elevada, probablemente debido a que dicho salario no es destinado para esa necesidad . Podemos determinar que para el mismo rango de salarios, la NAT es superior en 2021 que en 2022.
 
 Por otro lado, conforme aumenta el salario ,hasta 2200€, aumenta el valor de la NAT paulatinamente.
 
@@ -871,15 +858,12 @@ NAT_vs_CCAA
 
 ### **Conclusiones**
 
-Podemos aprecir que los valores de NAT han sido más elevados generalemnte en 2021 que en 2022.
-Al igual que la CCAA con más NAT ha sido tanto en 2021 como en 2022 Ceuta y detrás de esta Melilla.
-La CCAA siguen la misma tendencia de NAT en ambos años, pero con valores generalemnte inferiores 
-
-
+Podemos aprecir que los valores de NAT han sido más elevados generalemnte en 2021 que en 2022. Al igual que la CCAA con más NAT ha sido tanto en 2021 como en 2022 Ceuta y detrás de esta Melilla. La CCAA siguen la misma tendencia de NAT en ambos años, pero con valores generalemnte inferiores
 
 ## **Visualización de la NAT en cada CCAA de España**
 
 A continuación se puede observar la necesidad de atención psicológica entre las diferentes CCAA, tanto en 2021 como 2022.
+
 ```{r}
 
 # NAT 2021
@@ -989,11 +973,9 @@ NAT_21_22
 
 ### **Conclusiones**
 
-En 2021, podemos apreciar que en las zonas del norte y centro peninsular, así como Ceuta y Melilla, la NAT es más elevada que en el resto de las CCAA.
-En 2022, generalmente los valores de NAT son más bajo, exluyendo algunas CCAA como La Rioja, Cantabria, Navarra, Ceuta y Melilla.
+En 2021, podemos apreciar que en las zonas del norte y centro peninsular, así como Ceuta y Melilla, la NAT es más elevada que en el resto de las CCAA. En 2022, generalmente los valores de NAT son más bajo, exluyendo algunas CCAA como La Rioja, Cantabria, Navarra, Ceuta y Melilla.
 
-En conclusión, podemos determiar que en el 2021 hay mucha más NAT que en el 2022, esto puede ser debido a la post-pandemia, salarios inferiores, temperaturas mas bajas.
-
+En conclusión, podemos determinar que en el 2021 hay mucha más NAT que en el 2022, esto puede ser debido a la post-pandemia, salarios inferiores, temperaturas mas bajas.
 
 ## **Análisis de la regresión lineal**
 
@@ -1006,45 +988,35 @@ Modelo <- lm(NAT ~ tmedia*Total_s, data = tabla_final)
 summary(Modelo)
 ```
 
-- **COEFICIENTES**:
+-   **COEFICIENTES**:
 
-  - **Intercept**: Es 774516.902. Valor estimado de la variable de respuesta (NAT) cuando todas las variables predictoras son cero.
+    -   **Intercept**: Es 774516.902. Valor estimado de la variable de respuesta (NAT) cuando todas las variables predictoras son cero.
 
-  - **tmedia**: Por cada unidad de **aumento** en **tmedia**, se espera que la NAT disminuya en promedio en -51551.784 unidades.
-            Sin embargo, en gráficas anteriores hemos visto como ante un mayor valor de temperatura la NAT aumentaba exponencialmente (la conclusión del análisis no se corresponde con el comportamiento del modelo).
+    -   **tmedia**: Por cada unidad de **aumento** en **tmedia**, se espera que la NAT disminuya en promedio en -51551.784 unidades. Sin embargo, en gráficas anteriores hemos visto como ante un mayor valor de temperatura la NAT aumentaba exponencialmente (la conclusión del análisis no se corresponde con el comportamiento del modelo).
 
-  - **Total_s**: Por cada unidad de **aumento** en **Total_s**, se espera que NAT disminuya en promedio en -397.301 unidades. Se corresponde con el comportamiento observado del modelo. 
+    -   **Total_s**: Por cada unidad de **aumento** en **Total_s**, se espera que NAT disminuya en promedio en -397.301 unidades. Se corresponde con el comportamiento observado del modelo.
 
-  - **Interacción entre tmedia y Total_s**: Es positiva (26.668). Esto indica que el efecto de tmedia en NAT depende del valor de Total_s, y viceversa.
-  
-- **SIGNIFICACIÓN ESTADÍSTICA**:
+    -   **Interacción entre tmedia y Total_s**: Es positiva (26.668). Esto indica que el efecto de tmedia en NAT depende del valor de Total_s, y viceversa.
 
-Los **asteriscos** en la *columna "Pr(>|t|)"* indican la **significancia estadística** de cada coeficiente. 
-Podemos observar como el intercept, tmedia, Total_s y su interacción son **estadísticamente significativas**, dado que presentan unos valores p < 0.05.
+-   **SIGNIFICACIÓN ESTADÍSTICA**:
 
+Los **asteriscos** en la *columna "Pr(\>\|t\|)"* indican la **significancia estadística** de cada coeficiente. Podemos observar como el intercept, tmedia, Total_s y su interacción son **estadísticamente significativas**, dado que presentan unos valores p \< 0.05.
 
-- **BONDAD DE AJUSTE**:
-  - **Residual standard error**: La desviación estándar de los residuos (errores) es 20450. Esto indica la variabilidad no explicada por el modelo.
+-   **BONDAD DE AJUSTE**:
+    -   **Residual standard error**: La desviación estándar de los residuos (errores) es 20450. Esto indica la variabilidad no explicada por el modelo.
 
-  - **R cuadrado y R cuadrado ajustado**: El *R cuadrado* es 0.3869, lo que significa que el modelo explica el 38.69% de la variabilidad en NAT. El *R cuadrado ajustado* tiene en cuenta el número de predictores en el modelo, y es 0.3328.
+    -   **R cuadrado y R cuadrado ajustado**: El *R cuadrado* es 0.3869, lo que significa que el modelo explica el 38.69% de la variabilidad en NAT. El *R cuadrado ajustado* tiene en cuenta el número de predictores en el modelo, y es 0.3328.
+-   **ESTADÍSITCO F**:
 
+El valor F-statistic (7.151) y el p-value asociado (0.000754) indican si al menos una de las variables predictoras es significativa en la explicación de la variabilidad en la variable de respuesta. En este caso, el p-value es bajo, lo que sugiere que al menos una de las variables predictoras (tmedia y Total_s) es significativa en el modelo.
 
-- **ESTADÍSITCO F**:
+Como hemos observado en las diversas gráficas, ambas variables tienen un efecto sobre la NAT.
 
-El valor F-statistic (7.151) y el p-value asociado (0.000754) indican si al menos una de las variables predictoras es significativa en la explicación de la variabilidad en la variable de respuesta. 
-En este caso, el p-value es bajo, lo que sugiere que al menos una de las variables predictoras (tmedia y Total_s) es significativa en el modelo.
-
-Como hemos observado en las diversas gráficas, ambas variables tienen un efecto sobre la NAT. 
-
-
-En resumen, el modelo proporciona evidencia de que las variables **tmedia**, **Total_s** y su **interacción** tienen un **impacto significativo** en la variable de **respuesta NAT**. 
-Sin embargo, el modelo solo explica alrededor del 38.69% de la variabilidad en NAT, lo que sugiere que hay otras variables que podrían estar influyendo en la respuesta.
-
+En resumen, el modelo proporciona evidencia de que las variables **tmedia**, **Total_s** y su **interacción** tienen un **impacto significativo** en la variable de **respuesta NAT**. Sin embargo, el modelo solo explica alrededor del 38.69% de la variabilidad en NAT, lo que sugiere que hay otras variables que podrían estar influyendo en la respuesta.
 
 ### **Visualización 3D para ver la relación entre Tª media y el total de salario**
 
-A continuación, podremos observar la relación conjunta entre **tmedia** y **Total_s** sobre la NAT de nuestro modelo lineal. 
-Podemos ver cómo cambia la **NAT** ante las variables predictoras **tmedia** y **Total_s**.
+A continuación, podremos observar la relación conjunta entre **tmedia** y **Total_s** sobre la NAT de nuestro modelo lineal. Podemos ver cómo cambia la **NAT** ante las variables predictoras **tmedia** y **Total_s**.
 
 ```{r}
 
