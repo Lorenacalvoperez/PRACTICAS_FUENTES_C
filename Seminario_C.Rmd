@@ -42,7 +42,8 @@ Como se puede ver existen númerosos estudios que muestran una relación entre l
 
 En el siguiente [estudio](https://www.pnas.org/doi/full/10.1073/pnas.1801528115), los resultados obtenidos son:
 
-![Resultados del estudio](IMAGES/Temperatura%20.png)
+![Resultados del estudio](IMAGES/Temperatura%20.png)  
+
 
 Además, también hemos visto un [estudio](https://www.somospacientes.com/noticias/sanidad/estudio-sobre-las-necesidades-de-atencion-psicologica-en-la-sanidad-publica/) relacionado con la necesidad de atención psicologica del SNS.En el que se muestra que en España se necesitan más *psicologos*.
 
@@ -175,7 +176,8 @@ psicologos_json_2021_union<- cbind(psicologos_json_2021_Metadata,psicologos_json
 
 ![**Tabla_psicologos.json**](IMAGES/tabla_psicologos.jpg)
 
-![**Tabla_psicologos.csv**](IMAGES/tabla_psicologos_json.jpg)
+![**Tabla_psicologos.csv**](IMAGES/tabla_psicologos_json.jpg)  
+
 
 Como se visualiza en las tablas, al intentar cargar los datos json, nos encontramos 2 objetos de tipo arrays (Data y Metadata). En el objeto Data se localizan los valores , mientras que en el objeto Metadata se localizan las varibles.Al combinar todo vemos que los filas combinadas no son las correctas en consecuencia, que las variables no coinciden con sus valores.
 
@@ -652,7 +654,7 @@ Salario_22_graf <- ggplot(CCAA_sf) +
 
 # Gráficos combinados:
 
-plot_grid(Salario_21_graf, Salario_22_graf, ncol = 2, labels = c("SALARIO 2021", "SALARIO 2022") )
+plot_grid(Salario_21_graf, Salario_22_graf, ncol = 2, align = 'v', axis = 'tb', labels = c("SALARIO 2021", "SALARIO 2022") )
 
 
 
@@ -773,7 +775,7 @@ Temperatura_22_graf <- ggplot(CCAA_sf) +
 
 # Gráficos combinados:
 
-Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncol = 2, labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
+Temperatura_21_22 <- plot_grid(Temperatura_21_graf, Temperatura_22_graf, ncol = 2, align = 'v', axis = 'tb', labels = c("TEMPERATURA 2021", "TEMPERATURA 2022") )
 
 Temperatura_21_22
 
@@ -970,7 +972,7 @@ NAT_22_graf <- ggplot(CCAA_sf) +
 # Gráficos combinados:
 library(cowplot)
 X11()
-NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, labels = c("NAT 2021", "NAT 2022") )
+NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, align = 'v', axis = 'tb', labels = c("NAT 2021", "NAT 2022") )
 
 NAT_21_22
 
@@ -1038,3 +1040,10 @@ A continuación, podremos observar la relación conjunta entre **tmedia** y **To
 visreg2d(Modelo, "tmedia", "Total_s", plot.type = "rgl")
 
 ```
+
+### **Visualización 3D fija para ver la relación entre Tª media y el total de salario**
+
+```{r, message=FALSE, warning=FALSE}
+visreg2d(Modelo, "tmedia", "Total_s", plot.type = "persp")
+```
+
