@@ -1,6 +1,12 @@
-# NECESIDAD DE ATENCIÓN PSICOLÓGICA EN ESPAÑA ![logo](IMAGES/universidad_burgos.jpg)
+# NECESIDAD DE ATENCIÓN PSICOLÓGICA EN ESPAÑA <img src='IMAGES/universidad_burgos.jpg' align="right" height="120" />
+
+Repositorio en el que se encuentra el código `R` y desarrollo del estudio sobre la Necesidad de ATención psicológica (NAT) en España.
 
 ### Autores: Julia Arellano, Lorena Calvo, Mario Díaz
+
+Para más información consultad el resto del `README`.
+
+***
 
 ## Introducción
 
