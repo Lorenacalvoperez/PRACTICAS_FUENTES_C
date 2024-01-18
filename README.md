@@ -1,4 +1,6 @@
-# NECESIDAD DE ATENCIÓN PSICOLÓGICA EN ESPAÑA    ![](IMAGES/universidad_burgos)
+# NECESIDAD DE ATENCIÓN PSICOLÓGICA EN ESPAÑA    
+
+![](IMAGES/universidad_burgos)
 
 ## Autores: Julia Arellano, Lorena Calvo, Mario Díaz
 
