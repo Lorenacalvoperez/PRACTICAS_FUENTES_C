@@ -858,6 +858,39 @@ NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, labels = c("NAT 2021"
 plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, align = 'v', axis = 'tb', labels = c("NAT 2021", "NAT 2022"))
 
 
+##################
+
+# Pruebas post-presentación:
+
+
+library(readr)
+coor_prov <- read_delim("DATA/provincias_espanolas.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+View(coor_prov)
+coor_prov$`Geo Point`[0]
+
+View(tabla_final)
+
+
+myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))      # Create reverse Spectral palette
+
+plot_cities <- ggplot() +
+  geom_polygon(data = tabla_final, aes(fill = avg_age,   
+                                              x = long, 
+                                              y = lat, 
+                                              group = id)) +      # Dummy variable to correct fill by PCode.
+  scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
+  labs(fill="Avg age")
+
+library(rayshader)
+plot_gg(NAT_21_graf,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
+render_snapshot()
+
+library(rayshader)
+plot_gg(NAT_21_graf,multicore=FALSE,width=5,height=3, invert = TRUE,scale=310)    # Plot_gg de rayshader
+render_snapshot()
+
+#################
+
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
 
 #CARGA de datos psicologos.json 
