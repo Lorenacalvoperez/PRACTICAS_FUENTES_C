@@ -889,6 +889,9 @@ library(rayshader)
 plot_gg(NAT_21_graf,multicore=FALSE,width=5,height=3, invert = TRUE,scale=310)    # Plot_gg de rayshader
 render_snapshot()
 
+# Rotación mapa (vídeo):
+render_movie("IMAGES/movie_spain.mp4",frames = 720, fps=30,zoom=0.6,fov = 30)
+
 #################
 
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
