@@ -5,7 +5,6 @@ Repositorio en el que se encuentra el código `R` y desarrollo del estudio sobre
 ### Autores: Julia Arellano, Lorena Calvo, Mario Díaz
 Grado en [Ingeniería de la Salud](https://www.ubu.es/grado-en-ingenieria-de-la-salud).
 
-![](https://github.com/Lorenacalvoperez/PRACTICAS_FUENTES_C/assets/127235455/4da1f737-2a91-48a8-9776-a4c4193895a1)
 
 Para más información consultad el resto del `README`.
 
