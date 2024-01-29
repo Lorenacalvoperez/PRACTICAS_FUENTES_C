@@ -858,18 +858,22 @@ NAT_21_22 <- plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, labels = c("NAT 2021"
 plot_grid(NAT_21_graf, NAT_22_graf, ncol = 2, align = 'v', axis = 'tb', labels = c("NAT 2021", "NAT 2022"))
 
 
+
 ##################
 
 # Pruebas post-presentación:
 
+# Obtención de una animación 3D:
+# https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/
 
+# Carga de datos de coordenadas de provincias:
 library(readr)
 coor_prov <- read_delim("DATA/provincias_espanolas.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 View(coor_prov)
 coor_prov$`Geo Point`[0]
 
-View(tabla_final)
 
+# Visualización con ggplot:
 
 myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))      # Create reverse Spectral palette
 
@@ -881,18 +885,25 @@ plot_cities <- ggplot() +
   scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
   labs(fill="Avg age")
 
+
+# Visualización en 3D con Rayshader (no usamos las coordenadas sino los datos de NAT_21_graf):
+
 library(rayshader)
 plot_gg(NAT_21_graf,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
 render_snapshot()
+
+# Modificación realizada para obtener el 3D de forma más visual (invertido):
 
 library(rayshader)
 plot_gg(NAT_21_graf,multicore=FALSE,width=5,height=3, invert = TRUE,scale=310)    # Plot_gg de rayshader
 render_snapshot()
 
-# Rotación mapa (vídeo):
+# Almacenamos el vídeo del 3D invertido (Rotación mapa):
+
 render_movie("IMAGES/movie_spain.mp4",frames = 720, fps=30,zoom=0.6,fov = 30)
 
 #################
+
 
 # JULIA AL FINAL QUE HACEMOS CON ESTO???
 
